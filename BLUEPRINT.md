@@ -1,325 +1,137 @@
-# Teach Yourself Conceptual Mathematics — App Blueprint
+# Technical Blueprint — Teach Yourself Evolutionary Psychology
 
-A complete architectural blueprint for the *Teach Yourself Conceptual Mathematics* 4-week course. This document is the single reference for what the app does, how it's wired, and the contracts between pieces. For day-to-day commands and gotchas see `replit.md`.
-
----
-
-## 1. Product summary
-
-Teach Yourself Conceptual Mathematics is a self-paced, single-user, no-login web course covering the *ideas behind the symbols* of modern mathematics — numbers, operations and structures, the continuum, and the foundations (logic, proof, undecidability). Each micro-lecture introduces one concept, grounds it in a real example from science or the history of mathematics, and asks the student to write the defining statement *in symbols of their own* using the on-screen math keyboard.
-
-The full QuantReason runtime is preserved unchanged: lectures at three depths, section-scoped AI tutor, adaptive practice, AI-graded assignments, two-layer AI-authorship detection, and one-click diagnostics.
-
-The product surface is three deployable artifacts in one pnpm monorepo:
-
-| Artifact | Slug | Role |
-| --- | --- | --- |
-| `@workspace/api-server` | `api-server` | Express 5 API mounted at `/api`. Owns the DB, OpenAI calls, AI detection, grading, diagnostics. |
-| `@workspace/qr-course` | `qr-course` | Student-facing React + Vite app. The actual course. |
-| `@workspace/qr-course-demo` | `qr-course-demo` | A screencast-style product demo video, exported as MP4 from the preview pane. |
-
-Shared contracts live in `lib/`:
-
-- `lib/api-spec` — OpenAPI source of truth.
-- `lib/api-zod` — generated Zod validators (used by the server).
-- `lib/api-client-react` — generated React Query hooks (used by `qr-course`).
-- `lib/db` — Drizzle schema + db client.
+This document describes the system architecture, data flow, and the contracts that hold the pieces together. For a feature overview and setup steps, see [README.md](./README.md).
 
 ---
 
-## 2. Curriculum (the ideas)
-
-Source: `artifacts/api-server/src/lib/seed.ts`. 32 micro-lectures across four weeks. Each lecture teaches exactly one concept, anchors it in a real worked example, and ships a question that *requires* the student to write the key statement in symbolic form.
-
-| Week | Theme | Concepts covered |
-| --- | --- | --- |
-| 1 | The number systems | Counting & the number line · rationals & ratios · irrationals & the $\sqrt 2$ scandal · real numbers & completeness · imaginary & complex numbers as rotations · zero, negatives, conceptual leaps · bases & place value · countable vs. uncountable infinity |
-| 2 | Operations and structures | What an operation is · commutativity, associativity, distributivity · groups & symmetry · rings & fields · vector spaces · functions as mappings · relations, equivalence classes, isomorphism · modular arithmetic |
-| 3 | The continuum | Limits & the taming of infinity · continuity · derivatives as instantaneous rate · integrals as accumulation · the Fundamental Theorem of Calculus · sequences, series, & Zeno · Euclidean vs. non-Euclidean geometry · topology, dimension, & curvature |
-| 4 | Foundations: logic, proof, undecidability | Propositional & predicate logic · what a proof is · mathematical induction · sets & Russell's paradox · axioms & independence · Gödel's incompleteness theorems · probability (measure, frequency, credence) · computability & the halting problem |
-
-Assignment shape: 2 homeworks per week plus a graded checkpoint at the end of each week — a Week 1 test, the midterm at the end of Week 2, a Week 3 test, and the cumulative final at the end of Week 4 — 12 assignments total. Each problem prompt is *one symbolic statement* the student must compose.
-
----
-
-## 3. Domain model (Postgres + Drizzle)
-
-Source: `lib/db/src/schema/course.ts`.
+## 1. System overview
 
 ```
-topics ──< lectures              (one topic, one lecture per length)
-topics ──< problems              (problems tagged to a topic for analytics)
-assignments ──< problems         (homework / test / midterm / final)
-assignments ──< attempts ──< answers
-                                ↑ per-answer keystroke trace + AI scores
-practice_sessions ──< practice_problems ──< practice_attempts
-                                            ↑ adaptive difficulty session
+                         ┌─────────────────────────────┐
+                         │        Shared proxy          │
+                         │        (localhost:80)        │
+                         └──────────────┬──────────────┘
+            /            │            /api            │        /qr-course-demo
+   ┌────────────────┐    │   ┌────────────────────┐   │   ┌────────────────────┐
+   │  qr-course     │    │   │   api-server       │   │   │  qr-course-demo    │
+   │  React + Vite  │────┼──▶│   Express          │   │   │  React + Framer    │
+   │  (course UI)   │    │   │                    │   │   │  (narrated video)  │
+   └────────────────┘    │   └─────────┬──────────┘   │   └────────────────────┘
+                         │             │              │
+                         │   ┌─────────▼──────────┐   │
+                         │   │   Postgres (Neon)  │   │
+                         │   │   via Drizzle ORM  │   │
+                         │   └────────────────────┘   │
+                         │   external: OpenAI, GPTZero │
+                         └─────────────────────────────┘
 ```
 
-Notable columns:
-
-- `lectures.body` / `body_medium` / `body_long` — the Short / Medium / Long toggle is three pre-baked LLM rewrites of the same lecture. Only `body` is seeded; the on-demand `expand-lectures` job fills in the longer two.
-- `answers.{keystrokeCount,eraseCount,bulkInsertCount,longestBulkInsertChars,rewriteSegments,durationMs}` — the **diachronic trace**, captured client-side from the textarea and submitted with the answer.
-- `answers.{aiScore,aiFlagged,diachronicScore,diachronicFlagged,detectionRationale}` — frozen detection outcome at submission time.
-- `practice_sessions.difficulty` (1–4, double) — adapts session-by-session based on streaks / accuracy.
-
-Push schema with `pnpm --filter @workspace/db run push`.
-
-### 3.1 Curriculum-swap reseed
-
-`seedIfEmpty` maintains an `EXPECTED_TOPIC_SLUGS` set and a `REVISION_SENTINEL` constant (sentinel slug + a phrase that must appear in that lecture's body). On boot it compares the set of seeded topic slugs to the expected set, **and** verifies the sentinel phrase appears in the designated lecture:
-
-- If both match: do nothing.
-- If either differs (or the table is empty): wipe attempts, answers, practice, problems, assignments, lectures, topics in dependency order, then re-seed the full curriculum.
-
-This is what lets a single content swap (e.g. swapping a previous QR or notation curriculum out for the conceptual-math one) propagate cleanly on the next server start, without manual DB surgery.
+All artifacts are routed by path through a single reverse proxy. Services handle their own full base path; paths are not rewritten.
 
 ---
 
-## 4. API surface (OpenAPI-first)
+## 2. Contract-first API
 
-Source: `lib/api-spec/openapi.yaml`. **Never** hand-edit `lib/api-zod/src/generated/*` or `lib/api-client-react/src/generated/*` — change the spec and run `pnpm --filter @workspace/api-spec run codegen`.
+The single source of truth is the OpenAPI document in `lib/api-spec`. From it we generate:
 
-| Tag | Endpoints | Purpose |
-| --- | --- | --- |
-| `course` | `GET /course/overview`, `GET /course/weeks/{n}`, `GET /course/lectures/{id}` | Read the static course tree. Lectures return Short/Medium/Long bodies. |
-| `tutor` | `POST /tutor/ask` (SSE), `GET /tutor/suggestions/{lectureId}` | Streaming AI tutor scoped to a lecture section. Suggestions are pre-generated starter questions. |
-| `practice` | `POST /practice/sessions`, `POST /practice/sessions/{id}/next`, `POST /practice/sessions/{id}/attempts` | Adaptive practice: server generates the next problem, scoring it adjusts session `difficulty`. |
-| `assignments` | `GET /assignments`, `GET /assignments/{id}`, `POST /assignments/{id}/attempt`, `PUT /assignments/{id}/attempts/{aid}/answers/{pid}`, `POST /assignments/{id}/attempts/{aid}/submit` | Homework / test flow. Submit triggers AI grade + detection per answer. |
-| `analytics` | `GET /analytics/summary`, `GET /analytics/topics`, `GET /analytics/activity` | KPIs, topic mastery, recent activity. |
-| `detection` | `POST /detection/scan` | Run AI + diachronic detection on an arbitrary text + trace. Used by the diagnostics page. |
-| `diagnostics` | `GET /diagnostics/system`, `POST /diagnostics/synthetic-run`, `POST /diagnostics/expand-lectures`, `POST /diagnostics/reset` | Self-tests and seed maintenance. See §8. |
+- **React Query hooks** — consumed by the `qr-course` frontend.
+- **Zod schemas** — used by the `api-server` to validate request and response payloads.
 
-The submit endpoint's response schema (`AttemptResult`) bundles `score / total / percent / perProblem[] / detection[]` so the UI can render the AI-grade + detection verdict in one round-trip.
+Regenerate after any spec change:
+
+```bash
+pnpm --filter @workspace/api-spec run codegen
+```
+
+Do not change the OpenAPI `info.title` — it controls generated filenames.
 
 ---
 
-## 5. Server architecture
+## 3. API surface (`artifacts/api-server`)
 
-### 5.1 Layout
-
-```
-artifacts/api-server/src/
-├── routes/
-│   ├── course.ts          read-only course tree
-│   ├── tutor.ts           SSE chat against a lecture section
-│   ├── practice.ts        adaptive session lifecycle
-│   ├── assignments.ts     attempt + grade + detect on submit
-│   ├── analytics.ts       summary / topic mastery / activity
-│   ├── detection.ts       /detection/scan passthrough
-│   ├── diagnostics.ts     two diagnostics + seed maintenance
-│   ├── health.ts          /healthz
-│   └── index.ts           router mount
-└── lib/
-    ├── ai.ts              OpenAI client (Replit AI Integrations proxy)
-    ├── detection.ts       GPTZero + heuristic + diachronic scoring
-    ├── grading.ts         AI-graded answer with rationale
-    ├── seed.ts            32-topic curriculum + auto-reseed
-    └── logger.ts          singleton pino logger (req.log in routes)
-```
-
-### 5.2 Conventions
-
-- **Validation:** every handler parses input with `safeParse` from `@workspace/api-zod` and re-`parse`s outputs before sending. Never trust the request body, never trust your own response.
-- **Logging:** `req.log.info(...)` inside routes; singleton `logger` everywhere else. **Never** `console.log` in server code.
-- **OpenAI:** all model calls go through `lib/ai.ts` (`chatText`, `chatJson`, `chatStream`, `FAST_MODEL`).
-- **Errors:** thrown errors bubble to a global error handler that logs and returns `{ error: string }` with the right status. Detection failures are **non-fatal** — they return `null` and the caller falls back.
-
----
-
-## 6. Symbolic answer harness — `MathKeyboard.tsx`
-
-The student-facing app (`artifacts/qr-course`) ships a floating math keyboard that opens when the answer textarea focuses. Each tab targets one of the four curricular families (Numbers / Algebra & structures / Calculus & continuum / Logic & sets). Pressing a key inserts the corresponding LaTeX fragment at the textarea cursor.
-
-The conceptual-math curriculum is, by design, a worst-case load for this keyboard: most assignment problems' canonical answers contain at least one symbol that requires it — set-builder notation, quantifiers, blackboard-bold sets, congruences, $\varepsilon$–$\delta$, $\Sigma$ / $\Pi$ / $\int$ / $\partial$, $\mathbb{Z}/n\mathbb{Z}$, and so on.
-
-What the harness stresses:
-
-| Sub-system | Stress |
+| Route group | Responsibility |
 | --- | --- |
-| Tab discoverability | Each lecture's problems push the student into a specific tab; if a tab is hidden or mislabeled, the student gets stuck. |
-| Cursor insertion | LaTeX fragments must land at the current caret without smearing surrounding text. |
-| Keystroke detection | Each keyboard press counts as a real keystroke in the diachronic trace; otherwise typed-answer behaviour reads as a paste. |
-| LaTeX-aware grading | Canonical answers contain LaTeX; the grader must match `\sum` to `Σ`, `\geq` to `≥`, `\mathbb{Q}` to `ℚ`, `\equiv \ldots \pmod n`, set-builder `\{x \in \mathbb{R} \mid \ldots\}`, and quantifier strings. |
-| KaTeX rendering | Both lecture body and student answer-preview render the same LaTeX subset. |
+| `course` | Course overview (week titles, lecture/assignment counts), lecture content. |
+| `tutor` | Section-scoped AI tutor; token-by-token Server-Sent-Event streaming. |
+| `practice` | Adaptive practice sessions; on-demand problem generation; difficulty 1–4. |
+| `assignments` | Assignment attempts and answer submission. Invokes the internal AI grader (LaTeX-aware, with a numeric short-circuit). |
+| `detection` | Two-layer AI-authorship detection on submitted answers. |
+| `analytics` | Per-topic mastery, activity feed, and an LLM-authored narrative report. |
+| `diagnostics` | System self-test and synthetic-student end-to-end run. |
+| `health` | Liveness/readiness check. |
+
+> AI **grading** is a service/library invoked by the `assignments` and `practice` routes — it is not a standalone route group.
+
+**Logging:** route handlers use `req.log`; non-request code uses the singleton `logger`. No `console.log` in server code.
 
 ---
 
-## 7. AI detection — `artifacts/api-server/src/lib/detection.ts`
+## 4. Data layer (`lib/db`)
 
-Detection runs **two independent functions** and bundles their outputs into one `DetectionOutcome`.
+- Schema defined with Drizzle in `lib/db/src/schema`.
+- Applied out-of-band via `drizzle-kit push` (there is no migration/`CREATE TABLE` step in the app boot path).
+- Core tables: `topics`, `lectures`, `assignments`, `problems`, `attempts`, `answers`, `practice_sessions`, `practice_problems`, `practice_attempts`.
 
-### 7.1 Static AI detection (GPTZero, with fallback)
+### Auto-reseed contract
 
-Question answered: *"Was this text written by an LLM?"*
+On boot, `seedIfEmpty` decides whether the database holds the current content by checking **two** things:
 
-Pipeline:
+1. The sorted set of topic slugs matches the expected curriculum.
+2. A revision-sentinel phrase is present in one designated lecture body.
 
-1. **`gptzeroAiScore(text)`** — calls `POST https://api.gptzero.me/v2/predict/text` with `x-api-key: $GPTZERO_API_KEY`. Reads `documents[0].class_probabilities.ai` (plus half-weight of `mixed`), falls back to `completely_generated_prob`. Returns `null` on missing key, network failure, malformed response, or text shorter than 40 chars.
-2. **`heuristicAiScore(text)`** — local zero-dependency scorer. Penalises long average sentence length plus presence of LLM tells (`delve`, `tapestry`, `leverag(e|ing)`, `in conclusion`, `it is important to note`, `plays a crucial/vital/pivotal role`, etc.).
-3. **`llmAiScore(text)`** — secondary fallback in JSON-only mode.
+If **either** differs, it wipes (child → parent order) and re-seeds. `CONTENT_REVISION` is logged for humans; the actual drift gate is the slug set plus the sentinel phrase.
 
-Blend (`detect()`):
+> **When overhauling content:** changing slugs triggers a reseed automatically. If you change only lecture bodies / answers / problems while keeping slugs, you **must** also bump the sentinel phrase (and `CONTENT_REVISION`), or the new content will not propagate.
 
-```
-if GPTZero responded:           aiScore = 0.85 * gptzero + 0.15 * heuristic
-elif LLM scorer responded:      aiScore = 0.60 * llm     + 0.40 * heuristic
-else:                           aiScore = heuristic
-```
+---
 
-`aiFlagged = aiScore >= 0.55`.
+## 5. Two-layer AI-authorship detection
 
-### 7.2 Diachronic detection (keystroke pattern)
+**Static (per-document):**
+- Each submitted answer is sent to GPTZero's `predict/text` endpoint.
+- Final score blends `0.85 × GPTZero + 0.15 × structural-heuristic`.
+- If GPTZero is unavailable, the system silently falls back to an LLM scorer plus the heuristic.
 
-Question answered: *"Did the student paste AI output and reword it to sound human?"*
+**Diachronic (keystroke pattern):**
+- The student textarea captures keystroke count, erase count, bulk-insert events, longest bulk insert, rewrite segments, and total duration.
+- A scorer penalizes paste-then-reword behavior, low keystroke-to-output ratios, and impossibly sustained typing speeds.
 
-`diachronicScore(text, trace)` reads a `TraceInput`:
+---
 
-```
-{ keystrokeCount, eraseCount, bulkInsertCount?, longestBulkInsertChars?,
-  rewriteSegments?, durationMs }
-```
+## 6. Conceptual answer harness
 
-Penalty points:
+Problems are structured so the canonical answer is a precise statement of an evolutionary-psychology concept — occasionally notation (e.g. Hamilton's rule `$rB > C$`, relatedness `r = 1/2` for full siblings).
 
-| Signal | Penalty | Why |
+- **Prompt rendering:** KaTeX.
+- **Answer entry:** an on-screen math/symbol keyboard (Relations / Operators / Greek / Logic & sets).
+- **Grading:** a LaTeX-aware AI grader with a numeric short-circuit for purely numeric answers.
+
+---
+
+## 7. Demo video with audio (`artifacts/qr-course-demo`)
+
+- Six scenes built with React + Framer Motion, driven by a scene-duration timeline (total ≈ 62s).
+- A continuous instrumental **music bed** (`public/audio/bg_music.mp3`) is seeked per scene so the score stays aligned when a viewer jumps between scenes.
+- **Scene-synced voiceover narration** (`public/audio/narration/s{1..6}.mp3`) plays the current scene's clip from its start on each scene change, layered over the (ducked) music bed.
+- Audio starts muted (browser autoplay policy); the in-iframe control bar exposes mute/unmute, per-scene scrubbing, and loop.
+
+---
+
+## 8. Diagnostics
+
+| Diagnostic | Endpoint | Method |
 | --- | --- | --- |
-| `longestBulkInsertChars > 40` *or* `longestBulkInsertChars / textLen > 0.4` | +0.50 | One paste covers most of the answer. |
-| `bulkInsertCount >= 2 && longestBulkInsert > 25` | +0.15 | Multiple paste events. |
-| `keystrokeCount / textLen < 0.6` with `textLen > 30` | +0.30 | Far fewer keys than characters of output — paste-like. |
-| `charsPerSecond > 12` with `textLen > 30` | +0.20 | Sustained typing speed no human freshman maintains. |
-| `longestBulkInsert > 30 && rewriteSegments >= 2` | +0.15 | Big paste followed by reword passes — the giveaway pattern. |
+| System self-test | `/api/diagnostics/system` | `GET` |
+| Synthetic-student run | `/api/diagnostics/synthetic-run` | `POST` |
 
-Clamped to `[0, 1]`. `diachronicFlagged = diachronicScore >= 0.55`.
-
-> ⚠️ The math keyboard interacts with diachronic detection: every keyboard press counts as a real `keydown` so the keystroke-to-output ratio stays human-shaped. If a future keyboard implementation inserts characters without dispatching keydowns, every symbolic answer will diachronically flag as paste — the keyboard *is* part of the detection contract.
+The system test returns `{ ok, generatedAt, steps: [{ name, ok, ms, detail }] }`. The synthetic run proves the whole stack by having a fake student exercise lectures, all 12 assignments, practice, the tutor, detection, and analytics.
 
 ---
 
-## 8. Diagnostics surface
+## 9. Required external services
 
-Two routes, one page. The page lives at `artifacts/qr-course/src/pages/Diagnostics.tsx`.
-
-### 8.1 `GET /api/diagnostics/system`
-
-Strict ordered checklist returning `{ ok, generatedAt, steps[] }`:
-
-1. **Environment** — `DATABASE_URL` present.
-2. **Database** — `SELECT 1` round-trip.
-3. **Database** — course content seeded (≥32 topics, ≥1 lecture / assignment / problem).
-4. **OpenAI** — fast-model chat completion returns non-empty text.
-5. **OpenAI** — JSON mode returns `{ ok: true }`.
-6. **Detection** — heuristic+scoring pipeline returns numbers for a benign sentence.
-7. **AI detection** — pasted-style LLM-tell text **flags** as AI.
-8. **GPTZero** — if `GPTZERO_API_KEY` is set, the real API responds and gives a non-null score.
-
-### 8.2 `POST /api/diagnostics/synthetic-run`
-
-Simulates a real student session against the live DB:
-
-1. Create a practice session for a known topic.
-2. Pull the first problem.
-3. Submit a wrong answer, then a right one — confirm difficulty adjusts.
-4. Create an assignment attempt, answer each problem, submit, and verify `AttemptResult` returns full `perProblem[]` + `detection[]`.
-5. Hit analytics endpoints and confirm the new attempt is reflected.
-
-### 8.3 Supporting routes (not in the diagnostics UI)
-
-- `POST /api/diagnostics/expand-lectures` — generates `body_medium` / `body_long` for lectures missing them. Idempotent.
-- `POST /api/diagnostics/reset` — wipes attempts / answers / practice for a clean demo. Does **not** drop course content.
-
----
-
-## 9. Student app — `@workspace/qr-course`
-
-React + Vite + Tailwind. Routes:
-
-| Route | Page | What it does |
+| Service | Used by | Failure behavior |
 | --- | --- | --- |
-| `/` | `Dashboard` | Assignments progress + Course Schedule + Recent Activity |
-| `/weeks/:weekNumber` | `WeekView` | List of week's lectures and assignments |
-| `/lectures/:lectureId` | `LectureView` | Lecture body + Short/Medium/Long toggle + right-rail tutor / practice |
-| `/practice/topic/:topicId` | `TopicPractice` | Adaptive single-topic drill |
-| `/assignments` | `Assignments` | All homework / tests / midterm / final |
-| `/assignments/:id` | `AssignmentRunner` | Take + review an assignment; shows AI grade + detection per answer |
-| `/analytics` | `Analytics` | KPIs, topic mastery table, recent activity |
-| `/diagnostics` | `Diagnostics` | Operator self-test UI (see §8) |
-
-All server data goes through the **generated** React Query hooks from `@workspace/api-client-react`. No fetch logic should be hand-written in components.
-
-### 9.1 Diachronic trace capture
-
-The answer `<textarea>` is wrapped in a hook (in the assignment runner / topic practice) that:
-
-- Counts every `keydown` (excluding modifier-only) into `keystrokeCount`.
-- Increments `eraseCount` on Backspace/Delete.
-- On every `input` event, compares the new value to the previous: if the diff inserted ≥4 chars in one tick, that's a "bulk insert" — increment `bulkInsertCount` and update `longestBulkInsertChars`.
-- Detects a "rewrite segment" when characters are erased mid-string and replaced with new ones.
-- Stamps `durationMs` = (submit time − first focus time).
-
-The trace is included in the answer `PUT` body and on `POST submit`, then stored verbatim on `answers` so detection is reproducible.
-
----
-
-## 10. Demo video — `@workspace/qr-course-demo`
-
-A **screencast-style** product walkthrough of the conceptual-math course UI, **not** a marketing reel. Built per the `video-js` skill: React + framer-motion, exported to MP4 from the preview pane via the browser recorder.
-
-```
-artifacts/qr-course-demo/src/components/video/
-├── VideoTemplate.tsx        scene router + persistent sidebar + persistent cursor + background audio
-├── VideoWithControls.tsx    iframe-only wrapper: scene jump, scene-lock, mute toggle
-├── useSceneControls.ts      hook hiding jump/lock workarounds for useVideoPlayer
-├── CursorPointer.tsx        animated SVG arrow
-├── TypewriterText.tsx       char-by-char typing into inputs
-├── StreamingText.tsx        word-by-word AI-response streaming
-├── TypingIndicator.tsx      three pulsing dots
-└── video_scenes/
-    ├── Scene1.tsx           Dashboard → Week 1 "The number systems" (8s)
-    ├── Scene2.tsx           Lecture 1.1 "Counting, the integers, and the number line": Short/Long toggle + Practice/Tutor tabs (8s)
-    ├── Scene3.tsx           Tutor Q&A: "Why are the rationals countable but the reals are not?" (12s)
-    ├── Scene4.tsx           Analytics with counting KPIs + topic mastery click (10s)
-    ├── Scene5.tsx           Topic Practice: wrong → adjust ↓ → right (symbolic answer typed via the math keyboard) → adjust ↑ (14s)
-    └── Scene6.tsx           Assignments review with AI grade + AI-detection chip (10s)
-```
-
-`SCENE_DURATIONS` sums to **62 seconds**, looped. Background audio (`public/audio/bg_music.mp3`) is scene-synced via `SCENE_START_SEC`.
-
-### 10.1 Key architectural rules
-
-- **Sidebar persistence.** Sidebar lives in `VideoTemplate.tsx` outside `<AnimatePresence>`. Only the right-pane scene swaps.
-- **Cursor persistence.** `CursorPointer` lives outside `<AnimatePresence>` and is driven by `setCursorPos / setIsClicking` passed into every scene.
-- **The UI is rebuilt, not screenshotted.** Scenes use the real fonts and colours but every pixel is JSX.
-- **`AnimatePresence` key = `currentSceneKey`** (NOT `baseSceneKey`). When scene-lock toggles `_r1` / `_r2`, both iterations must remount.
-- **Mute wiring.** The mute toggle is declarative JSX (`<audio muted={muted}>`) only — it must not also re-seek `audio.currentTime`, or unmute restarts the scene's audio.
-
----
-
-## 11. README contract
-
-`replit.md` and `README.md` are the always-loaded project READMEs. They contain:
-
-1. **Product overview** — what the course is and why this build exists (conceptual scaffolding behind the symbols).
-2. **Required env / secrets** — `DATABASE_URL`, `OPENAI_API_KEY`, `GPTZERO_API_KEY`, `SESSION_SECRET`.
-3. **Curriculum summary** — the 32 concepts across four weeks.
-4. **Technical features** — symbolic-answer harness, two-layer detection, diagnostics, auto-reseed, contract-first API.
-
-If you change anything in this blueprint, update `README.md` and `replit.md` to match — they are the long-form and short-form views of the same truth.
-
----
-
-## 12. End-to-end request example
-
-A student submits Homework 1.1 (the number systems). The full path:
-
-1. Browser: `qr-course/src/pages/AssignmentRunner.tsx` calls the generated `useSubmitAttempt()` hook with `{ traces: { [problemId]: TraceInput } }`. Every $\sqrt{}$, $\mathbb{Q}$, $\notin$, $\forall$ in the answer was inserted by `MathKeyboard.tsx`, but each insert dispatched a real `keydown` so the trace looks human.
-2. Generated client: `POST /api/assignments/{id}/attempts/{aid}/submit`, validated against `SubmitAttemptBody` Zod schema.
-3. Express route (`routes/assignments.ts`):
-   - Loads `attempt` + `answers` + `problems` from Drizzle.
-   - For each answer: calls `gradeAnswer(problem, answer)` (OpenAI JSON mode, returns `{ correct, rationale }`) **and** `detect(answer.text, trace)` in parallel.
-   - Writes `correct`, `aiScore`, `aiFlagged`, `diachronicScore`, `diachronicFlagged`, `detectionRationale` back onto each answer row.
-   - Updates `attempts.status = "submitted"`, computes `scorePercent`.
-4. Returns `AttemptResult` validated against the generated Zod schema.
-5. Browser: `AssignmentRunner` renders per-problem cards with the AI grade rationale + a detection chip (`Human-written response · confidence 94%` or `AI-detected · 91%`).
-
-Every layer in that chain (spec → server zod → server logic → client hook → client zod) is generated or validated from the same `openapi.yaml`. Don't introduce a parallel path.
+| OpenAI | tutor, practice, grading, analytics narrative, lecture expansion | Required at boot. |
+| GPTZero | static AI detection | Falls back to LLM scorer + heuristic. |
+| Postgres | all persistence | App cannot serve course data; reseed requires the schema to be pushed first. |

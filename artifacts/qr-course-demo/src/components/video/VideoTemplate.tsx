@@ -60,6 +60,7 @@ export default function VideoTemplate({
   const [cursorPos, setCursorPos] = useState({ x: '50vw', y: '50vh' });
   const [isClicking, setIsClicking] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const narrationRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     onSceneChange?.(currentSceneKey);
@@ -70,13 +71,29 @@ export default function VideoTemplate({
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
-    audio.volume = 0.45;
-    const targetTime = SCENE_START_SEC[baseSceneKey] ?? 0;
-    if (Math.abs(audio.currentTime - targetTime) > AUDIO_SEEK_EPSILON_SEC) {
-      audio.currentTime = targetTime;
+    if (audio) {
+      // Music bed runs underneath the voiceover, so keep it ducked low.
+      audio.volume = 0.16;
+      const targetTime = SCENE_START_SEC[baseSceneKey] ?? 0;
+      if (Math.abs(audio.currentTime - targetTime) > AUDIO_SEEK_EPSILON_SEC) {
+        audio.currentTime = targetTime;
+      }
+      audio.play().catch(() => {});
     }
-    audio.play().catch(() => {});
+
+    // Play the current scene's voiceover from the start. Restarting per scene
+    // (rather than seeking one long track) keeps narration in sync even when a
+    // viewer jumps between scenes.
+    const narration = narrationRef.current;
+    if (narration) {
+      const src = `${import.meta.env.BASE_URL}audio/narration/${baseSceneKey}.mp3`;
+      if (!narration.src.endsWith(`${baseSceneKey}.mp3`)) {
+        narration.src = src;
+      }
+      narration.volume = 1;
+      narration.currentTime = 0;
+      narration.play().catch(() => {});
+    }
   }, [currentSceneKey, baseSceneKey]);
 
   let activeNav = 'Dashboard';
@@ -90,7 +107,7 @@ export default function VideoTemplate({
       {/* Sidebar - persists across all scenes */}
       <div className="w-64 h-full border-r border-border bg-white flex flex-col pt-8 pb-4 shrink-0 z-20 shadow-sm relative">
         <div className="px-6 mb-8 flex items-center space-x-2">
-          <div className="w-8 h-8 bg-primary text-white flex items-center justify-center font-serif text-xl rounded">Σ</div>
+          <div className="w-8 h-8 bg-primary text-white flex items-center justify-center font-serif text-sm font-bold rounded">EP</div>
         </div>
 
         <nav className="flex-1 px-4 space-y-1">
@@ -134,6 +151,8 @@ export default function VideoTemplate({
         autoPlay
         muted={muted}
       />
+
+      <audio ref={narrationRef} preload="auto" muted={muted} />
     </div>
   );
 }

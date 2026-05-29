@@ -8,11 +8,11 @@ export function Scene3({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    // 0-2.0s Cursor into textarea, types "Why is dividing by zero undefined?"
+    // 0-2.0s Cursor into textarea, types "What's the difference between an adaptation and a by-product?"
     // 2.0-2.5s Cursor to send button, clicks.
     // 2.5-3.5s Pulsing dots.
     // 3.5-10s AI response streams.
-    // 10-12s Cursor types "What about limits?"
+    // 10-12s Cursor types "So is language an adaptation?"
 
     setCursorPos({ x: '60vw', y: '16vh' }); // Start at Tutor tab
     

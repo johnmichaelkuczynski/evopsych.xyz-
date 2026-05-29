@@ -13,7 +13,7 @@ export function Scene4({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
     // 0-1.5s: Cursor to sidebar "Analytics", clicks. Crossfade.
     // 1.5-4.0s: KPI tiles count up.
     // 4.0-6.0s: Topic Mastery rows stagger in.
-    // 6.0-8.5s: Cursor to "Ratios and proportions", click.
+    // 6.0-8.5s: Cursor to "Inclusive fitness and kin selection", click.
     // 8.5-10s: Crossfade begins.
 
     setCursorPos({ x: '65vw', y: '90vh' }); // Start where Scene 3 left off
@@ -51,7 +51,7 @@ export function Scene4({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
     }, 4000);
 
     const t6 = setTimeout(() => {
-      setCursorPos({ x: '40vw', y: '65vh' }); // Move to Ratios row
+      setCursorPos({ x: '40vw', y: '65vh' }); // Move to "Inclusive fitness and kin selection" row
     }, 6000);
 
     const t7 = setTimeout(() => {
