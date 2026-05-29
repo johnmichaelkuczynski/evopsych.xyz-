@@ -8,7 +8,7 @@
 
 Teach Yourself Evolutionary Psychology is a self-paced, single-user web course that asks the question most psychology classes skip: *why* do we have the minds we do? Why do we fear some things more easily than others? Why do mating preferences differ? Why do we cooperate with strangers, favor kin, feel jealousy, fall for status, and build cultures and religions? The organizing answer is one idea: the mind is a set of information-processing devices — cognitive adaptations — built by natural selection to solve the recurring problems faced by our ancestors.
 
-The course is a content reskin of the **QuantReason** Quantitative Reasoning app. The full QuantReason runtime — lectures with short / medium / long depth, section-scoped AI tutor, adaptive practice, AI-graded homework / tests / midterm / final, two-layer AI-authorship detection, and one-click diagnostics — is preserved unchanged. The **purpose** of this build is to teach the conceptual backbone of evolutionary psychology — the same backbone that runs through every undergraduate text in the field — presented in one connected arc.
+The runtime — lectures with short / medium / long depth, section-scoped AI tutor, adaptive practice, AI-graded homework / tests / midterm / final, two-layer AI-authorship detection, and one-click diagnostics — supports a single goal: teaching the conceptual backbone of evolutionary psychology — the same backbone that runs through every undergraduate text in the field — presented in one connected arc.
 
 ---
 
@@ -21,7 +21,7 @@ The course is a content reskin of the **QuantReason** Quantitative Reasoning app
   - **Week 4 — Social life, cooperation, and culture**: kinship and family dynamics; cooperation and reciprocal altruism; aggression, status, and dominance; coalitions, groups, and warfare; language and communication; emotions as evolved programs; culture, religion, and the evolved mind; a capstone synthesis.
 - **One Real Example per Lecture** — Every micro-lecture grounds its concept in a worked example from biology, anthropology, history, or experimental psychology — e.g. Hamilton's rule and the evolution of altruism, Trivers' parental-investment theory, the Wason selection task and cheater detection, Cosmides and Tooby's adapted-mind program, snake- and spider-fear preparedness experiments, and Buss's cross-cultural mate-preference surveys.
 - **One Analytic Question per Lecture** — Every homework / test / midterm / final problem requires the student to *state the key idea precisely* — sometimes in words, sometimes in symbols (Hamilton's rule $rB > C$, the coefficient of relatedness $r$, parental-investment asymmetries) — not just gesture at it in English. The on-screen math/symbol keyboard remains available for the symbolic answers.
-- **Three-Depth Lectures, Section-Scoped Tutor, Adaptive Practice, AI Grading, Two-Layer Detection, One-Click Diagnostics** — All inherited unchanged from the QuantReason runtime.
+- **Three-Depth Lectures, Section-Scoped Tutor, Adaptive Practice, AI Grading, Two-Layer Detection, One-Click Diagnostics** — The full learning runtime.
 - **Built-In Product Demo Video** — The companion `qr-course-demo` artifact still ships as a short screencast of the live UI.
 
 ---
@@ -55,7 +55,7 @@ Both are requested via the secrets panel; neither is hard-coded.
 ## 🎓 Designed For
 
 - **Anyone Curious About Why the Mind Works the Way It Does:** A short, focused course on the conceptual scaffolding behind human behavior — adaptation, selection, kinship, mating, cooperation, and culture.
-- **The Maintainer of QuantReason and Its Clones:** A pure stress test of the lecture / tutor / grading / detection stack under a different curriculum, with answers that lean on conceptual precision and the occasional symbolic statement (Hamilton's rule, relatedness coefficients).
+- **Anyone Maintaining the Underlying Runtime:** A clean exercise of the lecture / tutor / grading / detection stack under a conceptual-precision curriculum, with answers that lean on precise statements and the occasional symbolic form (Hamilton's rule, relatedness coefficients).
 
 ---
 

@@ -1,6 +1,6 @@
 # Teach Yourself Evolutionary Psychology
 
-A self-paced, single-user web course on the adapted mind — from natural selection to cooperation, language, and culture. It is a content reskin of the **QuantReason** runtime: the full lecture / tutor / practice / grading / detection / diagnostics stack is preserved, with the curriculum replaced by 29 evolutionary-psychology micro-lectures across four weeks.
+A self-paced, single-user web course on the adapted mind — from natural selection to cooperation, language, and culture. It ships a full lecture / tutor / practice / grading / detection / diagnostics stack, with a curriculum of 29 evolutionary-psychology micro-lectures across four weeks.
 
 > Read the idea, see it grounded in a real example, then state the idea precisely.
 
