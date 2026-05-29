@@ -19,1279 +19,790 @@ type SeedTopic = {
 
 const TOPICS: SeedTopic[] = [
   // ───────────────────────────────────────────────────────────────
-  // Week 1 — The number systems
+  // Week 1 — Foundations of evolutionary psychology
   // ───────────────────────────────────────────────────────────────
   {
-    slug: "counting-integers-numberline",
-    title: "Counting, the integers, and the number line",
+    slug: "evopsych-what-why",
+    title: "What evolutionary psychology is and why it exists",
     weekNumber: 1,
-    blurb: "From tally marks to a continuous line of integers.",
-    lectureTitle: "1.1 Counting, the integers, and the number line",
-    body: `# Counting, the integers, and the number line
+    blurb: "The mind as a product of natural selection.",
+    lectureTitle: "1.1 What evolutionary psychology is and why it exists",
+    body: `# What evolutionary psychology is and why it exists
 
-Mathematics begins with *counting*. The natural numbers $\\mathbb{N} = \\{1, 2, 3, \\ldots\\}$ — or $\\{0, 1, 2, \\ldots\\}$, depending on the author — are the answer to "how many?" They are discrete, ordered, and unbounded above.
+Evolutionary psychology is the study of the human mind as a product of evolution. Its central premise is simple but radical: the brain is a biological organ, shaped by natural selection over millions of years to solve the recurrent problems faced by our ancestors. If the hand, the eye, and the immune system are adaptations, then so are the mechanisms of fear, attraction, memory, and language.
 
-Extending counting in the opposite direction gives the **integers** $\\mathbb{Z} = \\{\\ldots, -2, -1, 0, 1, 2, \\ldots\\}$. The letter $\\mathbb{Z}$ comes from German *Zahlen* ("numbers"). What makes $\\mathbb{Z}$ a genuine *extension* of $\\mathbb{N}$ is that subtraction is now always defined: $3 - 5 = -2$ has no answer in $\\mathbb{N}$, but it does in $\\mathbb{Z}$.
+## The core claim
 
-## The number line
+The founding idea, developed by Leda Cosmides and John Tooby in the late 1980s, is that **the mind is a set of information-processing devices** — evolved programs — each designed to solve a specific adaptive problem. There is no single, general-purpose "thinking machine." Instead there are many specialized systems: one for detecting cheaters in social exchange, one for choosing mates, one for avoiding contaminated food, and so on.
 
-Around 1600, John Wallis popularized the picture of integers as evenly-spaced points on a horizontal **line** stretching to infinity in both directions. The visual is so familiar we forget it is a *modeling choice*: we are asserting that numbers, which began life as counts of distinct objects, can be identified with positions on a continuum.
+## Why it exists
 
-That single picture quietly unifies arithmetic with geometry. Addition becomes translation; negation becomes reflection through $0$; ordering ($<$, $>$) becomes "left of, right of." Every later number system — the rationals, the reals, the complex numbers — is built by adding more points to (or stacking more lines onto) this single mental object.
+Before evolutionary psychology, psychology often treated the mind as a blank slate, infinitely shaped by culture and learning. But a blank slate cannot explain *why* humans everywhere fear snakes more easily than cars, why every culture has language with the same deep structure, or why jealousy follows predictable patterns. Evolution supplies the missing explanation: our minds come pre-loaded with structure because structured minds out-reproduced unstructured ones.
 
-## A historical example
+## Tinbergen's four questions
 
-Negative numbers were rejected as absurd in Europe until the 17th century — Cardano (1545) called them *numeri ficti*, "fictitious numbers." What changed minds was *bookkeeping*: a debt of seven coins is structurally a $-7$, and treating it as a number lets you add receipts and debts in one column. The number line absorbed the negatives by giving them a home: a *place* to stand, on the left of zero.`,
+The biologist Niko Tinbergen pointed out that any trait can be explained at four levels: its **mechanism** (how it works now), its **development** (how it grows in the individual), its **function** (what it was selected for), and its **phylogeny** (its evolutionary history). Evolutionary psychology specializes in the *function* question — but the four are complementary, not competing.
+
+## A grounding example
+
+Consider the human preference for sweet and fatty foods. A blank-slate account struggles: nobody teaches a baby to like sugar. The evolutionary account is immediate — in ancestral environments, calories were scarce and ripe fruit and fat were rare, valuable energy sources. A taste system that rewarded eating them was favored by selection. The same mechanism that was adaptive then now drives obesity in a world of cheap calories — a mismatch we will return to repeatedly.`,
   },
   {
-    slug: "rationals-ratios",
-    title: "Rational numbers and ratios",
+    slug: "natural-selection-adaptation",
+    title: "Natural selection and adaptation",
     weekNumber: 1,
-    blurb: "Numbers as ratios of integers; why $\\mathbb{Q}$ is dense.",
-    lectureTitle: "1.2 Rational numbers and ratios",
-    body: `# Rational numbers and ratios
+    blurb: "How selection builds functional design without a designer.",
+    lectureTitle: "1.2 Natural selection and adaptation",
+    body: `# Natural selection and adaptation
 
-A **rational number** is a ratio $p/q$ of integers with $q \\neq 0$. The set of all such ratios, with two representations identified when they cross-multiply equal, is
+Natural selection is the only known natural process that builds complex functional design. Understanding it precisely is the foundation of everything that follows.
 
-$$\\mathbb{Q} = \\{\\,p/q : p, q \\in \\mathbb{Z},\\ q \\neq 0\\,\\}.$$
+## The logic of selection
 
-The point of this construction is to make *division* always work — exactly as the integers existed to make subtraction always work.
+Darwin's argument needs only three ingredients:
 
-## Density
+- **Variation** — individuals differ from one another.
+- **Heritability** — some of that variation is passed to offspring.
+- **Differential reproduction** — some variants leave more surviving offspring than others.
 
-Between any two rationals, no matter how close, there is another rational: take their average. Iterate, and you discover that the rationals are **dense** on the number line — there are no "gaps" between them as far as any finite measurement could ever detect.
+When all three hold, the traits that promote reproduction become more common over generations. No foresight, no goal, no designer — just the statistical accumulation of what works.
 
-This is so counterintuitive that for centuries mathematicians assumed the rationals already filled the line. They do not — but you cannot tell from the inside.
+## What an adaptation is
 
-## A scientific example
+An **adaptation** is a trait that exists *because* it solved a recurrent reproductive problem in ancestral environments. The defining signature of an adaptation is *functional design*: complex, coordinated machinery that is improbably well-suited to a specific task. The vertebrate eye, with its lens, aperture, and light-sensitive retina, is not an accident — its parts fit together to do one thing, see.
 
-Every measurement humans actually make is rational. A digital scale reading "$1.732\\,\\text{kg}$" is asserting $1732/1000$. The speed of light in SI units, $c = 299{,}792{,}458\\,\\text{m/s}$, is an *exact* integer by definition since 1983 — and therefore rational.
+## Byproducts and noise
 
-## Ratios vs. fractions
+Not every trait is an adaptation. **Byproducts** ride along with adaptations without being selected for themselves — the whiteness of bone is a byproduct of calcium, not a selected color. **Noise** is random variation with no function. Distinguishing adaptation from byproduct from noise is one of the hardest and most important tasks in the field.
 
-The word *ratio* in $\\mathbb{Q}$ matters. Pythagoras taught that the harmony of a musical interval is a ratio of small integers: the octave is $2{:}1$, the perfect fifth $3{:}2$, the perfect fourth $4{:}3$. Greek mathematics for two centuries was essentially the study of *ratios of magnitudes*, on the implicit assumption that any two magnitudes had one. The next lecture is the story of how that assumption broke.`,
+## A grounding example
+
+The human eye's blind spot is a clue to how selection actually works. Because the optic nerve passes *in front of* the retina in vertebrates, there is a hole in the visual field. A designer starting from scratch would never do this — the octopus eye, evolved separately, has the wiring behind the retina and no blind spot. Selection does not optimize; it tinkers with whatever is already there. Adaptations are good enough, not perfect.`,
   },
   {
-    slug: "irrationals-sqrt2",
-    title: "Irrational numbers and the $\\sqrt 2$ scandal",
+    slug: "genes-inheritance-replication",
+    title: "Genes, inheritance, and replication",
     weekNumber: 1,
-    blurb: "The diagonal of the unit square is not a ratio.",
-    lectureTitle: "1.3 Irrational numbers and the $\\sqrt 2$ scandal",
-    body: `# Irrational numbers and the $\\sqrt 2$ scandal
+    blurb: "The gene's-eye view: replicators and vehicles.",
+    lectureTitle: "1.3 Genes, inheritance, and replication",
+    body: `# Genes, inheritance, and replication
 
-The Pythagoreans believed every length was a ratio of two integers — that is, every length was rational. The unit square killed that belief.
+Selection acts on traits, but traits are not inherited directly — *genes* are. To understand why minds are the way they are, we have to descend to the level of the replicating molecule.
 
-## The diagonal
+## Replicators and vehicles
 
-By the Pythagorean theorem, the diagonal of a square of side $1$ has length $d$ with $d^2 = 1^2 + 1^2 = 2$, so $d = \\sqrt 2$. The Pythagoreans tried to write $\\sqrt 2 = p/q$ and discovered they could not.
+In Richard Dawkins's framing, a **replicator** is an entity that makes copies of itself; a **vehicle** is the body that carries replicators and interacts with the world. Genes are the replicators; organisms are the vehicles. The crucial shift in perspective is this: bodies are temporary, but a gene can persist across countless generations. Selection therefore favors genes that build vehicles good at propagating those very genes.
 
-## The proof by contradiction
+## Why "the selfish gene" is not about selfishness
 
-Suppose $\\sqrt 2 = p/q$ in lowest terms. Then $p^2 = 2 q^2$, so $p^2$ is even, so $p$ is even, so $p = 2k$. Substituting: $4k^2 = 2q^2$, i.e. $q^2 = 2k^2$, so $q$ is even too. But then $p$ and $q$ share a factor of $2$ — contradicting "lowest terms." Therefore no such $p/q$ exists. $\\sqrt 2 \\notin \\mathbb{Q}$.
+The phrase is often misread. A gene is "selfish" only in the metaphorical sense that it spreads if it raises its own frequency — even when doing so makes the *organism* behave generously. A gene that makes a mother sacrifice for her children can spread precisely because copies of it sit inside those children. The gene's-eye view explains altruism, not just competition.
 
-This is one of the oldest theorems in mathematics and one of the cleanest examples of *proof by contradiction*, a technique we will revisit in week 4.
+## Genotype and phenotype
 
-## A scandal, not just a result
+The **genotype** is the genetic code; the **phenotype** is the observable trait it helps produce, always in interaction with the environment. Genes do not encode behaviors directly. They build developmental systems that, given normal inputs, reliably produce adaptive phenotypes. "Genetic" never means "fixed" or "unchangeable."
 
-Legend says Hippasus of Metapontum, who first proved this, was thrown overboard by his fellow Pythagoreans for revealing the result. Whether or not the drowning happened, the cultural shock was real: the entire Pythagorean cosmology — "all is number" meaning "all is ratio of integers" — collapsed. A new kind of number was needed.
+## A grounding example
 
-## The bigger picture
-
-$\\sqrt 2$, $\\pi$, $e$, $\\log_2 3$, and almost every number you can write down are irrational. The irrationals are not a few exotic exceptions sprinkled into $\\mathbb{Q}$; they are, in a precise sense we will quantify in 1.8, the *overwhelming majority* of the real numbers.`,
+Consider lactase persistence — the ability to digest milk into adulthood. In populations with a long history of dairying, a gene variant that keeps the lactase enzyme switched on spread rapidly over just a few thousand years. The same gene is rare where dairying never took hold. Here we can watch the whole chain: a replicator, a measurable phenotype, an environmental problem (a new food source), and selection raising the gene's frequency.`,
   },
   {
-    slug: "reals-completeness",
-    title: "Real numbers and completeness",
+    slug: "sexual-selection",
+    title: "Sexual selection",
     weekNumber: 1,
-    blurb: "Filling in the gaps: $\\mathbb{R}$ has no holes.",
-    lectureTitle: "1.4 Real numbers and completeness",
-    body: `# Real numbers and completeness
+    blurb: "Selection for traits that win mates, not just survival.",
+    lectureTitle: "1.4 Sexual selection",
+    body: `# Sexual selection
 
-The rationals are dense but full of holes — $\\sqrt 2$, $\\pi$, and uncountably many others are missing. The **real numbers** $\\mathbb{R}$ are the result of filling in *every* such hole.
+Darwin noticed a puzzle: some traits seem to *hurt* survival. The peacock's tail is heavy, conspicuous, and metabolically expensive. Why would selection build it? His answer was a second engine of evolution.
 
-## What "complete" means
+## Two kinds of competition
 
-A number system is **complete** if every "convergent-looking" sequence actually converges to something *inside the system*. Two precise versions of this idea:
+**Sexual selection** is selection for traits that improve mating success rather than survival. It operates through two mechanisms:
 
-- **Least Upper Bound axiom.** Every nonempty subset of $\\mathbb{R}$ with an upper bound has a least upper bound (a supremum) in $\\mathbb{R}$.
-- **Cauchy completeness.** Every sequence whose terms get arbitrarily close to each other converges to a real limit.
+- **Intrasexual selection** — members of one sex compete directly with each other for access to mates (think of antlers and male-male combat).
+- **Intersexual selection** — members of one sex choose mates based on certain traits (think of peahens choosing the showiest tail).
 
-In $\\mathbb{Q}$ both properties *fail*. The sequence $1, 1.4, 1.41, 1.414, 1.4142, \\ldots$ of decimal approximations to $\\sqrt 2$ is a Cauchy sequence of rationals with no rational limit. In $\\mathbb{R}$ its limit is $\\sqrt 2$, which is, by construction, *in* $\\mathbb{R}$.
+A trait can spread even if it shortens life, as long as it raises reproduction enough to compensate.
 
-## How $\\mathbb{R}$ is built
+## The handicap principle
 
-Two classical constructions:
+Why should a costly ornament signal quality? Amotz Zahavi's **handicap principle** answers: a signal is reliable precisely *because* it is costly. Only a genuinely healthy, well-fed peacock can afford to grow and haul around an enormous tail. The cost guarantees the signal cannot be faked. Honest signals must be expensive.
 
-1. **Dedekind cuts** (1872). A real number is a partition of $\\mathbb{Q}$ into a "lower" and "upper" set with no greatest element below. $\\sqrt 2$ is the cut $\\{q \\in \\mathbb{Q} : q^2 < 2\\}\\,|\\,\\{q \\in \\mathbb{Q} : q^2 > 2\\}$.
-2. **Cauchy sequences** (Cantor, 1872). A real number is an equivalence class of Cauchy sequences of rationals.
+## Why this matters for the human mind
 
-Both constructions yield the same field $\\mathbb{R}$, up to isomorphism.
+Many human traits — humor, music, generosity, creativity, and aspects of language — may be partly products of sexual selection, advertising the quality of the underlying brain. This reframes courtship displays not as cultural frills but as fitness indicators.
 
-## A scientific example
+## A grounding example
 
-In physics, the *continuum* hypothesis — that space and time are modeled by $\\mathbb{R}$, not $\\mathbb{Q}$ — is what lets us write down differential equations. The reals' completeness is exactly what guarantees that, e.g., Newton's $F = ma$ has solutions; in the rationals alone, most ODEs would have no solution to converge to.`,
+The long tail of the male widowbird was tested directly by Malte Andersson. He cut tails short on some males and glued the cut pieces onto others, making them artificially long. Males with experimentally lengthened tails attracted far more mates than shortened ones, even though the long tail offered no survival benefit. Female choice alone was driving the trait — sexual selection caught in the act.`,
   },
   {
-    slug: "complex-rotations",
-    title: "Imaginary and complex numbers as rotations",
+    slug: "inclusive-fitness-kin-selection",
+    title: "Inclusive fitness and kin selection",
     weekNumber: 1,
-    blurb: "$i$ is not mysterious — it's a $90°$ turn.",
-    lectureTitle: "1.5 Imaginary and complex numbers as rotations",
-    body: `# Imaginary and complex numbers as rotations
+    blurb: "Hamilton's rule and why we help relatives.",
+    lectureTitle: "1.5 Inclusive fitness and kin selection",
+    body: `# Inclusive fitness and kin selection
 
-A **complex number** has the form $z = a + bi$ with $a, b \\in \\mathbb{R}$ and $i$ defined by $i^2 = -1$. The set of all such numbers is $\\mathbb{C}$.
+If genes are what spread, then helping a relative — who carries copies of your genes — can be a way of propagating those genes indirectly. This insight, due to W. D. Hamilton, solved one of biology's deepest puzzles: the existence of self-sacrifice.
 
-## The leap
+## Inclusive fitness
 
-Cardano (1545) used $\\sqrt{-1}$ as a *bookkeeping device* in solving cubic equations — the imaginary parts cancelled at the end, leaving real roots. For two centuries $\\sqrt{-1}$ remained, in Euler's words, "neither nothing, nor greater than nothing, nor less than nothing." The mystery was: *what is it the number of?*
+**Inclusive fitness** is an organism's total genetic contribution to the next generation: its own offspring (*direct* fitness) plus its effect on the reproduction of relatives, weighted by relatedness (*indirect* fitness). Natural selection maximizes inclusive fitness, not mere personal survival.
 
-## The Argand picture
+## Hamilton's rule
 
-Caspar Wessel (1799) and Jean-Robert Argand (1806) independently noticed that complex numbers live not on a *line* but on a *plane*: identify $a + bi$ with the point $(a, b)$. Real numbers occupy the horizontal axis. The number $i$ sits at $(0, 1)$.
+The condition for an altruistic act to be favored is captured in one inequality, **Hamilton's rule**: an act spreads when $rB > C$, where $r$ is the coefficient of relatedness between actor and recipient, $B$ is the reproductive benefit to the recipient, and $C$ is the cost to the actor. The closer the relative and the larger the benefit relative to cost, the more selection favors helping.
 
-In this picture, **multiplication by $i$ is rotation by $90°$**. Multiplying by $i$ twice rotates by $180°$, which is multiplication by $-1$ — and that is precisely the equation $i^2 = -1$. The imaginary unit is not a mystery; it is the quarter-turn.
+## Coefficients of relatedness
 
-More generally, multiplying by $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ rotates the plane by angle $\\theta$. This is **Euler's formula**, and the special case $e^{i\\pi} + 1 = 0$ packages five fundamental constants in seven symbols.
+For sexually reproducing organisms, $r = 1/2$ for parent and child or for full siblings, $r = 1/4$ for grandparent and grandchild or for aunt and niece, and $r = 1/8$ for first cousins. J. B. S. Haldane joked that he would lay down his life for two brothers or eight cousins — a precise application of the math.
 
-## A scientific example
+## A grounding example
 
-Alternating current in electrical engineering is described by complex *impedances*: a resistor contributes a real number, a capacitor or inductor contributes an imaginary number. The phase shift between voltage and current is literally an angle in the complex plane. Without $i$, you would write coupled trigonometric differential equations; with $i$, you write algebra.`,
+Belding's ground squirrels give alarm calls when a predator approaches, drawing dangerous attention to the caller. The behavior looks suicidal until you notice *who* calls: females, who stay near their birthplace surrounded by relatives, call far more than dispersing males. The alarm protects kin who share the caller's genes — exactly what Hamilton's rule predicts.`,
   },
   {
-    slug: "zero-negatives-leaps",
-    title: "Zero, negatives, and other conceptual leaps",
+    slug: "adapted-mind-modularity",
+    title: "The adapted mind and modularity",
     weekNumber: 1,
-    blurb: "How long it took to accept the numbers we now take for granted.",
-    lectureTitle: "1.6 Zero, negatives, and other conceptual leaps",
-    body: `# Zero, negatives, and other conceptual leaps
+    blurb: "Many specialized programs, not one general computer.",
+    lectureTitle: "1.6 The adapted mind and modularity",
+    body: `# The adapted mind and modularity
 
-The set $\\{0, 1, -3, \\sqrt 2, \\pi, i\\}$ contains nothing exotic to a modern eye. To the mathematicians who lived through the introduction of each of these ideas, every entry was scandalous.
+If the mind is a product of selection, what is its architecture? The evolutionary answer is **modularity**: the mind is not a single all-purpose computer but a large collection of specialized programs, each shaped for a particular adaptive problem.
 
-## Zero
+## Why specialized, not general
 
-Most early number systems had no $0$. The Babylonians, Greeks, and Romans counted with words for "nothing" but no *numeral* for it — Roman numerals have no zero. Indian mathematicians (Brahmagupta, c. 628 CE) wrote down the first formal arithmetic rules for $0$: $a + 0 = a$, $a \\cdot 0 = 0$, and the still-debated $a / 0$. The numeral itself, *śūnya* ("emptiness"), travelled west via Arabic mathematicians and reached Europe through Fibonacci's *Liber Abaci* (1202). Even then, several Italian cities banned zero into the 1300s on the grounds that it made accounting forgery easier.
+A general-purpose problem-solver faces a fatal difficulty: most adaptive problems have *different* optimal solutions. The rules for choosing a mate are not the rules for choosing food, which are not the rules for avoiding predators. A mechanism tuned to one problem will be wrong for another. Selection therefore favors many domain-specific mechanisms, each carrying built-in knowledge about its own problem.
 
-## Negatives
+## The Swiss Army knife metaphor
 
-Diophantus (3rd c. CE) called the equation $4x + 20 = 4$ "absurd" because its solution would have to be negative. Descartes (1637) called negative roots of polynomial equations *fausses racines*, "false roots." Acceptance only came when negatives modelled something — debt, direction, signed measurement — that could not be wished away.
+Cosmides and Tooby compare the mind to a Swiss Army knife: a bundle of distinct tools, each shaped for a job. This does not mean the modules are isolated boxes in the brain — they can overlap and interact — but functionally they embody different rules tuned to different domains.
 
-## Irrationals, transcendentals, $i$
+## The grain of truth in "instinct blindness"
 
-Each new kind of number arrived as a forced response to an equation the previous system could not solve:
+We are blind to our own instincts precisely because they work so smoothly. Seeing in three dimensions, recognizing a face, parsing a sentence — these feel effortless and obvious, which conceals the enormous specialized machinery doing the work. The seeming ease is evidence *for* dedicated design, not against it.
 
-- $x + 1 = 0$ forces $\\mathbb{Z}$.
-- $2x = 1$ forces $\\mathbb{Q}$.
-- $x^2 = 2$ forces $\\mathbb{R}$ (or at least the algebraic reals).
-- $x^2 + 1 = 0$ forces $\\mathbb{C}$.
+## A grounding example
 
-## The lesson
-
-A *conceptual leap* in mathematics is almost always the recognition that an object the previous generation called "impossible" is in fact useful, consistent, and indispensable. The reluctance is cultural, not logical.`,
+The **Wason selection task** reveals modularity sharply. When people are asked to test an abstract logical rule ("if a card shows an even number, the other side is red"), most fail. But when the *identical* logic is framed as a social-contract cheater-detection problem ("if someone drinks alcohol, they must be over 18"), performance jumps dramatically. We do not reason with one general logic engine; we have a specialized mechanism for catching cheaters in social exchange.`,
   },
   {
-    slug: "bases-place-value",
-    title: "Bases, place value, and representation",
+    slug: "levels-of-explanation",
+    title: "Levels of explanation and common misunderstandings",
     weekNumber: 1,
-    blurb: "A number is one thing; its written form is another.",
-    lectureTitle: "1.7 Bases, place value, and representation",
-    body: `# Bases, place value, and representation
+    blurb: "Avoiding the naturalistic fallacy and genetic determinism.",
+    lectureTitle: "1.7 Levels of explanation and common misunderstandings",
+    body: `# Levels of explanation and common misunderstandings
 
-The number *seventeen* is a single concept. Its written representations include:
+Evolutionary psychology is more misunderstood than almost any field. Most objections target claims the field does not make. Clearing them away is essential before going further.
 
-- $17$ in base $10$
-- $10001$ in base $2$
-- $11$ in base $16$ (often written $0x11$)
-- XVII in Roman numerals
-- 一十七 in Chinese.
+## Proximate vs. ultimate causes
 
-The number is invariant; the *numeral* changes with the convention.
+Every behavior has two complementary explanations. A **proximate** explanation describes the immediate machinery — hormones, neurons, learning, stimuli. An **ultimate** explanation describes the evolutionary function — why selection built that machinery. "A mother loves her baby because of oxytocin" and "because caring for offspring propagated her genes" are both true; they answer different questions and do not compete.
 
-## Place value
+## The naturalistic fallacy
 
-In a positional system of base $b$, the string $d_k d_{k-1} \\ldots d_1 d_0$ means
+The **naturalistic fallacy** is the error of inferring *ought* from *is* — assuming that whatever evolved is therefore good or justified. Evolution explains why infanticide, deception, and violence exist under certain conditions; it never endorses them. Describing a tendency is not approving of it. Understanding a disease is the first step to curing it.
 
-$$d_k b^k + d_{k-1} b^{k-1} + \\cdots + d_1 b + d_0,$$
+## Genetic determinism is not the claim
 
-with each digit $d_i$ in $\\{0, 1, \\ldots, b-1\\}$. The *position* of a digit determines what power of $b$ it contributes. This is the deep insight that the Romans lacked: in Roman numerals, $X$ always means ten, no matter where it sits.
+Saying a trait is an adaptation does **not** mean it is fixed, inevitable, or unchangeable. Adaptations are typically *conditional* — they produce different outputs depending on environmental inputs. Calluses are an adaptation, but you only grow them where there is friction. Most evolved psychology works the same way: if-then programs sensitive to context.
 
-Place value lets you do arithmetic algorithmically: add column by column, carry when a column overflows. Try long-division in Roman numerals — you can't, which is why the Roman world used an abacus.
+## A grounding example
 
-## Why base 10?
-
-There is no mathematical reason for base 10. We use it because humans have ten fingers. The Babylonians used base 60 — you still find it in time ($60$ seconds, $60$ minutes) and angles ($360°$). The Maya used base 20. Modern computers use base 2.
-
-## A scientific example
-
-Floating-point arithmetic in a computer represents a real number as $\\pm m \\cdot 2^{e}$, with the *mantissa* $m$ and *exponent* $e$ both stored in binary. The number $0.1$ has a finite decimal representation but an *infinite* binary one — which is why "0.1 + 0.2" is not exactly "0.3" in JavaScript. The mathematical number is fine; its representation in base $2$ rounds.
-
-## A philosophical aside
-
-Once you separate a number from its representation, you can ask: which properties of a number are intrinsic, and which are artifacts of how we wrote it? "Is 7 a prime?" is intrinsic. "Does the decimal expansion of 7 contain the digit 3?" is representational.`,
-  },
-  {
-    slug: "countable-uncountable",
-    title: "Countable vs. uncountable infinity",
-    weekNumber: 1,
-    blurb: "There are more reals than rationals — strictly more.",
-    lectureTitle: "1.8 Countable vs. uncountable infinity",
-    body: `# Countable vs. uncountable infinity
-
-For finite sets, "same size" means "same count." For infinite sets, Cantor (1874) showed that "same size" must mean **same cardinality**: there is a one-to-one correspondence (a bijection) between them.
-
-## Countable
-
-A set is **countable** if it can be put in bijection with $\\mathbb{N}$. Astonishingly:
-
-- $\\mathbb{Z}$ is countable: list $0, 1, -1, 2, -2, 3, -3, \\ldots$
-- $\\mathbb{N} \\times \\mathbb{N}$ is countable: walk diagonals $(0,0), (1,0), (0,1), (2,0), (1,1), (0,2), \\ldots$
-- $\\mathbb{Q}$ is countable: a rational $p/q$ is a pair of integers, so apply the previous result.
-
-So all three of $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{Q}$ have the *same* infinite size. Cantor called this size $\\aleph_0$ ("aleph-null").
-
-## Uncountable
-
-Cantor's **diagonal argument** shows $\\mathbb{R}$ is **not** countable. Suppose, for contradiction, you had a list $r_1, r_2, r_3, \\ldots$ of every real number in $[0,1]$. Write each $r_n$ as a decimal:
-
-$$r_1 = 0.d_{11} d_{12} d_{13} \\ldots$$
-$$r_2 = 0.d_{21} d_{22} d_{23} \\ldots$$
-$$\\vdots$$
-
-Now construct a new number $x = 0.e_1 e_2 e_3 \\ldots$ where $e_n$ is *different* from $d_{nn}$ (say, $e_n = 5$ if $d_{nn} \\neq 5$, else $e_n = 6$). By construction, $x$ differs from $r_n$ in the $n$th decimal place, so $x$ is not on the list — yet $x \\in [0,1]$. Contradiction. There is no such list.
-
-The cardinality of $\\mathbb{R}$ is strictly greater than $\\aleph_0$; it is usually written $\\mathfrak{c}$ or $2^{\\aleph_0}$.
-
-## What this means
-
-There are infinitely many sizes of infinity. The rationals are sparse compared to the reals in a precise sense: if you "pick a random real," the probability you get a rational is exactly $0$. Most numbers — almost all of them — are irrational, in fact *transcendental*, and we cannot write them down.
-
-This week we have climbed from counting to a hierarchy of infinities. Next week we ask: what are we *doing* to these numbers when we add, multiply, and group them?`,
+Consider the claim that men are, on average, more physically aggressive than women. The naturalistic fallacy would (wrongly) conclude that male violence is therefore acceptable. Genetic determinism would (wrongly) conclude that nothing can change it. The correct evolutionary reading is conditional: aggression is a strategy that paid off for ancestral males under specific circumstances (competition for status and mates), and rates vary enormously with context — which is exactly why societies that reduce those incentives see far less violence.`,
   },
 
   // ───────────────────────────────────────────────────────────────
-  // Week 2 — Operations and structures
+  // Week 2 — Survival and the evolved individual
   // ───────────────────────────────────────────────────────────────
   {
-    slug: "what-is-operation",
-    title: "What an operation is",
+    slug: "survival-evolved-body",
+    title: "Survival and the evolved body",
     weekNumber: 2,
-    blurb: "An operation is a function that combines elements of a set.",
-    lectureTitle: "2.1 What an operation is",
-    body: `# What an operation is
+    blurb: "The body as a record of ancestral survival problems.",
+    lectureTitle: "2.1 Survival and the evolved body",
+    body: `# Survival and the evolved body
 
-We have spent week 1 collecting numbers. Now we ask: what is happening when we *combine* them?
+Reproduction requires survival first. Before an organism can pass on genes, it must find food, avoid predators, regulate temperature, and stay healthy long enough to mate. The body and its associated psychology are a record of the survival problems our ancestors faced.
 
-## The formal definition
+## Survival as a precondition, not the goal
 
-A **binary operation** on a set $S$ is a function
+A common misconception is that organisms are designed to survive. They are not. They are designed to *reproduce*, and survival is merely a means to that end. This is why selection will trade survival for reproduction — salmon swim upstream and die after spawning, and human risk-taking peaks in young males competing for status. Survival mechanisms are calibrated to serve lifetime reproductive success, not longevity.
 
-$$* : S \\times S \\to S$$
+## Homeostasis and regulation
 
-that takes two elements of $S$ and returns one element of $S$. Addition on $\\mathbb{R}$ is one ($+ : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$). So is multiplication. So is concatenation of strings, union of sets, composition of functions.
+Much of our evolved machinery maintains internal balance: thermoregulation (sweating, shivering), hunger and satiety, thirst, sleep. These systems feel automatic precisely because they are ancient and reliable. Each represents a solution to a survival problem so persistent that selection hardwired the response.
 
-The deep word in that definition is the codomain: the result is required to be *in $S$*. This is called **closure**, and it is not automatic.
+## The environment of evolutionary adaptedness
 
-## Closure: not automatic
+Our survival mechanisms were tuned to the **environment of evolutionary adaptedness (EEA)** — the statistical composite of ancestral conditions, largely the Pleistocene foraging world. Because the modern environment differs so sharply, many once-adaptive mechanisms now misfire: we crave more salt and sugar than is healthy, and we under-exercise because conserving energy was once wise.
 
-- Subtraction is a binary operation on $\\mathbb{Z}$ but **not** on $\\mathbb{N}$ — $3 - 5 = -2 \\notin \\mathbb{N}$.
-- Division is a binary operation on $\\mathbb{Q}^{\\times} = \\mathbb{Q}\\setminus\\{0\\}$ but **not** on $\\mathbb{Q}$ — you cannot divide by $0$.
-- The cross product is a binary operation on $\\mathbb{R}^3$ but does not generalize as a binary operation to $\\mathbb{R}^n$ for arbitrary $n$.
+## A grounding example
 
-The history of week 1 — the introduction of negatives, fractions, irrationals, complex numbers — is, retold structurally, the story of *enlarging the set so that the operation has closure*.
-
-## Unary and $n$-ary
-
-Beyond binary, you also have:
-
-- **Unary** operations: negation $x \\mapsto -x$, square root $x \\mapsto \\sqrt x$.
-- **$n$-ary** operations: e.g. the determinant of an $n \\times n$ matrix.
-- **Nullary** operations (constants): the identity element $0$ of addition, the identity element $1$ of multiplication.
-
-## A scientific example
-
-In quantum mechanics, the operation $[A, B] = AB - BA$ on linear operators is a binary operation called the **commutator**. It is *not* closed under all combinations — its very failure of niceness encodes the uncertainty principle. The operation has been chosen because its violations of nice structure tell you something physical.`,
+The fight-or-flight response is a survival adaptation laid bare. A perceived threat triggers a cascade — adrenaline, raised heart rate, blood diverted to muscles, sharpened attention — that prepared an ancestor to fight or flee a predator within seconds. The same system now fires during a job interview or a traffic jam, flooding the body with stress hormones for threats that cannot be outrun. The mechanism is ancient; the trigger is modern; the mismatch is the source of chronic stress.`,
   },
   {
-    slug: "commutative-associative-distributive",
-    title: "Commutativity, associativity, distributivity",
+    slug: "foraging-food-palate",
+    title: "Foraging, food, and the evolved palate",
     weekNumber: 2,
-    blurb: "Three structural laws — and what happens when they fail.",
-    lectureTitle: "2.2 Commutativity, associativity, distributivity",
-    body: `# Commutativity, associativity, distributivity
+    blurb: "Why we crave what we crave.",
+    lectureTitle: "2.2 Foraging, food, and the evolved palate",
+    body: `# Foraging, food, and the evolved palate
 
-Once we have an operation $*$ on a set $S$, three properties dominate the discussion.
+Finding and choosing food was a daily, life-or-death problem for our ancestors. The result is a sophisticated set of evolved mechanisms governing what tastes good, what disgusts us, and how we search for food.
 
-## Commutativity
+## The logic of taste
 
-$$a * b = b * a \\quad \\text{for all } a, b \\in S.$$
+Our five basic tastes map onto ancestral nutritional problems. **Sweet** signals ripe fruit and quick energy. **Salt** signals scarce but essential electrolytes. **Umami** signals protein. **Bitter** and **sour** often signal toxins or spoilage and trigger rejection. Taste is not arbitrary preference — it is an evolved nutrient-detection system.
 
-Order doesn't matter. Addition and multiplication of real numbers are commutative. Subtraction is **not** — $3 - 5 \\neq 5 - 3$. Function composition is usually **not** — $\\sin(\\cos x) \\neq \\cos(\\sin x)$ in general. Matrix multiplication is **not** — and this failure is the whole content of quantum mechanics' non-commuting observables.
+## Optimal foraging theory
 
-## Associativity
+Foraging animals, including ancestral humans, behave as if solving a cost-benefit problem: maximize calories and nutrients gained per unit of time and energy spent. **Optimal foraging theory** predicts which foods a forager should pursue and which to ignore, and it successfully describes the diets of contemporary hunter-gatherers.
 
-$$(a * b) * c = a * (b * c) \\quad \\text{for all } a, b, c \\in S.$$
+## Omnivore's dilemma and food learning
 
-Grouping doesn't matter. Without associativity you cannot write $a*b*c$ unambiguously; you would have to specify which pair to combine first. Addition, multiplication, function composition, and matrix multiplication are all associative. Subtraction and the cross product are **not** — $(1-2)-3 = -4 \\neq 2 = 1 - (2-3)$, and $(\\vec a \\times \\vec b) \\times \\vec c \\neq \\vec a \\times (\\vec b \\times \\vec c)$ in general.
+As omnivores, humans face a tension: dietary flexibility lets us exploit many foods, but each new food is a potential poison. We resolve this with specialized learning — strong **one-trial taste aversion** (a single bout of nausea can make a food repellent for life) and a wariness of novel foods called food neophobia, strongest in childhood.
 
-## Distributivity
+## A grounding example
 
-With two operations $*$ and $\\circ$ on the same set, $*$ **distributes over** $\\circ$ if
-
-$$a * (b \\circ c) = (a * b) \\circ (a * c).$$
-
-Multiplication distributes over addition: $a(b + c) = ab + ac$. Addition does **not** distribute over multiplication: $a + (bc) \\neq (a + b)(a + c)$ in general.
-
-## Why these three?
-
-These three laws are not arbitrary — they are exactly the laws that make algebraic *manipulation* work. Solving $2x + 3 = 11$ silently uses every one of them. Without commutativity of addition, the order of the terms would matter. Without associativity, $2x + 3$ would be ambiguous. Without distributivity, you could not factor or expand.
-
-Modern abstract algebra is the systematic study of *which combinations of these laws hold*, and *what consequences each combination has*. The next four lectures are tour stops on that map.`,
+The Garcia effect, discovered by John Garcia, shows taste learning is special. Rats that became ill hours after tasting a novel flavor avoided that flavor forever — even though the illness came long after eating, violating ordinary learning rules that require close timing. The same delayed, single-trial aversion appears in humans: people who get sick after a meal often develop a lasting disgust for that food, even when they *know* it was a virus, not the food. The mechanism is an evolved poison-avoidance system that overrides conscious belief.`,
   },
   {
-    slug: "groups-symmetry",
-    title: "Groups and symmetry",
+    slug: "fear-predators-threat-detection",
+    title: "Fear, predators, and threat detection",
     weekNumber: 2,
-    blurb: "A group is a set with an invertible, associative operation.",
-    lectureTitle: "2.3 Groups and symmetry",
-    body: `# Groups and symmetry
+    blurb: "An evolved alarm system biased toward false alarms.",
+    lectureTitle: "2.3 Fear, predators, and threat detection",
+    body: `# Fear, predators, and threat detection
 
-A **group** is a set $G$ together with a binary operation $* : G \\times G \\to G$ satisfying four axioms:
+Fear is one of the most studied evolved emotions. It is an alarm system designed to detect and respond to ancestral dangers — and its design reveals a deep logic of error management.
 
-1. **Closure.** For all $a, b \\in G$, $a * b \\in G$.
-2. **Associativity.** $(a*b)*c = a*(b*c)$ for all $a, b, c$.
-3. **Identity.** There exists $e \\in G$ with $e*a = a*e = a$ for all $a$.
-4. **Inverses.** For every $a \\in G$ there exists $a^{-1} \\in G$ with $a*a^{-1} = a^{-1}*a = e$.
+## Prepared fears
 
-If, in addition, $a*b = b*a$ for all $a,b$, the group is **abelian**.
+Humans acquire fears of certain stimuli — snakes, spiders, heights, deep water, the dark, strangers — far more readily than fears of modern, more dangerous things like cars or electrical outlets. These **prepared fears** track *ancestral* threats, not current statistics. A child learns to fear a snake after one frightening experience; learning to fear a car takes constant warning and rarely "sticks" the same way.
 
-## Examples
+## Error management theory
 
-- $(\\mathbb{Z}, +)$, $(\\mathbb{Q}, +)$, $(\\mathbb{R}, +)$, $(\\mathbb{C}, +)$ — abelian groups under addition; identity $0$.
-- $(\\mathbb{Q}^{\\times}, \\cdot)$, $(\\mathbb{R}^{\\times}, \\cdot)$ — abelian groups under multiplication (after removing $0$); identity $1$.
-- $S_n$, the **symmetric group** — permutations of $n$ objects under composition. Non-abelian for $n \\ge 3$.
-- The set of rotations of an equilateral triangle (identity, $120°$, $240°$) under composition.
+A smoke detector that occasionally goes off when you make toast is annoying — but a detector that fails to fire during a real fire is fatal. **Error management theory** explains why the fear system is biased toward false alarms: the cost of a false positive (fleeing a stick mistaken for a snake) is trivial compared with the cost of a false negative (ignoring a real snake). Selection tuned the system to over-react.
 
-## Groups are symmetries
+## The fast and slow routes
 
-The headline theorem (Cayley, 1854): every group is isomorphic to a group of permutations. A more useful way to say it: a group is *the set of symmetries of something*.
+Joseph LeDoux mapped two pathways for fear in the brain: a fast, crude route through the amygdala that triggers a response *before* conscious recognition, and a slower cortical route that evaluates the threat in detail. The fast route makes you jump back from the coiled shape on the trail a fraction of a second before you consciously realize whether it is a snake or a rope.
 
-- The symmetries of a square form a group of order $8$ (the dihedral group $D_4$): four rotations $\\times$ two flips.
-- The symmetries of a circle form an *infinite* group: every rotation by every real angle.
-- The symmetries of an equation are a group, called its Galois group, and they decide whether the equation is solvable by radicals (Galois, 1832).
+## A grounding example
 
-This single insight — that *symmetry is a group* — pervades modern mathematics and physics. Noether's theorem (1918) says every continuous symmetry of a physical system gives a conserved quantity: time-translation symmetry $\\Rightarrow$ conservation of energy; rotational symmetry $\\Rightarrow$ conservation of angular momentum.
-
-## A scientific example
-
-The set of $3 \\times 3$ rotation matrices $SO(3)$ is the group of rotations of physical space. It is non-abelian: rotating $90°$ about the $x$-axis then $90°$ about the $y$-axis is a different physical rotation than doing them in the opposite order. Try it with a book — that non-commutativity is a real fact about the geometry of 3D space.`,
+Studies using visual search show the **snake-detection advantage**: people spot a snake among flowers far faster than a flower among snakes, and this bias appears even in infants and in people who have never encountered a live snake. Anthropologist Lynne Isbell has argued that the pressure from snakes was so persistent across primate evolution that it shaped the very acuity of our visual system — our excellent close-range vision may itself be, in part, a snake-detection adaptation.`,
   },
   {
-    slug: "rings-fields",
-    title: "Rings and fields",
+    slug: "habitat-preferences-cognition",
+    title: "Habitat preferences and environmental cognition",
     weekNumber: 2,
-    blurb: "Two operations playing well together: addition and multiplication.",
-    lectureTitle: "2.4 Rings and fields",
-    body: `# Rings and fields
+    blurb: "Savanna preferences and the spatial mind.",
+    lectureTitle: "2.4 Habitat preferences and environmental cognition",
+    body: `# Habitat preferences and environmental cognition
 
-A group has one operation. The familiar number systems have two — and the way the two interact is what gives arithmetic its power.
+Where to live, where to find water, how to navigate home — these spatial problems shaped both our preferences for landscapes and the cognitive machinery we use to move through the world.
 
-## Ring
+## The savanna hypothesis
 
-A **ring** $R$ is a set with two operations, traditionally $+$ and $\\cdot$, such that:
+Gordon Orians proposed that humans carry an evolved preference for habitats resembling the African savanna where our genus arose: open grassland dotted with trees, the presence of water, and varied terrain offering both resources and refuge. Across cultures, people asked to rate landscapes tend to prefer savanna-like scenes — and this preference is strongest in young children, before culture has much chance to shape taste.
 
-- $(R, +)$ is an abelian group with identity $0$.
-- $(R, \\cdot)$ is associative and has an identity $1$ (in a **ring with unity**).
-- Multiplication distributes over addition: $a(b+c) = ab + ac$ and $(b+c)a = ba + ca$.
+## Prospect and refuge
 
-Note: multiplication is not required to be commutative, and elements are not required to have multiplicative inverses.
+Jay Appleton's **prospect-refuge theory** holds that we are drawn to places that offer both *prospect* (a clear view to detect resources and threats) and *refuge* (a place to hide and be safe). The appeal of a hilltop house with a view, or a restaurant table with your back to the wall facing the door, reflects this ancient calculus: see without being seen.
 
-## Examples of rings
+## Sex differences in spatial cognition
 
-- $\\mathbb{Z}$, $\\mathbb{Q}$, $\\mathbb{R}$, $\\mathbb{C}$ — all commutative rings with unity.
-- $M_n(\\mathbb{R})$, the $n \\times n$ real matrices — a **noncommutative** ring under matrix addition and multiplication.
-- $\\mathbb{R}[x]$, polynomials in $x$ with real coefficients — a commutative ring.
-- $\\mathbb{Z}/n\\mathbb{Z}$, the integers modulo $n$ — see lecture 2.8.
+On average, men and women show different spatial strengths that may track a division of foraging labor. Men tend to perform better on mental-rotation and route-distance tasks (consistent with hunting and long-range travel), while women tend to excel at object-location memory (consistent with gathering, which rewards remembering where food plants are). These are average differences with large overlap, not categorical divides.
 
-## Field
+## A grounding example
 
-A **field** $F$ is a commutative ring in which every nonzero element has a multiplicative inverse. Equivalently: $(F\\setminus\\{0\\}, \\cdot)$ is an abelian group.
-
-- $\\mathbb{Q}$, $\\mathbb{R}$, $\\mathbb{C}$ are fields.
-- $\\mathbb{Z}$ is **not** a field: $2$ has no integer inverse.
-- $\\mathbb{Z}/p\\mathbb{Z}$ is a field exactly when $p$ is prime.
-
-## Why these axioms?
-
-A field is precisely the abstract setting in which the entire toolkit of high-school algebra — solving linear equations, dividing both sides, manipulating fractions — works. Once you know "these axioms hold," you get all the theorems for free, whether the field is $\\mathbb{R}$ or the integers mod $7$ or the rational functions over $\\mathbb{C}$.
-
-## A scientific example
-
-The finite field $\\mathbb{F}_{2^8}$ with $256$ elements is the arithmetic backbone of the AES encryption standard that protects most of the world's internet traffic. The S-box of AES is, definitionally, multiplicative inversion in this field followed by an affine map. Every secure HTTPS connection you make is computing in a 256-element field on your behalf.`,
+In a now-classic study, Irwin Silverman and Marion Eals tested object-location memory by briefly showing people a cluttered array of objects and later asking which had moved. Women outperformed men at remembering the spatial layout of objects — precisely the skill an effective gatherer needs to relocate productive plants season after season. The result links a measurable cognitive sex difference to a specific ancestral foraging problem.`,
   },
   {
-    slug: "vector-spaces",
-    title: "Vector spaces and linear combination",
+    slug: "disease-avoidance-immune-system",
+    title: "Disease avoidance and the behavioral immune system",
     weekNumber: 2,
-    blurb: "Adding arrows and scaling them — the universal language of linear math.",
-    lectureTitle: "2.5 Vector spaces and linear combination",
-    body: `# Vector spaces and linear combination
+    blurb: "Disgust as a first line of defense against pathogens.",
+    lectureTitle: "2.5 Disease avoidance and the behavioral immune system",
+    body: `# Disease avoidance and the behavioral immune system
 
-A **vector space** $V$ over a field $F$ is a set whose elements (**vectors**) can be added to each other and scaled by elements of $F$ (**scalars**), subject to a short list of axioms:
+The biological immune system fights pathogens *after* they enter the body — a costly, last-ditch defense. Selection also built a cheaper, earlier line of defense: a psychological system that helps us avoid pathogens in the first place.
 
-- $(V, +)$ is an abelian group.
-- For all $\\alpha, \\beta \\in F$ and $v, w \\in V$:
-  - $\\alpha(v + w) = \\alpha v + \\alpha w$
-  - $(\\alpha + \\beta) v = \\alpha v + \\beta v$
-  - $(\\alpha \\beta) v = \\alpha(\\beta v)$
-  - $1 \\cdot v = v$.
+## The behavioral immune system
 
-## Examples
+The **behavioral immune system** is a suite of perceptual and emotional mechanisms — spearheaded by disgust — that detect cues of infection and motivate avoidance. Rotting food, bodily waste, open wounds, and signs of illness in others all trigger disgust and withdrawal. It is a smoke detector for pathogens.
 
-- $\\mathbb{R}^n$, ordered $n$-tuples of real numbers, with componentwise addition and scalar multiplication. The prototype example.
-- The set of all polynomials with real coefficients, $\\mathbb{R}[x]$, under polynomial addition and scaling.
-- The set of all continuous functions $f : [0,1] \\to \\mathbb{R}$, under pointwise addition.
-- The set of solutions to a linear homogeneous differential equation.
+## Why disgust has the triggers it does
 
-The same axioms apply to all of these — and so the same theorems do.
+The elicitors of disgust are not random: feces, vomit, blood, corpses, oozing sores, and spoiled food are all reliable ancestral sources of contagion. Disgust also shows **contamination sensitivity** — a cockroach briefly touching food ruins the whole plate, because pathogens spread invisibly. This "better safe than sorry" logic is error management again.
 
-## Linear combinations, span, basis
+## Costs and overgeneralization
 
-A **linear combination** of vectors $v_1, \\ldots, v_k$ is an expression
+Like all error-managed systems, the behavioral immune system over-fires. It can attach to harmless cues that merely *resemble* disease — unusual appearances, disfigurement, or unfamiliar people — and has been linked to xenophobia and prejudice. Recognizing this helps separate the *mechanism* from the *moral judgment*: understanding the bias is the route to counteracting it.
 
-$$\\alpha_1 v_1 + \\alpha_2 v_2 + \\cdots + \\alpha_k v_k, \\quad \\alpha_i \\in F.$$
+## A grounding example
 
-The set of all linear combinations of a fixed list is its **span**. A list is **linearly independent** if no vector in it is a linear combination of the others. A **basis** is a linearly independent list whose span is all of $V$. The number of vectors in any basis is the **dimension** of $V$.
-
-## Why this matters
-
-Most of physics, signal processing, machine learning, and computer graphics is the systematic exploitation of vector-space structure. Fourier analysis says: the space of "nice" functions has a basis of sines and cosines, so any signal is a linear combination of pure tones. Principal component analysis says: high-dimensional data can usually be approximated in a low-dimensional subspace.
-
-## A scientific example
-
-A quantum state of a spin-$\\tfrac{1}{2}$ particle is a unit vector in the complex vector space $\\mathbb{C}^2$. The basis $\\{|{\\uparrow}\\rangle, |{\\downarrow}\\rangle\\}$ is "spin up" and "spin down" along a chosen axis. Every other state — including the "superposition" states that drive every paradox of quantum mechanics — is a linear combination $\\alpha|{\\uparrow}\\rangle + \\beta|{\\downarrow}\\rangle$. The famous mystery is entirely the linearity.`,
+Valerie Curtis and colleagues surveyed disgust reactions across dozens of countries and found striking universality: images carrying disease cues (bodily fluids, signs of illness) were rated most disgusting everywhere, regardless of culture. In a complementary finding, pregnant women in the first trimester — when the immune system is suppressed to tolerate the fetus and the embryo is most vulnerable — show heightened disgust and food aversions, exactly when extra pathogen avoidance would pay off. The system is dialed up precisely when the body is most at risk.`,
   },
   {
-    slug: "functions-mappings",
-    title: "Functions as mappings",
+    slug: "life-history-theory",
+    title: "Life history theory",
     weekNumber: 2,
-    blurb: "A function is a rule that sends every input to exactly one output.",
-    lectureTitle: "2.6 Functions as mappings",
-    body: `# Functions as mappings
+    blurb: "Trade-offs in how organisms budget time and energy.",
+    lectureTitle: "2.6 Life history theory",
+    body: `# Life history theory
 
-A **function** $f : A \\to B$ is a rule that assigns to *every* element $a$ of the **domain** $A$ exactly one element $f(a)$ of the **codomain** $B$.
+Every organism has finite time and energy. **Life history theory** studies how selection allocates that budget across competing demands — growth, maintenance, and reproduction — and across the timing of a life.
 
-The set $f(A) = \\{f(a) : a \\in A\\} \\subseteq B$ is the **image** (or range). The codomain $B$ is the place where outputs are *allowed* to live; the image is the subset they actually hit.
+## The fundamental trade-offs
 
-## Three classifications
+Resources spent on one function cannot be spent on another. The key trade-offs are:
 
-- **Injective** (one-to-one): different inputs give different outputs. $f(a_1) = f(a_2) \\Rightarrow a_1 = a_2$.
-- **Surjective** (onto): every element of the codomain is hit. $f(A) = B$.
-- **Bijective**: both. Bijections are precisely the functions that have a two-sided inverse $f^{-1} : B \\to A$.
+- **Current vs. future reproduction** — reproduce now, or grow and reproduce more later?
+- **Quantity vs. quality of offspring** — many cheap offspring, or few well-provisioned ones?
+- **Mating effort vs. parenting effort** — invest in acquiring mates, or in raising existing young?
 
-A bijection $f : A \\to B$ is, in essence, a *renaming* of $A$'s elements as $B$'s elements. Two sets have the same cardinality (1.8) iff there is a bijection between them.
+There is no universally best answer; the optimal strategy depends on the environment.
 
-## Composition
+## Fast vs. slow strategies
 
-Functions compose: if $f : A \\to B$ and $g : B \\to C$, then $g \\circ f : A \\to C$ is the function $a \\mapsto g(f(a))$. Composition is **associative** but generally **not** commutative.
+Environments shape where organisms fall on a **fast–slow continuum**. Harsh, unpredictable environments with high mortality favor a *fast* strategy: mature early, reproduce young, have many offspring, invest less in each. Stable, safe environments favor a *slow* strategy: mature late, reproduce later, invest heavily in fewer offspring. Humans overall are an extreme *slow* species, but individuals shift along the continuum based on cues from their childhood environment.
 
-The set of bijections of a fixed set $X$ to itself, under composition, is a group — the symmetric group $S_X$. This is the bridge from "function" back to "group."
+## Calibration by early experience
 
-## Functions vs. formulas
+The developing organism reads its early environment as a forecast of the world it will face. Harshness and unpredictability in childhood tend to shift development toward a faster strategy — earlier puberty, earlier sexual activity, more present-oriented decision-making. This is not pathology; it is an evolved calibration to a dangerous world where waiting may mean never reproducing at all.
 
-A function is *not* a formula. A formula is one way to *describe* a function. The function $f : \\mathbb{R} \\to \\mathbb{R}$, $f(x) = x^2$ can equally well be described as $f(x) = |x|^2$, $f(x) = x \\cdot x$, or by a table or by a graph. They are all the same function: same domain, same codomain, same input-to-output rule.
+## A grounding example
 
-## A scientific example
-
-Crystallography classifies crystals by their **symmetry group** — the group of geometric transformations $f : \\mathbb{R}^3 \\to \\mathbb{R}^3$ that map the crystal to itself. There are exactly $230$ such groups in 3D (the *crystallographic space groups*), determined a century ago, and every real crystal falls into exactly one of them.`,
+Studies on father absence find that girls who grow up without a father present tend, on average, to reach puberty earlier and become sexually active younger than girls with involved fathers. Life history theory interprets this not as damage but as facultative calibration: the absence of paternal investment is a cue that the local environment is one of low male commitment and instability, conditions under which an earlier, faster reproductive strategy historically paid off.`,
   },
   {
-    slug: "relations-equivalence-iso",
-    title: "Relations, equivalence classes, and isomorphism",
+    slug: "development-child-mind",
+    title: "Development and the shaping of the child mind",
     weekNumber: 2,
-    blurb: "Sameness, refined: when do two different things count as the same?",
-    lectureTitle: "2.7 Relations, equivalence classes, and isomorphism",
-    body: `# Relations, equivalence classes, and isomorphism
+    blurb: "How evolved programs unfold across childhood.",
+    lectureTitle: "2.7 Development and the shaping of the child mind",
+    body: `# Development and the shaping of the child mind
 
-A **relation** on a set $S$ is a subset $R \\subseteq S \\times S$. We write $a \\sim b$ for $(a, b) \\in R$. An **equivalence relation** is one satisfying three properties:
+Adaptations are not present fully formed at birth; they unfold through development. Evolutionary developmental psychology studies how evolved programs construct themselves across childhood, often using the environment as a necessary input.
 
-1. **Reflexive.** $a \\sim a$ for all $a$.
-2. **Symmetric.** $a \\sim b \\Rightarrow b \\sim a$.
-3. **Transitive.** $a \\sim b$ and $b \\sim c \\Rightarrow a \\sim c$.
+## Childhood as an adaptation
 
-## Equivalence classes
+Human childhood is extraordinarily long. Why spend years dependent and unproductive? Because the human niche depends on learning an enormous amount — about local plants, animals, tools, language, and social rules. The extended childhood is itself an adaptation, a protected period for acquiring the knowledge that a large, flexible brain requires.
 
-Given an equivalence relation $\\sim$ on $S$, the **equivalence class** of $a$ is
+## Ontogenetic vs. deferred adaptations
 
-$$[a] = \\{x \\in S : x \\sim a\\}.$$
+Some childhood traits are **ontogenetic adaptations** — useful *during* development and then discarded, like the suckling reflex or the rich neural connections of infancy that are later pruned. Others are **deferred adaptations** — features that prepare the child for adult life, like rough-and-tumble play rehearsing later skills. Not everything about a child is just an immature version of an adult.
 
-The classes form a **partition** of $S$: every element is in exactly one class, and the classes don't overlap. Conversely, every partition of $S$ defines an equivalence relation.
+## Attachment
 
-## Examples
+John Bowlby applied evolutionary thinking to the infant-caregiver bond. **Attachment** is an evolved system that keeps a vulnerable infant close to a protector, with separation triggering distress and reunion bringing comfort. Different attachment styles (secure, anxious, avoidant) can be read as facultative strategies calibrated to the reliability of early caregiving.
 
-- "Has the same birthday as" on the set of all humans. The classes have at most $366$ elements each.
-- $a \\sim b$ iff $a - b \\in \\mathbb{Z}$, on $\\mathbb{R}$. Each class is the set of reals with a given fractional part. The quotient set is the circle $\\mathbb{R}/\\mathbb{Z}$.
-- $a \\sim b$ iff $a - b$ is divisible by $5$, on $\\mathbb{Z}$. The classes are $\\{[0], [1], [2], [3], [4]\\}$ — the integers mod $5$ (lecture 2.8).
+## A grounding example
 
-Every time mathematicians say "consider $X$ up to $\\sim$," they are forming a quotient set by an equivalence relation.
-
-## Isomorphism: the deepest equivalence
-
-Two algebraic objects — two groups, two rings, two vector spaces — are **isomorphic** when there is a bijection between them that preserves the operations. Symbolically, $G \\cong H$.
-
-Isomorphism says: $G$ and $H$ are "the same object, with different names for the elements." Every property expressible in the language of the structure transfers across an isomorphism.
-
-## A scientific example
-
-The group $(\\mathbb{R}, +)$ and the group $(\\mathbb{R}_{>0}, \\cdot)$ are isomorphic: the bijection $x \\mapsto e^x$ sends $a + b$ to $e^{a+b} = e^a \\cdot e^b$. This isomorphism is exactly what makes the **logarithm** useful: it lets you convert a hard multiplication problem into an easier addition problem (the principle behind slide rules and log tables).`,
-  },
-  {
-    slug: "modular-arithmetic",
-    title: "Modular arithmetic",
-    weekNumber: 2,
-    blurb: "Clock arithmetic, and the basis of modern cryptography.",
-    lectureTitle: "2.8 Modular arithmetic",
-    body: `# Modular arithmetic
-
-Fix a positive integer $n$, called the **modulus**. Define an equivalence relation on $\\mathbb{Z}$ by
-
-$$a \\equiv b \\pmod n \\iff n \\mid (a - b).$$
-
-The equivalence classes are $[0], [1], \\ldots, [n-1]$. The set of classes is denoted $\\mathbb{Z}/n\\mathbb{Z}$ or $\\mathbb{Z}_n$.
-
-The miracle is that addition and multiplication on $\\mathbb{Z}$ **descend** to operations on $\\mathbb{Z}/n\\mathbb{Z}$: $[a] + [b] = [a+b]$ and $[a] \\cdot [b] = [ab]$, with the answer independent of which representative you chose. So $\\mathbb{Z}/n\\mathbb{Z}$ is itself a ring (lecture 2.4) — a finite one, with $n$ elements.
-
-## Clock arithmetic
-
-The most familiar example is $\\mathbb{Z}/12\\mathbb{Z}$ — the integers mod $12$. If it is $9$ o'clock and you wait $5$ hours, the clock reads $9 + 5 \\equiv 2 \\pmod{12}$. Every act of telling time is modular arithmetic.
-
-## When is $\\mathbb{Z}/n\\mathbb{Z}$ a field?
-
-$\\mathbb{Z}/n\\mathbb{Z}$ is a field iff $n$ is **prime**. For $n = p$ prime, every nonzero class has a multiplicative inverse (by Bézout's lemma), so you can divide. For $n$ composite, this fails: in $\\mathbb{Z}/6\\mathbb{Z}$, $2 \\cdot 3 = 6 \\equiv 0$ — two nonzero elements multiplying to zero, which a field forbids.
-
-## Fermat's Little Theorem
-
-For prime $p$ and integer $a$ not divisible by $p$,
-
-$$a^{p-1} \\equiv 1 \\pmod p.$$
-
-This single congruence is the backbone of:
-
-- **Primality testing.** Probabilistic tests (Miller–Rabin) check whether a candidate $n$ satisfies an analogue of FLT; failure is a *proof* $n$ is composite.
-- **RSA encryption.** Picking two large primes $p$ and $q$ and computing $n = pq$, the security of every RSA-encrypted email and SSH connection rests on the difficulty of recovering $p$ and $q$ from $n$, combined with the modular-exponentiation identities that FLT provides.
-
-## The point
-
-Modular arithmetic is what week 2 was building toward: a small, *finite* number system that nonetheless obeys the field axioms of lecture 2.4, supports linear algebra (lecture 2.5), and has nontrivial groups (lecture 2.3) sitting inside it. It is also one of the most economically valuable structures in mathematics — virtually all of public-key cryptography is computation in $\\mathbb{Z}/n\\mathbb{Z}$.`,
+Children's play is not idle. Cross-culturally, young mammals including humans engage in **rough-and-tumble play** and object play that rehearse adult survival and social skills — chasing, fighting, building, and role-taking. Boys' play tends to involve more competitive physical contests and girls' more cooperative and caregiving themes, mirroring ancestral sex-typed activities. The universality and timing of these patterns — peaking before the skills are needed — mark play as a deferred adaptation, practice for a life not yet lived.`,
   },
 
   // ───────────────────────────────────────────────────────────────
-  // Week 3 — The continuum: calculus, geometry, topology
+  // Week 3 — Mating and reproduction
   // ───────────────────────────────────────────────────────────────
   {
-    slug: "limits-taming-infinity",
-    title: "Limits and the taming of infinity",
+    slug: "mating-fundamentals",
+    title: "Mating fundamentals",
     weekNumber: 3,
-    blurb: "Making 'gets arbitrarily close to' a precise idea.",
-    lectureTitle: "3.1 Limits and the taming of infinity",
-    body: `# Limits and the taming of infinity
+    blurb: "Parental investment as the engine of sex differences.",
+    lectureTitle: "3.1 Mating fundamentals",
+    body: `# Mating fundamentals
 
-For two thousand years, mathematicians used phrases like "infinitely small" and "approaches but never reaches" without a rigorous definition. The 19th century replaced the metaphor with arithmetic.
+Mating is where selection's effects are most visible, because differential reproduction *is* the currency of evolution. The logic of mating begins with a single asymmetry: the unequal cost of reproduction to the two sexes.
 
-## The $\\varepsilon$–$\\delta$ definition
+## Anisogamy: the original asymmetry
 
-We write $\\lim_{x \\to a} f(x) = L$ to mean:
+The very definition of the sexes is **anisogamy** — females produce few, large, costly gametes (eggs); males produce many, small, cheap gametes (sperm). This tiny asymmetry at the cellular level cascades upward into nearly everything else about mating behavior.
 
-> For every $\\varepsilon > 0$ there exists a $\\delta > 0$ such that whenever $0 < |x - a| < \\delta$, we have $|f(x) - L| < \\varepsilon$.
+## Parental investment theory
 
-In symbols:
+Robert Trivers generalized the insight: the sex that **invests more** in offspring becomes a limiting resource over which the other sex competes, and the higher-investing sex becomes choosier. In mammals, females invest enormously — gestation, lactation — so females tend to be selective and males tend to compete. Where the pattern reverses (as in seahorses, where males carry the young), so do the behaviors: females compete and males choose.
 
-$$\\forall \\varepsilon > 0,\\ \\exists \\delta > 0 : 0 < |x - a| < \\delta \\Rightarrow |f(x) - L| < \\varepsilon.$$
+## Sexual selection follows investment
 
-This formulation is due to Cauchy (1821) and refined by Weierstrass in the 1850s. It says: no matter how tight a window $\\varepsilon$ you demand on the output, I can find a tight enough window $\\delta$ on the input that guarantees it. Nothing in this definition mentions "infinity" or "infinitesimal." That is the entire point.
+Because the lower-investing sex competes for the higher-investing sex, the engines of sexual selection — male-male competition and female choice — follow directly from the investment asymmetry. This single framework predicts the direction of choosiness and competitiveness across the animal kingdom.
 
-## What the definition replaced
+## A grounding example
 
-Newton and Leibniz, inventing calculus in the 1670s, spoke of *fluxions* and *infinitesimals* — quantities smaller than any positive number but not zero. Bishop Berkeley (1734) mocked them as "the ghosts of departed quantities," and he was right that the foundations were incoherent. Two centuries later, the $\\varepsilon$–$\\delta$ definition gave calculus the rigorous foundation it had been doing without. (Robinson, 1960, vindicated the infinitesimal approach with *nonstandard analysis* — but the $\\varepsilon$–$\\delta$ definition is still the working language.)
-
-## Limits at infinity
-
-$$\\lim_{x \\to \\infty} f(x) = L \\iff \\forall \\varepsilon > 0,\\ \\exists M : x > M \\Rightarrow |f(x) - L| < \\varepsilon.$$
-
-Same idea: the "tight window on the output" is met by a "far enough out on the input."
-
-## A scientific example
-
-The terminal velocity of a falling skydiver is a limit:
-
-$$v_{\\text{term}} = \\lim_{t \\to \\infty} v(t).$$
-
-The skydiver never *reaches* terminal velocity — at any finite $t$, $v(t)$ is strictly less. But the difference gets arbitrarily small as time goes on. The limit captures this precisely without committing to "infinity" as a number.`,
+Angus Bateman's experiments with fruit flies established the principle now called the **Bateman gradient**: male reproductive success rose steeply with the number of mates, while female success plateaued after just one or two. A male who mated with many females had many more offspring; a female gained little from extra mates because her output was capped by her egg supply. This asymmetric payoff — more mates helps males far more than females — is the quantitative root of why the sexes pursue different mating strategies.`,
   },
   {
-    slug: "continuity",
-    title: "Continuity",
+    slug: "female-mate-preferences",
+    title: "Female mate preferences",
     weekNumber: 3,
-    blurb: "A function is continuous when small input changes give small output changes.",
-    lectureTitle: "3.2 Continuity",
-    body: `# Continuity
+    blurb: "Choosing for resources, protection, and good genes.",
+    lectureTitle: "3.2 Female mate preferences",
+    body: `# Female mate preferences
 
-A function $f : \\mathbb{R} \\to \\mathbb{R}$ is **continuous at $a$** if
+Because ancestral women bore the heavy costs of reproduction, selection favored women who chose mates carefully. The predicted preferences track the problems a choosing female had to solve: securing resources, protection, and good genes for her children.
 
-$$\\lim_{x \\to a} f(x) = f(a).$$
+## The problems female choice must solve
 
-Three things have to be true simultaneously: $f(a)$ has to exist, the limit has to exist, and they have to be equal. $f$ is **continuous** if it is continuous at every $a$ in its domain.
+A woman's reproductive success was historically limited not by the number of mates but by the *quality* of investment she and her offspring received. The recurrent problems were: obtaining resources during pregnancy and lactation, securing protection, ensuring a partner's commitment, and acquiring good genes. Female preferences are tuned to cues that predicted these.
 
-In plain English: nearby inputs go to nearby outputs. You can draw the graph without lifting your pen. (The plain-English version misses some pathological continuous functions, but it captures the spirit.)
+## Resources and status
 
-## Discontinuities
+Across cultures, women on average place more weight than men on a prospective long-term partner's resources, ambition, status, and earning capacity. These are not arbitrary materialism — they are cues to a partner's ability to invest in her and her children over the long haul.
 
-There are three flavors of failure:
+## Good genes and the dual-mating puzzle
 
-- **Removable.** $\\lim_{x \\to a} f(x)$ exists but isn't $f(a)$. Redefine $f(a)$ and you've fixed it.
-- **Jump.** Left and right limits exist but differ. A step function. Common in physics (phase transitions) and economics (tax brackets).
-- **Essential.** The limit doesn't exist at all. $\\sin(1/x)$ near $0$ oscillates forever.
+Some female preferences seem aimed at genetic quality rather than investment — cues like symmetry, masculinity, and health. The tension between wanting a *good investor* and a *good-genes* mate generates subtle predictions, including shifts in preference across the ovulatory cycle, though the strength of these cycle effects remains debated.
 
-## The Intermediate Value Theorem
+## A grounding example
 
-If $f$ is continuous on $[a, b]$ and $y_0$ is any value between $f(a)$ and $f(b)$, then there is some $c \\in [a, b]$ with $f(c) = y_0$.
-
-This is one of those theorems that feels like a definition: of *course* a continuous curve from $f(a)$ to $f(b)$ has to cross every height between them. But you cannot prove it without the completeness of $\\mathbb{R}$ (lecture 1.4) — the IVT is false on $\\mathbb{Q}$ alone.
-
-## The Extreme Value Theorem
-
-If $f$ is continuous on a closed bounded interval $[a, b]$, then $f$ attains a maximum and a minimum on $[a, b]$.
-
-This too fails without compactness: $f(x) = 1/x$ on $(0, 1]$ is continuous but unbounded.
-
-## A scientific example
-
-Temperature is a continuous function of position on Earth. By the IVT (applied on a great circle), at every moment there exist two *antipodal* points on the equator that have the exact same temperature. This is a special case of the **Borsuk–Ulam theorem**, which generalizes to any continuous map from a sphere to a Euclidean space of lower dimension.`,
+David Buss's study of mate preferences across 37 cultures — spanning six continents, every major religion, and a wide range of economic systems — found a strikingly consistent pattern: women in nearly every culture rated "good financial prospects," ambition, and somewhat older age in a partner more highly than men did. The cross-cultural universality, in societies as different as Nigeria, Japan, and Sweden, points to an evolved preference rather than a quirk of any one economy or tradition.`,
   },
   {
-    slug: "derivatives-instantaneous-rate",
-    title: "Derivatives as instantaneous rate",
+    slug: "male-mate-preferences",
+    title: "Male mate preferences",
     weekNumber: 3,
-    blurb: "What's the speed *right now*? — the question that started calculus.",
-    lectureTitle: "3.3 Derivatives as instantaneous rate",
-    body: `# Derivatives as instantaneous rate
+    blurb: "Cues to fertility and the problem of paternity.",
+    lectureTitle: "3.3 Male mate preferences",
+    body: `# Male mate preferences
 
-The average rate of change of $f$ over an interval $[a, a + h]$ is
+Male reproductive success was historically limited by sexual access to fertile females. Selection therefore favored male preferences attuned to cues of a partner's **fertility** and **reproductive value** — and, for long-term mates, to the problem of paternity certainty.
 
-$$\\frac{f(a + h) - f(a)}{h}.$$
+## Cues to fertility
 
-The **derivative** of $f$ at $a$ is what this approaches as the interval shrinks:
+Because female fertility is strongly age-graded and not directly observable, men evolved preferences for *observable cues* that correlated with fertility: youthfulness, clear skin, lustrous hair, and features associated with health and estrogen. These are signals, not the trait itself — men did not evolve to read fertility directly but to track its visible correlates.
 
-$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h},$$
+## Reproductive value vs. current fertility
 
-when the limit exists. Geometrically, $f'(a)$ is the *slope of the tangent line* to the graph of $f$ at $x = a$.
+A subtle distinction matters. **Current fertility** is the probability of conceiving now; **reproductive value** is the expected *future* reproductive output. The two peak at slightly different ages. Men seeking short-term mates and men seeking long-term mates weight these differently, which helps explain age-preference patterns.
 
-## Three pictures
+## The paternity problem
 
-- **Geometric.** Slope of the tangent line.
-- **Physical.** Instantaneous rate of change. Velocity is the derivative of position; acceleration is the derivative of velocity.
-- **Numerical.** The best linear approximation: near $a$, $f(x) \\approx f(a) + f'(a)(x - a)$.
+Males face a problem females never do: **paternity uncertainty**. A woman is always certain her child is hers; a man, before modern testing, could not be. This asymmetry shaped male sexual psychology profoundly — including preferences for cues of fidelity in long-term mates and the particular form male jealousy takes, a topic we return to.
 
-All three are the same idea, stated in three languages.
+## A grounding example
 
-## Notation
-
-- Lagrange: $f'(x)$.
-- Leibniz: $\\dfrac{\\mathrm{d}f}{\\mathrm{d}x}$. Treats the derivative as a ratio of "differentials" — heuristic, but extremely useful for change-of-variable.
-- Newton: $\\dot f$. Mostly survives in physics, for derivatives with respect to time.
-- Operator: $D f$ or $\\partial_x f$.
-
-Same object, four notations. Each makes a different calculation natural.
-
-## Differentiable implies continuous
-
-If $f$ is differentiable at $a$, it is continuous at $a$. (Proof sketch: $f(a + h) - f(a) = h \\cdot \\dfrac{f(a+h)-f(a)}{h} \\to 0 \\cdot f'(a) = 0$ as $h \\to 0$.) The converse fails: $f(x) = |x|$ is continuous everywhere but not differentiable at $0$.
-
-In fact, Weierstrass (1872) constructed a function that is continuous everywhere and differentiable *nowhere* — a curve that is unbroken but has no tangent line at any point. The intuition that "continuous = smooth" is a useful lie.
-
-## A scientific example
-
-Newton's second law in its most general form is
-
-$$\\vec F = \\frac{\\mathrm{d}\\vec p}{\\mathrm{d}t},$$
-
-force equals the time-derivative of momentum. Reducing the universe of mechanics to a single derivative — that is what calculus is *for*.`,
+Studies of waist-to-hip ratio by Devendra Singh found that men across many cultures tend to rate a female waist-to-hip ratio around 0.7 as most attractive. This ratio is not arbitrary: it correlates with youth, health, hormonal profile, and the absence of current pregnancy — all cues to fertility. Even when overall body weight preferences vary across cultures, the preference for this *proportion* recurs, suggesting men evolved to track a reliable signal of reproductive potential rather than any single body size.`,
   },
   {
-    slug: "integrals-accumulation",
-    title: "Integrals as accumulation",
+    slug: "short-long-term-strategies",
+    title: "Short-term and long-term strategies",
     weekNumber: 3,
-    blurb: "Summing infinitely many infinitesimal pieces.",
-    lectureTitle: "3.4 Integrals as accumulation",
-    body: `# Integrals as accumulation
+    blurb: "A pluralistic menu of conditional mating tactics.",
+    lectureTitle: "3.4 Short-term and long-term strategies",
+    body: `# Short-term and long-term strategies
 
-If the derivative answers "how fast is it changing?", the **integral** answers "how much has accumulated?".
+Humans do not have one mating strategy; we have a *repertoire*. Sexual strategies theory, developed by David Buss and David Schmitt, holds that both sexes pursue a mix of short-term and long-term mating, deployed conditionally depending on circumstances.
 
-## The Riemann integral
+## Two strategies, different problems
 
-Partition $[a, b]$ into $n$ pieces by points $a = x_0 < x_1 < \\cdots < x_n = b$. Pick a sample point $x_i^*$ in each subinterval $[x_{i-1}, x_i]$. Form the **Riemann sum**
+**Long-term mating** (committed partnership) and **short-term mating** (brief liaisons) solve different adaptive problems and impose different costs and benefits. They therefore activate different preferences. In short-term contexts, both sexes lower some standards but men especially relax selectivity, while in long-term contexts both sexes raise standards on commitment-relevant traits.
 
-$$S_n = \\sum_{i=1}^{n} f(x_i^*) \\, (x_i - x_{i-1}).$$
+## Strategic interference and deception
 
-Each term is a rectangle: width times height. Their sum approximates the area under $f$ over $[a,b]$.
+Because men and women pursue overlapping but non-identical strategies, conflict arises. **Strategic interference** occurs when one person's strategy blocks another's — for example, when one partner seeks a short-term encounter and the other a long-term bond. This generates the predictable use of deception in courtship, and emotions (like anger and distress) that flag when one's strategy is being thwarted.
 
-The **definite integral** is the limit of these sums as the partition is refined:
+## Conditional deployment
 
-$$\\int_a^b f(x)\\,\\mathrm{d}x = \\lim_{\\|P\\| \\to 0} \\sum_{i=1}^{n} f(x_i^*)(x_i - x_{i-1}),$$
+Which strategy a person emphasizes depends on factors like sex ratio, their own mate value, the local environment, and life-history calibration. Strategies are facultative — switched on and off by circumstance — not fixed personality types.
 
-where $\\|P\\|$ is the width of the widest subinterval, and provided the limit exists independent of choices.
+## A grounding example
 
-## What integrals compute
-
-- **Area** under a curve, when $f \\ge 0$.
-- **Signed area** in general (positive above the axis, negative below).
-- **Accumulated total** of any rate: $\\int_a^b v(t)\\,\\mathrm{d}t$ is the displacement over $[a, b]$ if $v$ is velocity.
-- **Average value** of $f$ on $[a, b]$: $\\dfrac{1}{b - a}\\int_a^b f(x)\\,\\mathrm{d}x$.
-- **Probability**: the probability that a continuous random variable $X$ with density $p$ lies in $[a, b]$ is $\\int_a^b p(x)\\,\\mathrm{d}x$.
-
-## Why "$\\mathrm{d}x$"
-
-The "$\\mathrm{d}x$" is the limiting width of a rectangle. It is the same $\\mathrm{d}x$ that appears in Leibniz's derivative notation $\\mathrm{d}f/\\mathrm{d}x$, and the symmetry is the subject of the next lecture.
-
-## A historical example
-
-Archimedes computed the area of a parabolic segment, around 250 BCE, using essentially Riemann sums two millennia before Riemann. He bounded the area between inscribed and circumscribed triangles, refined the partition, and showed the bounds squeeze to the same value. Calculus existed in spirit long before its symbols did.`,
+In a famous (and ethically dated) field study by Russell Clark and Elaine Hatfield, attractive strangers approached members of the opposite sex on a college campus and asked one of three questions: go on a date, come to my apartment, or go to bed with me. About half of both sexes agreed to a date. But while *zero percent* of women agreed to sex with a stranger, roughly *seventy-five percent* of men did — a larger fraction than agreed even to the date. The dramatic sex difference in willingness to accept an immediate short-term offer illustrates the divergent payoffs short-term mating historically held for men and women.`,
   },
   {
-    slug: "ftc",
-    title: "The Fundamental Theorem of Calculus",
+    slug: "attraction-beauty-fitness-signals",
+    title: "Attraction, beauty, and signals of fitness",
     weekNumber: 3,
-    blurb: "Differentiation and integration undo each other.",
-    lectureTitle: "3.5 The Fundamental Theorem of Calculus",
-    body: `# The Fundamental Theorem of Calculus
+    blurb: "Why beauty standards are partly universal.",
+    lectureTitle: "3.5 Attraction, beauty, and signals of fitness",
+    body: `# Attraction, beauty, and signals of fitness
 
-Derivatives measure instantaneous change. Integrals accumulate change. The **Fundamental Theorem** says these are inverse operations.
+"Beauty is in the eye of the beholder" is half true. Much of attraction is culturally variable, but a surprising core is universal — and the universal core consists of cues that signaled health, fertility, and genetic quality.
 
-## Part 1: derivative of an integral
+## Symmetry
 
-Let $f$ be continuous on $[a, b]$, and define $F : [a, b] \\to \\mathbb{R}$ by
+**Fluctuating asymmetry** — small random departures from bilateral symmetry — tends to increase with developmental stress, disease, and mutation load. Symmetry is therefore an honest cue of developmental stability, and across species and cultures, more symmetric faces and bodies tend to be rated more attractive.
 
-$$F(x) = \\int_a^x f(t)\\,\\mathrm{d}t.$$
+## Averageness
 
-Then $F$ is differentiable and $F'(x) = f(x)$.
+Counterintuitively, faces that are *average* — close to the mathematical mean of the population — are rated as more attractive than unusual faces. Composite faces made by averaging many individuals are consistently judged beautiful. Averageness may signal genetic diversity, developmental normality, and the absence of harmful mutations.
 
-So integration *produces* an antiderivative: $F$ is a function whose derivative is $f$.
+## Honest signals and hormone markers
 
-## Part 2: integral of a derivative
+Some attractive features are **hormone markers**: estrogen-dependent features in women and testosterone-dependent features in men (a strong jaw, for instance). Because high testosterone is immunosuppressive, only a healthy male can "afford" to display strongly masculine features — making them an honest, handicap-style signal of quality.
 
-If $F$ is any antiderivative of $f$ on $[a, b]$ (i.e. $F' = f$ and $F$ is continuous on $[a, b]$), then
+## A grounding example
 
-$$\\int_a^b f(x)\\,\\mathrm{d}x = F(b) - F(a).$$
-
-This is the calculation rule: to integrate $f$, find any antiderivative $F$, and subtract.
-
-## Why this is "fundamental"
-
-Differentiation is a *local* operation: $f'(a)$ depends only on $f$ near $a$. Integration is a *global* operation: $\\int_a^b f$ depends on $f$ everywhere on $[a, b]$. There is no a priori reason these two operations should be related, much less inverse.
-
-The FTC is the bridge. It says: to compute the global thing (the integral), you can solve a local problem (find an antiderivative) and read off two values. Every closed-form integral you have ever computed is an application of the FTC.
-
-## A historical note
-
-Newton and Leibniz are usually credited with calculus because they were the first to recognize and exploit the FTC. Earlier mathematicians (Cavalieri, Fermat, Barrow) had pieces of the differentiation and integration theory but treated them as separate subjects. The unification was the conceptual leap.
-
-## A scientific example
-
-In thermodynamics, the change in internal energy of a closed system over a process is
-
-$$\\Delta U = \\int_{t_1}^{t_2} \\frac{\\mathrm{d}U}{\\mathrm{d}t}\\,\\mathrm{d}t = U(t_2) - U(t_1).$$
-
-We almost never know $\\mathrm{d}U/\\mathrm{d}t$ as a function we could integrate term by term. The point of having the FTC is that the *value* $\\Delta U$ depends only on the initial and final states, never on the path — energy is a *state function*. Every conservation law in physics is, formally, a statement that some integrand is the derivative of something.`,
+Judith Langlois demonstrated that the preference for attractive faces is present before culture could install it: infants only a few months old look *longer* at faces adults rate as attractive than at faces rated unattractive. Babies have not learned any beauty standard from magazines or media, yet they already prefer the same faces adults do. This early, pre-cultural agreement points to an evolved face-evaluation mechanism tuned to cues of health and quality.`,
   },
   {
-    slug: "sequences-series-zeno",
-    title: "Sequences, series, and Zeno",
+    slug: "jealousy-conflict-mate-retention",
+    title: "Jealousy, conflict, and mate retention",
     weekNumber: 3,
-    blurb: "An infinite sum can have a finite value.",
-    lectureTitle: "3.6 Sequences, series, and Zeno",
-    body: `# Sequences, series, and Zeno
+    blurb: "Jealousy as an evolved anti-cuckoldry mechanism.",
+    lectureTitle: "3.6 Jealousy, conflict, and mate retention",
+    body: `# Jealousy, conflict, and mate retention
 
-A **sequence** is a function $\\mathbb{N} \\to \\mathbb{R}$, usually written $(a_n)_{n \\ge 1}$. A **series** is the formal sum
+Acquiring a mate is only half the problem; keeping one is the other half. Jealousy is an evolved emotion designed to detect and counter threats to a valued relationship — and its design reflects the different reproductive threats faced by men and women.
 
-$$\\sum_{n=1}^{\\infty} a_n = a_1 + a_2 + a_3 + \\cdots$$
+## Jealousy as an adaptation
 
-## What an infinite sum *means*
+**Jealousy** is not a malfunction but a mate-guarding mechanism: it is triggered by cues of a partner's potential infidelity and motivates action to prevent or end it. Like fear, it is error-managed — tuned to fire on suspicion because the cost of missing a real betrayal was high.
 
-You cannot add infinitely many numbers in finite time. So the value of an infinite series is defined as the limit of its **partial sums**:
+## The sex difference hypothesis
 
-$$\\sum_{n=1}^{\\infty} a_n := \\lim_{N \\to \\infty} \\sum_{n=1}^{N} a_n,$$
+David Buss proposed that the sexes face different adaptive threats from infidelity. For a man, a partner's *sexual* infidelity risks **cuckoldry** — investing in another man's child. For a woman, a partner's *emotional* infidelity risks the loss of his investment to another woman. The prediction: men are relatively more distressed by sexual infidelity, women relatively more by emotional infidelity.
 
-if the limit exists. If it does, the series **converges**; otherwise it **diverges**.
+## Mate retention tactics
 
-## Zeno's paradox
+People deploy a range of **mate retention behaviors**, from positive (vigilance, attentiveness, gift-giving) to negative (concealment, threats, violence). The intensity tends to track the partner's mate value and perceived risk of defection — and the darker tactics are an important part of understanding intimate partner conflict.
 
-Achilles races a tortoise that starts $10$ meters ahead. Zeno (5th c. BCE) argued Achilles can never overtake it: first he has to cover the $10$ meters, then the new gap, then the new new gap, and so on — infinitely many steps in finite time, which Zeno called absurd.
+## A grounding example
 
-We now see the argument for what it is: the steps form a **geometric series**
-
-$$10 + 10 \\cdot r + 10 \\cdot r^2 + \\cdots = \\frac{10}{1 - r}$$
-
-which is *finite* whenever $|r| < 1$. Zeno's mistake was assuming infinitely many steps must take infinite time. They don't.
-
-## Convergence tests
-
-A short menu of standard tools:
-
-- **Geometric**: $\\sum r^n$ converges iff $|r| < 1$.
-- **$p$-series**: $\\sum 1/n^p$ converges iff $p > 1$.
-- **Ratio test**: if $\\lim |a_{n+1}/a_n| < 1$, the series converges absolutely.
-- **Comparison test**: if $|a_n| \\le b_n$ and $\\sum b_n$ converges, so does $\\sum a_n$.
-
-## Power series
-
-A **power series** is $\\sum c_n (x - a)^n$. Its **radius of convergence** is the largest $R$ such that the series converges for $|x - a| < R$. Inside its radius, a power series defines an infinitely differentiable function — its **analytic** representative. The functions $e^x = \\sum x^n / n!$, $\\sin x = \\sum (-1)^n x^{2n+1}/(2n+1)!$, and $\\cos x$ are all power series convergent for all $x$.
-
-## A scientific example
-
-Quantum field theory's predictions are computed as **perturbation series** in a small coupling constant. The series for the electron's anomalous magnetic moment, computed to high order, matches experiment to twelve decimal places — one of the most precise agreements between theory and measurement in all of science. (Notoriously, these series usually do not converge; they are *asymptotic*. The first few terms approximate the right answer, but adding more terms eventually makes things worse. Which is a story for an analysis course.)`,
+Buss and colleagues asked people to imagine a partner's sexual infidelity versus emotional infidelity and measured which was more distressing, including via physiological responses like heart rate and skin conductance. Men showed greater physiological distress to imagined *sexual* infidelity, while women showed greater distress to imagined *emotional* infidelity. Although the size and universality of the effect are debated, the patterned sex difference — predicted in advance from paternity uncertainty versus investment loss — is exactly what an evolutionary account anticipates.`,
   },
   {
-    slug: "euclidean-non-euclidean",
-    title: "Euclidean vs. non-Euclidean geometry",
+    slug: "parental-investment-parenting",
+    title: "Parental investment and parenting",
     weekNumber: 3,
-    blurb: "Euclid's fifth postulate is independent — and false on a sphere.",
-    lectureTitle: "3.7 Euclidean vs. non-Euclidean geometry",
-    body: `# Euclidean vs. non-Euclidean geometry
+    blurb: "Why parents invest, and why conflict is built in.",
+    lectureTitle: "3.7 Parental investment and parenting",
+    body: `# Parental investment and parenting
 
-Euclid's *Elements* (c. 300 BCE) developed plane geometry from five postulates. Four are uncontroversially "obvious." The fifth is not.
+Reproduction is not finished at conception or even birth. In humans, the bulk of the reproductive task is *parenting* — and selection shaped both the depth of parental love and the surprising conflicts that run through families.
 
-## The parallel postulate
+## Why parents invest
 
-> Through a point not on a given line, there is exactly one line parallel to the given line.
+Parental care is an inclusive-fitness investment: a child carries half of each parent's genes ($r = 1/2$), so helping the child reproduce propagates the parent's genes. The intensity of parental love — among the strongest human motivations — is the proximate machinery of this ultimate logic.
 
-For two millennia, mathematicians tried to *prove* this from the other four — believing it should be a theorem, not a postulate. Every attempt failed.
+## Discriminative parental solicitude
 
-## The resolution
+Parental investment is not unconditional; it is **discriminative**, allocated according to cues of the offspring's relatedness, health, and reproductive prospects. Investment tends to rise with certainty of parentage and with the child's likelihood of surviving and reproducing. This explains why, tragically, risk factors for child maltreatment include stepparenthood and severe child disability — patterns that make grim sense in light of investment logic, though they never justify the behavior.
 
-In the early 19th century, Lobachevsky (1829), Bolyai (1832), and Gauss (unpublished) independently realized why every attempt had failed: the parallel postulate is **independent** of the others. You can replace it with its negation and get a consistent geometry.
+## Parent-offspring conflict
 
-Three possibilities:
+Trivers's **parent-offspring conflict** theory shows that families are not perfectly harmonious. A child is related to itself by $r = 1$ but to a sibling by only $r = 1/2$, so a child is selected to demand *more* investment than the parent — equally related to all offspring — is selected to give. The resulting tug-of-war begins in the womb and continues through weaning conflict and sibling rivalry.
 
-- **Exactly one parallel** — Euclidean geometry, $\\mathbb{R}^2$.
-- **No parallels** — elliptic / spherical geometry. On a sphere, every two great circles intersect.
-- **Infinitely many parallels** — hyperbolic geometry. Through a point off a line, infinitely many lines never meet the given line.
+## A grounding example
 
-Each of these is a logically consistent geometry. The angles of a triangle sum to $180°$ in Euclidean, more than $180°$ in elliptic, and less than $180°$ in hyperbolic.
-
-## Why this mattered
-
-The discovery of non-Euclidean geometry was a philosophical earthquake. It demonstrated, for the first time, that mathematics is not the description of a single "true" world but the systematic study of consequences of chosen axioms (a theme we will return to in 4.5).
-
-## A scientific example
-
-General relativity (Einstein, 1915) models spacetime as a *curved* manifold whose geometry is determined by the matter and energy inside it. Light rays follow **geodesics** — the analogues of straight lines — and those geodesics bend through gravitational fields. The first experimental confirmation was Eddington's 1919 measurement of starlight bending around the Sun during a solar eclipse. The universe is not Euclidean. The geometry of spacetime is fixed not by axiom but by Einstein's field equations:
-
-$$R_{\\mu\\nu} - \\tfrac{1}{2} g_{\\mu\\nu} R = \\frac{8\\pi G}{c^4} T_{\\mu\\nu}.$$`,
-  },
-  {
-    slug: "topology-dimension-curvature",
-    title: "Topology, dimension, and curvature",
-    weekNumber: 3,
-    blurb: "Geometry without distance: what survives when you stretch the page.",
-    lectureTitle: "3.8 Topology, dimension, and curvature",
-    body: `# Topology, dimension, and curvature
-
-**Topology** is the study of geometric properties that are preserved under continuous deformations — stretching, bending, twisting, but not tearing or gluing. The classic joke is that a topologist cannot tell a coffee mug from a donut, because each can be continuously deformed into the other.
-
-## What topology keeps and discards
-
-- **Discarded:** distance, angle, area, volume, curvature.
-- **Kept:** number of connected pieces, number of holes, orientability, the way the space loops back on itself.
-
-A circle and a square are topologically the same (both are simple closed loops). A line segment and a Y-shape are different: removing one point disconnects them differently.
-
-## Dimension
-
-Topology lets us say what the **dimension** of a space *is*, independent of any coordinate system.
-
-- Informally: a space is $n$-dimensional if it locally looks like $\\mathbb{R}^n$.
-- A line is $1$-dimensional; the plane is $2$-dimensional; the surface of a sphere is $2$-dimensional (yes, the surface — you can describe any point on it with latitude and longitude).
-- The Cantor set has dimension $\\log 2 / \\log 3 \\approx 0.63$ in the fractal (Hausdorff) sense — a single number need not be an integer to make sense as a dimension.
-
-## Curvature
-
-Once you put a *metric* (a notion of distance) back on a topological space, you can ask whether it is **curved**. Gauss (1827) showed that curvature is *intrinsic*: an ant living on a surface can detect curvature without ever leaving the surface, by measuring how the angles of triangles sum.
-
-- A plane has curvature $0$. Triangle angle sums equal $\\pi$.
-- A sphere of radius $R$ has constant positive curvature $1/R^2$. Triangle angle sums exceed $\\pi$.
-- A saddle / pseudosphere has negative curvature. Triangle angle sums fall below $\\pi$.
-
-## The Euler characteristic
-
-For a polyhedron with $V$ vertices, $E$ edges, and $F$ faces,
-
-$$\\chi = V - E + F.$$
-
-For *every* triangulation of a sphere, $\\chi = 2$. For *every* triangulation of a torus, $\\chi = 0$. The Euler characteristic is a topological invariant: it depends on the surface, not on how you cut it up.
-
-## A scientific example
-
-The shape of the *universe* — its global topology — is an open question in cosmology. Locally it appears flat (zero curvature). Globally it could be an infinite plane, a finite 3-torus, a 3-sphere, or any number of more exotic possibilities. Distinguishing these requires looking for repeated patterns in the cosmic microwave background — circles in the sky that would be "the same place seen twice." So far none have been found, but the constraints continue to tighten.`,
+Martin Daly and Margo Wilson examined child homicide and abuse records and found that the presence of a stepparent in the home was associated with a dramatically elevated risk to children compared with two genetic parents — a pattern they called the "Cinderella effect." A stepparent lacks the genetic stake that drives discriminative solicitude. The finding is sobering, and the evolutionary lens does not excuse it; rather, it predicts where vulnerability concentrates, information that can guide protection.`,
   },
 
   // ───────────────────────────────────────────────────────────────
-  // Week 4 — Foundations: logic, proof, set theory, undecidability
+  // Week 4 — Social life, cooperation, and culture
   // ───────────────────────────────────────────────────────────────
   {
-    slug: "propositional-predicate-logic",
-    title: "Propositional and predicate logic",
+    slug: "kinship-family-dynamics",
+    title: "Kinship and family dynamics",
     weekNumber: 4,
-    blurb: "Truth values, connectives, quantifiers: the grammar of proof.",
-    lectureTitle: "4.1 Propositional and predicate logic",
-    body: `# Propositional and predicate logic
+    blurb: "Genetic relatedness as the architecture of the family.",
+    lectureTitle: "4.1 Kinship and family dynamics",
+    body: `# Kinship and family dynamics
 
-Mathematics is built out of *statements* — sentences that are either true or false — combined according to a fixed grammar. **Logic** is the study of that grammar.
+Family is the original social world. The structure of kin relationships — who helps whom, who competes with whom — is largely organized by the logic of genetic relatedness we met in Hamilton's rule.
 
-## Propositional logic
+## Kin altruism in everyday life
 
-A **proposition** is a declarative sentence with a truth value. We build complex propositions out of simple ones using five **connectives**:
+Inclusive fitness predicts a gradient of helping that tracks relatedness, and the data broadly agree: people give more help, more often, to closer kin, especially in life-or-death situations. Bequests, organ donations, and risky rescues all skew toward close relatives. Kinship is the deepest reservoir of human cooperation.
 
-- $\\neg P$ — not $P$.
-- $P \\wedge Q$ — $P$ and $Q$.
-- $P \\vee Q$ — $P$ or $Q$ (inclusive — at least one).
-- $P \\to Q$ — if $P$ then $Q$ (implication).
-- $P \\leftrightarrow Q$ — $P$ if and only if $Q$ (biconditional).
+## Kin recognition
 
-Each connective is fully described by a truth table. Implication is the trickiest: $P \\to Q$ is false only when $P$ is true and $Q$ is false. In particular, "if $0 = 1$, then I am the Pope" is true — from a false premise, anything follows ($ex\\ falso\\ quodlibet$).
+To direct help toward kin, an organism must *identify* kin. Humans use cues such as **co-residence during childhood**, maternal association, and facial resemblance. These cues are usually reliable but can be fooled — which is why we feel familial warmth toward people we were merely raised with.
 
-A **tautology** is a propositional formula that is true under every truth assignment, e.g. $P \\vee \\neg P$ (the law of excluded middle).
+## The grandmother hypothesis
 
-## Predicate logic
+Humans are unusual in having a long post-reproductive lifespan, especially in women. The **grandmother hypothesis** proposes that menopause and longevity evolved because older women could raise their inclusive fitness more by helping provision grandchildren than by continuing to reproduce themselves — a striking case of indirect fitness shaping the human lifespan.
 
-Propositional logic cannot say "every integer has a successor." For that we need **predicates** $P(x)$ — statements about a variable — and **quantifiers**:
+## A grounding example
 
-- $\\forall x \\, P(x)$ — *for all* $x$, $P(x)$.
-- $\\exists x \\, P(x)$ — *there exists* $x$ such that $P(x)$.
-
-Predicate logic is strictly more powerful. The Pythagorean theorem, "for every right triangle with legs $a$, $b$ and hypotenuse $c$, $a^2 + b^2 = c^2$," is genuinely a $\\forall$ statement and cannot be captured in propositional logic alone.
-
-## Negation of quantifiers
-
-These are easy to get wrong:
-
-$$\\neg(\\forall x \\, P(x)) \\equiv \\exists x \\, \\neg P(x),$$
-$$\\neg(\\exists x \\, P(x)) \\equiv \\forall x \\, \\neg P(x).$$
-
-The negation of "every swan is white" is "some swan is not white" — not "no swan is white."
-
-## A scientific example
-
-The $\\varepsilon$–$\\delta$ definition of a limit (3.1) is the canonical example of a nested-quantifier statement: $\\forall \\varepsilon, \\exists \\delta, \\forall x, \\ldots$. Reversing the order of the quantifiers — $\\exists \\delta, \\forall \\varepsilon$ — produces a strictly *stronger* condition (uniform continuity). Quantifier order *is* the mathematics.`,
+The **Westermarck effect** is kin recognition caught misfiring. Children raised in close physical proximity during the first years of life develop a sexual aversion to one another, an evolved incest-avoidance mechanism using co-residence as a kinship cue. Studies of Israeli kibbutzim — where unrelated children were raised together communally — found that these peers almost never married each other, despite no rule against it. The co-residence cue triggered the aversion even though the children were not actually related, revealing the cue-based machinery behind incest avoidance.`,
   },
   {
-    slug: "what-is-proof",
-    title: "What a proof is",
+    slug: "cooperation-reciprocal-altruism",
+    title: "Cooperation and reciprocal altruism",
     weekNumber: 4,
-    blurb: "A proof is a finite chain of inferences from accepted premises.",
-    lectureTitle: "4.2 What a proof is",
-    body: `# What a proof is
+    blurb: "How cooperation among non-kin evolves and stays stable.",
+    lectureTitle: "4.2 Cooperation and reciprocal altruism",
+    body: `# Cooperation and reciprocal altruism
 
-A **proof** of a statement $S$, in a given axiomatic system, is a finite sequence of statements ending in $S$, where each statement is either:
+Kin selection explains helping relatives. But humans cooperate extensively with non-relatives — friends, trading partners, strangers. Explaining this required a second mechanism: reciprocity.
 
-1. an axiom (a premise accepted without proof),
-2. a previously proven theorem, or
-3. a consequence of earlier statements in the sequence by an explicit rule of inference (e.g. modus ponens: from $P$ and $P \\to Q$, conclude $Q$).
+## Reciprocal altruism
 
-This is what proof *is*, formally. In practice, mathematicians write proofs in natural language that compresses many such steps into one — but the underlying object is always, in principle, a finite chain like the above.
+Robert Trivers showed that altruism toward non-kin can evolve if it is **reciprocated**: I help you now, you help me later, and both of us end up better off than two non-cooperators. The condition is repeated interaction among individuals who can recognize each other and remember past dealings.
 
-## Common proof techniques
+## The prisoner's dilemma and tit-for-tat
 
-- **Direct proof.** To prove $P \\to Q$: assume $P$, derive $Q$.
-- **Proof by contradiction.** To prove $S$: assume $\\neg S$, derive a contradiction. (Used in 1.3 for $\\sqrt 2 \\notin \\mathbb{Q}$.)
-- **Proof by contrapositive.** To prove $P \\to Q$: prove $\\neg Q \\to \\neg P$ instead. Logically equivalent.
-- **Proof by cases.** To prove $S$ given that exactly one of $C_1, \\ldots, C_n$ must hold: prove $S$ assuming each $C_i$ in turn.
-- **Proof by induction.** See 4.3.
-- **Constructive proof.** Prove $\\exists x \\, P(x)$ by exhibiting a specific $x$.
-- **Nonconstructive proof.** Prove $\\exists x \\, P(x)$ without producing one. (Classic: there exist irrational $a, b$ with $a^b$ rational. Proof: consider $\\sqrt 2 ^{\\sqrt 2}$. If rational, done. If irrational, then $(\\sqrt 2 ^{\\sqrt 2})^{\\sqrt 2} = 2$ is rational, done. We don't know which case applied.)
+The problem of cooperation is captured by the **prisoner's dilemma**, where each individual is tempted to defect even though mutual cooperation pays better. In Robert Axelrod's famous tournaments, the winning strategy was **tit-for-tat**: cooperate first, then do whatever your partner did last. It is nice, retaliatory, forgiving, and clear — and it stabilizes cooperation among self-interested agents.
 
-## What a proof is *not*
+## Cheater detection and the social emotions
 
-A proof is not a description, a strong argument, an accumulation of examples, or a check that the result agrees with computation. "I've tried it for the first ten million $n$ and it works" is not a proof. (Famous example: the conjecture that $\\sum_{k=2}^n 1/(k \\ln k) > \\ln \\ln n$ for all $n \\ge 2$ holds for *every* $n$ ever checked but is now known to fail somewhere around $n \\approx 1.4 \\times 10^{316}$ — a number too large to ever check by computer.)
+Reciprocity is vulnerable to free-riders, so selection equipped us to police it. We have sharp **cheater-detection** abilities (recall the Wason task), and a suite of social emotions enforce the system: gratitude rewards cooperators, anger and the urge to punish deter defectors, and guilt repairs ruptured relationships. Trust and reputation become valuable currencies.
 
-## Why proof matters
+## A grounding example
 
-Proof is the *currency* of mathematics. It is what separates mathematics from every other field: a result is part of the body of mathematics if and only if it has been proven from the axioms. Outside mathematics, "proof" is rhetoric. Inside mathematics, it is a precisely defined object.`,
+Gerald Wilkinson documented reciprocal altruism in vampire bats. A bat that fails to feed on a given night will die within days, but a successful bat can regurgitate blood to share. Bats preferentially share with those who have shared with them in the past, and they remember individual partners. This is reciprocal altruism in a non-human animal: repeated interaction, individual recognition, and help contingent on past cooperation — exactly Trivers's conditions.`,
   },
   {
-    slug: "mathematical-induction",
-    title: "Mathematical induction",
+    slug: "aggression-status-dominance",
+    title: "Aggression, status, and dominance",
     weekNumber: 4,
-    blurb: "Prove a statement for all natural numbers from a base and a step.",
-    lectureTitle: "4.3 Mathematical induction",
-    body: `# Mathematical induction
+    blurb: "Aggression as a context-sensitive strategy.",
+    lectureTitle: "4.3 Aggression, status, and dominance",
+    body: `# Aggression, status, and dominance
 
-**Mathematical induction** is the proof technique tailored to statements of the form "for every natural number $n$, $P(n)$ holds."
+Aggression is not a senseless drive but a strategy — costly and dangerous, deployed when its expected payoff exceeded its expected cost. Understanding *when* it pays clarifies the patterns of human violence.
 
-## The principle
+## Aggression as strategy
 
-To prove $\\forall n \\in \\mathbb{N}\\, P(n)$:
+Selection would never favor indiscriminate violence; fighting risks injury and death. Instead it favors **conditional aggression**, calibrated to context: the value of the contested resource, the probability of winning, and the costs of losing. Animals (and people) assess these factors and usually settle conflicts through displays and assessment rather than escalating to combat.
 
-1. **Base case.** Prove $P(0)$ (or $P(1)$, depending on where $\\mathbb{N}$ starts).
-2. **Inductive step.** Prove that $P(k) \\Rightarrow P(k+1)$ for every $k$.
+## The young male syndrome
 
-If both succeed, $P(n)$ holds for all $n$. The metaphor is dominoes: knock the first one down (base), arrange each one so it knocks the next (step), and they all fall.
+Daly and Wilson described the **young male syndrome**: risk-taking and violence peak in young men, precisely the demographic that historically faced the fiercest competition for status and mates and had the least to lose. Homicide statistics across virtually every society show the same age-sex signature — a curve that bends sharply upward in young adulthood for men.
 
-## Why it works
+## Status and dominance vs. prestige
 
-Induction is *equivalent* to the **well-ordering principle**: every nonempty subset of $\\mathbb{N}$ has a least element. Suppose induction failed for some $P$. Then $\\{n : \\neg P(n)\\}$ is a nonempty subset of $\\mathbb{N}$; let $m$ be its least element. We know $m > 0$ (since the base case holds), so $m - 1 \\in \\mathbb{N}$ and $P(m - 1)$ holds. But then by the inductive step $P(m)$ holds — contradiction.
+Humans pursue rank through two routes. **Dominance** is status taken by force and intimidation; **prestige** is status freely conferred because of valued skills or knowledge. Both raise reproductive prospects, but prestige is the distinctively human route, built on the value others place on learning from the skilled.
 
-So induction is not a separate axiom: it is a consequence of how $\\mathbb{N}$ is ordered. Conversely, the **Peano axioms** for $\\mathbb{N}$ take induction as one of the foundational axioms.
+## A grounding example
 
-## A worked example
-
-**Claim.** $1 + 2 + 3 + \\cdots + n = \\dfrac{n(n+1)}{2}$ for all $n \\ge 1$.
-
-*Base.* For $n = 1$: LHS $= 1$, RHS $= 1 \\cdot 2 / 2 = 1$. ✓
-
-*Step.* Assume the formula for $n = k$:
-
-$$1 + 2 + \\cdots + k = \\frac{k(k+1)}{2}.$$
-
-Add $k + 1$ to both sides:
-
-$$1 + 2 + \\cdots + k + (k+1) = \\frac{k(k+1)}{2} + (k+1) = \\frac{(k+1)(k+2)}{2}.$$
-
-That's the formula at $n = k+1$. ✓ ∎
-
-## Strong induction
-
-A useful variant: assume $P(0), P(1), \\ldots, P(k)$ all hold and prove $P(k+1)$. Logically equivalent to ordinary induction, but more convenient when the proof needs more than the immediate predecessor — e.g. proving that every integer $\\ge 2$ has a prime factorization.
-
-## A scientific example
-
-The proof that a binary heap of $n$ elements supports *extract-min* in $O(\\log n)$ time goes by induction on the height of the heap. Almost every correctness proof in computer science is, under the hood, an induction over the size or structure of the input.`,
+Daly and Wilson analyzed homicides and found that a large share of male-male killings arose from seemingly "trivial" altercations — insults, status challenges, disputes over face in front of others. To an outsider the stakes look absurdly small. But in the ancestral world, a reputation for not tolerating disrespect deterred future exploitation, and status translated into mating opportunity. The "trivial" trigger is a status contest, and status was anything but trivial for a young man's reproductive future.`,
   },
   {
-    slug: "sets-russell-paradox",
-    title: "Sets and Russell's paradox",
+    slug: "coalitions-groups-warfare",
+    title: "Coalitions, groups, and warfare",
     weekNumber: 4,
-    blurb: "The naive notion of a set is inconsistent.",
-    lectureTitle: "4.4 Sets and Russell's paradox",
-    body: `# Sets and Russell's paradox
+    blurb: "The psychology of us-versus-them.",
+    lectureTitle: "4.4 Coalitions, groups, and warfare",
+    body: `# Coalitions, groups, and warfare
 
-Set theory is the lingua franca of modern mathematics: every object we have studied — numbers, functions, groups, vector spaces — can be encoded as a set. So you might expect the foundations of set theory to be straightforward. They are not.
+Humans are intensely group-living. We form alliances, mark group boundaries, and sometimes wage coordinated violence against other groups. The psychology behind coalitions is some of the most consequential — and dangerous — of our evolved equipment.
 
-## Naive set theory
+## Coalitional psychology
 
-Cantor and Frege, in the late 1800s, took as a basic principle:
+Ancestral life made **coalitions** — cooperative alliances — a route to resources, defense, and status. Selection therefore built a psychology for detecting alliances, tracking who is on whose side, and signaling group membership. We are exquisitely sensitive to coalitional cues, sometimes to a fault.
 
-> **Unrestricted comprehension.** For every property $P$, there is a set $\\{x : P(x)\\}$ of all things satisfying $P$.
+## Ingroup and outgroup
 
-This is the "naive" picture: a set is any collection you can describe. It seems obviously true. It is also inconsistent.
+Coalitional psychology generates the **ingroup/outgroup** distinction: cooperation and trust extended to "us," suspicion and competition directed at "them." Importantly, the categories that define groups are *flexible* — selection did not build us to track any particular marker but to detect whatever currently predicts alliance.
 
-## Russell's paradox (1901)
+## The intergroup-conflict logic
 
-Define
+Coordinated intergroup violence appears in chimpanzees and across human societies. Models suggest it can pay when an aggressor coalition can attack with low risk to itself — the "imbalance of power" condition, where overwhelming numerical advantage makes lethal raiding cheap. Much human warfare psychology, including in-group loyalty and out-group dehumanization, can be read through this lens.
 
-$$R = \\{x : x \\notin x\\},$$
+## A grounding example
 
-the set of all sets that are not members of themselves. (Most familiar sets satisfy this: $\\mathbb{N}$ is not an element of $\\mathbb{N}$.) Now ask: is $R \\in R$?
-
-- If $R \\in R$, then by definition of $R$, $R \\notin R$. Contradiction.
-- If $R \\notin R$, then $R$ satisfies the defining property, so $R \\in R$. Contradiction.
-
-Either way, contradiction. Therefore $R$ cannot be a set. Therefore unrestricted comprehension is false. Therefore naive set theory is inconsistent.
-
-Russell sent this to Frege in 1902, just as Frege's life work on the foundations of arithmetic was going to press. Frege added an appendix to the second volume acknowledging that the work was now on broken ground.
-
-## The fix: axiomatic set theory
-
-Modern set theory (Zermelo 1908, Fraenkel 1922) replaces unrestricted comprehension with weaker, carefully chosen axioms:
-
-- **Extensionality.** Two sets are equal iff they have the same elements.
-- **Pairing.** For any $a, b$, $\\{a, b\\}$ is a set.
-- **Union, power set, infinity, replacement, regularity, …**
-- **Restricted comprehension.** From a *given* set $A$ and a property $P$, you can form $\\{x \\in A : P(x)\\}$.
-
-The crucial change: you can only filter elements out of an existing set; you cannot conjure a set from a property alone. This blocks Russell's construction.
-
-This system, with the axiom of choice added, is **ZFC** — the standard foundation of mathematics today. (Almost) every theorem you know is, in principle, derivable from ZFC.
-
-## The lesson
-
-Mathematics is not self-evidently consistent. Even our most basic intuitions about "collection" can lead to contradiction. Foundations are not optional plumbing; they are a thing you can get wrong.`,
+Robert Kurzban, John Tooby, and Leda Cosmides tested whether race is a fixed category in the mind or a stand-in for coalition. Participants watched members of two mixed-race teams argue; the experimenters measured whether observers automatically encoded each speaker's *race* or their *team*. When clothing and context made team membership salient, observers' tendency to categorize by race *dropped sharply* — they tracked coalition instead. The finding suggests the mind does not have a dedicated "race module"; rather, it has a coalition-detector that latches onto race only when race happens to predict alliance, and lets go when something better does.`,
   },
   {
-    slug: "axioms-independence",
-    title: "Axioms and independence results",
+    slug: "language-communication",
+    title: "Language and communication",
     weekNumber: 4,
-    blurb: "Some questions cannot be answered by the axioms we have.",
-    lectureTitle: "4.5 Axioms and independence results",
-    body: `# Axioms and independence results
+    blurb: "Language as an evolved instinct.",
+    lectureTitle: "4.5 Language and communication",
+    body: `# Language and communication
 
-A statement $S$ is **independent** of an axiom system $T$ if neither $S$ nor $\\neg S$ can be proven from $T$. Independence is a fact about a *system*, not about the truth of $S$.
+Language is the most distinctive human trait and a prime candidate for a complex adaptation. The evidence that it is an evolved instinct — rather than a mere cultural invention — is strong and worth examining carefully.
 
-## The parallel postulate, again
+## The language instinct
 
-We met the first major independence result in 3.7: Euclid's fifth postulate is independent of the other four. You can adopt it (Euclidean geometry), negate it one way (elliptic geometry), or negate it the other way (hyperbolic geometry), and each choice yields a consistent system. There is no "right answer" inside the axioms.
+Noam Chomsky argued, and Steven Pinker popularized, that language is an **instinct**: a species-typical, specialized capacity that develops on a predictable schedule with minimal explicit teaching. Children acquire grammar rapidly, in a fixed sequence, and generate novel sentences they have never heard — making errors (like "goed" and "foots") that reveal they are extracting rules, not just imitating.
 
-How was independence proven? By **models**. Exhibit a model of geometry in which the other four postulates hold and the fifth fails. The Poincaré disc model of the hyperbolic plane does exactly this — and its consistency is reduced to the consistency of Euclidean geometry, which is reduced to the consistency of $\\mathbb{R}$, which is reduced to ZFC.
+## The poverty of the stimulus
 
-## The Continuum Hypothesis
+A central argument is the **poverty of the stimulus**: the language children hear is too sparse and error-ridden to account for the rich, rule-governed grammar they acquire. The gap implies the child brings innate structure — a universal grammar — to the task. Learning fills in parameters; it does not build the system from scratch.
 
-In 1878 Cantor asked: are there any cardinalities strictly between $|\\mathbb{N}|$ and $|\\mathbb{R}|$? The **Continuum Hypothesis (CH)** says no:
+## Design features and honest communication
 
-$$\\text{CH:}\\quad |\\mathbb{R}| = \\aleph_1.$$
+Language has hallmarks of designed communication: it is *digital* (discrete words combined by rules), *generative* (infinite expressions from finite means), and *displaced* (it can refer to the absent, the past, and the hypothetical). But communication poses an evolutionary puzzle — why be honest? Signaling theory and the policing of reputation help explain why language is reliable enough to be useful.
 
-Cantor and others tried for decades to prove CH from set theory. The resolution came in two stages:
+## A grounding example
 
-- **Gödel (1940).** CH is *consistent* with ZFC. If ZFC is consistent, so is ZFC + CH.
-- **Cohen (1963).** $\\neg$CH is also *consistent* with ZFC. If ZFC is consistent, so is ZFC + $\\neg$CH.
-
-Together: CH is **independent** of ZFC. There is no proof in either direction. (Cohen invented the technique of *forcing* to do this, the deepest tool in set theory.)
-
-This is unsettling. CH looks like a definite mathematical question — does some specific cardinality exist or not? — and the axioms we use for all of mathematics cannot answer it. There are at least three reactions:
-
-1. **Platonism.** CH has a definite truth value; our axioms are incomplete. We should look for new, well-motivated axioms that decide it.
-2. **Formalism.** CH has no truth value independent of an axiom system. Math is the study of consequences of axiom systems; pick one and proceed.
-3. **Multiverse view (Hamkins).** There are many "universes of sets," some satisfying CH, some not, all equally legitimate.
-
-## The Axiom of Choice
-
-A similar story: the **Axiom of Choice** (AC) says that, given any family of nonempty sets, you can pick one element from each. Innocuous-sounding, but it implies the **Banach–Tarski paradox**: a solid ball can be decomposed into five pieces and reassembled into two solid balls of the same size. (The pieces are non-measurable.) AC is independent of ZF (ZFC minus choice), and ZFC routinely takes AC on board.
-
-## The deeper point
-
-The discovery of independence results dissolved the dream — already in trouble after Russell's paradox — that mathematics is a single, finished, complete body of truth. It is, instead, the study of *what follows from what*. The axioms are the starting point you chose; the theorems are what you got. Different starting points are different mathematics.`,
+Studies of **creolization** show language structure emerging in a single generation. When children are exposed to a **pidgin** — a makeshift, grammarless contact language thrown together by adults with no common tongue — they spontaneously transform it into a **creole**, a full language with consistent grammar, complete with tense, agreement, and word order that the pidgin lacked. Derek Bickerton documented this in plantation communities, and Judy Kegl observed it as deaf Nicaraguan children, given only crude home signs, generated a fully grammatical sign language on their own. Children do not just learn language; given impoverished input, they *create* its missing structure — exactly what an innate language faculty predicts.`,
   },
   {
-    slug: "godel-incompleteness",
-    title: "Gödel's incompleteness theorems",
+    slug: "emotions-evolved-programs",
+    title: "Emotions as evolved programs",
     weekNumber: 4,
-    blurb: "Any sufficient axiom system contains true statements it cannot prove.",
-    lectureTitle: "4.6 Gödel's incompleteness theorems",
-    body: `# Gödel's incompleteness theorems
+    blurb: "Emotions as coordinating superordinate programs.",
+    lectureTitle: "4.6 Emotions as evolved programs",
+    body: `# Emotions as evolved programs
 
-In 1931, Kurt Gödel — age 25 — published two theorems that ended the century-old dream of finding a complete, consistent axiomatization of mathematics.
+Emotions can seem like the opposite of rational design — messy, disruptive, irrational. The evolutionary view inverts this: emotions are sophisticated programs that coordinate the whole organism to meet recurrent adaptive challenges.
 
-## What the theorems say
+## Emotions as superordinate programs
 
-Let $T$ be a formal axiom system rich enough to encode basic arithmetic (Peano arithmetic suffices, as does ZFC). Assume $T$ is **consistent** (proves no contradiction) and *effective* (its axioms can be recognized by an algorithm).
+Cosmides and Tooby describe an emotion as a **superordinate program** that orchestrates many subsystems at once. When fear is triggered, it simultaneously redirects attention, sharpens perception, shifts physiology (heart rate, hormones), reprioritizes goals, and biases memory and decision-making. Each emotion is a coordinated mode of operation matched to a class of situation — threat, loss, contamination, betrayal.
 
-- **First incompleteness theorem.** There is a statement $G$ in the language of $T$ that is *true* (in the standard model) but *not provable* in $T$. Moreover, $\\neg G$ is also not provable. $T$ is **incomplete**.
-- **Second incompleteness theorem.** The statement "$T$ is consistent" is not provable in $T$ itself.
+## Universality of basic emotions
 
-In a sentence: any system strong enough to do arithmetic is either inconsistent or unable to prove its own consistency, and is always missing some truths.
+Paul Ekman's research found that certain facial expressions of emotion — happiness, sadness, anger, fear, disgust, surprise — are recognized across radically different cultures, including peoples with no exposure to Western media. The cross-cultural consistency of both producing and reading these expressions argues for an evolved, species-typical emotional repertoire.
 
-## The construction (sketch)
+## Emotions as commitment devices
 
-Gödel's proof works by *self-reference*. He showed how to encode statements about $T$'s proofs as statements about numbers (this is **Gödel numbering**). Inside arithmetic, you can then formulate a sentence $G$ that says, in effect:
+Some emotions function as **commitment devices** that solve problems pure rationality cannot. Romantic love commits a partner beyond cold calculation; a credible capacity for vengeful anger deters exploitation precisely because it is *not* coolly cost-benefit. By making us behave in ways a pure short-term maximizer would not, emotions can secure long-term gains.
 
-> "This sentence is not provable in $T$."
+## A grounding example
 
-Now: if $T$ proves $G$, then $G$ is false — but $T$ proves only true things (by consistency). Contradiction. So $T$ does not prove $G$. But that is exactly what $G$ asserts. So $G$ is true. And $T$ does not prove it.
-
-The self-reference is the same machinery that powers the liar paradox ("this sentence is false") — but Gödel rebuilt it inside arithmetic, where it cannot be waved away as a quirk of natural language.
-
-## What it does **not** say
-
-The theorems are routinely misquoted. They do not say:
-
-- "Mathematics is inconsistent." (No — they assume consistency.)
-- "Some mathematical questions have no answer." (Only relative to a given axiom system.)
-- "Machines can never match human reasoning." (A philosophical extrapolation, not a theorem.)
-- "Anything goes." (No — proofs from the axioms are still proofs from the axioms.)
-
-What the theorems *do* say is sharp and limited: any single effective axiom system $T$ for arithmetic has true statements outside it. You can always extend $T$ to a larger system $T'$ that proves $G_T$ — but then $T'$ has its own unprovable $G_{T'}$. You never finish.
-
-## The historical impact
-
-Hilbert's program (1920s) was an explicit plan to formalize *all* of mathematics in a single system and prove it complete and consistent from within. The second incompleteness theorem killed the consistency half outright. The first killed the completeness half. The program was over within a year.
-
-What replaced it is the *modern* understanding of mathematics: as a network of axiom systems, each studied for its own consequences, with relationships between systems (relative consistency, conservative extension, mutual interpretability) doing the work that a single foundational system was supposed to do.`,
+Ekman traveled to the Fore people of Papua New Guinea, a then-isolated population with no exposure to outside media. He told them simple stories ("this person's child has died," "this person sees something that smells bad") and asked them to match the story to a photograph of a Western face. The Fore reliably picked the same expressions Westerners would — sadness for the dead child, disgust for the bad smell — and Western observers could likewise read Fore expressions. This mutual, cross-cultural legibility of emotional faces, in a population that could not have learned them from us, is powerful evidence that basic emotions are evolved rather than culturally invented.`,
   },
   {
-    slug: "probability-foundations",
-    title: "Probability: measure, frequency, credence",
+    slug: "culture-religion-evolved-mind",
+    title: "Culture, religion, and the evolved mind",
     weekNumber: 4,
-    blurb: "What does it *mean* to say a probability is $0.7$?",
-    lectureTitle: "4.7 Probability: measure, frequency, credence",
-    body: `# Probability: measure, frequency, credence
+    blurb: "How an evolved mind generates and constrains culture.",
+    lectureTitle: "4.7 Culture, religion, and the evolved mind",
+    body: `# Culture, religion, and the evolved mind
 
-We use the word *probability* for at least three different things. Modern mathematics has a precise definition of one of them and leaves the others to philosophy.
+Culture is sometimes set against biology, as if the two were rivals. The evolutionary view dissolves the opposition: culture is generated, transmitted, and constrained by evolved minds, and it co-evolves with our genes.
 
-## The mathematical definition (Kolmogorov, 1933)
+## Evoked vs. transmitted culture
 
-A **probability space** is a triple $(\\Omega, \\mathcal{F}, P)$ where:
+Tooby and Cosmides distinguish **evoked culture** — variation produced when a *universal* psychology meets different local conditions (different environments evoke different responses from the same programs) — from **transmitted culture** — ideas and practices passed from mind to mind by learning. Both depend on evolved psychology: the first as the program, the second as the learning machinery.
 
-- $\\Omega$ is a set of **outcomes** (the *sample space*).
-- $\\mathcal{F}$ is a collection of subsets of $\\Omega$ called **events**, closed under complement and countable unions (a *$\\sigma$-algebra*).
-- $P : \\mathcal{F} \\to [0, 1]$ is a function satisfying:
-  1. $P(\\Omega) = 1$,
-  2. $P(\\emptyset) = 0$,
-  3. *Countable additivity:* for any disjoint sequence $A_1, A_2, \\ldots \\in \\mathcal{F}$,
-     $$P\\!\\left(\\bigcup_n A_n\\right) = \\sum_n P(A_n).$$
+## Gene-culture coevolution
 
-That is *all* probability theory says probability *is*: a normalized measure on a $\\sigma$-algebra. Every theorem (law of large numbers, central limit theorem, Bayes' rule) is a consequence.
+Genes and culture shape each other. A cultural practice (dairying) can create a selection pressure that changes gene frequencies (lactase persistence), and evolved biases shape which cultural variants spread. Humans are the great imitators, equipped with biases to copy the successful, the prestigious, and the majority — biases that make cumulative culture possible.
 
-This is a beautifully clean foundation. But it leaves an enormous question unanswered: *how do you choose $P$ in a real problem?*
+## The byproduct theory of religion
 
-## The three interpretations
+Religion is widespread but puzzling. One influential account treats religious belief as a **byproduct** of ordinary cognitive systems: a hyperactive agency-detection device (we see intentions everywhere), a theory of mind that can imagine disembodied minds, and a tendency toward dualism. **Minimally counterintuitive** concepts — a person who is invisible, a statue that hears prayers — are especially memorable and transmissible. Other researchers argue religion also has adaptive functions, promoting cooperation and group cohesion.
 
-- **Frequentist.** $P(A)$ is the long-run relative frequency of $A$ in independent repeated trials. "The probability this coin lands heads is $0.5$" means: if you toss it forever, the fraction of heads tends to $0.5$. Concept of probability for one-off events is undefined.
-- **Bayesian / subjective.** $P(A)$ is your **degree of belief** that $A$ is true, calibrated so that you would accept fair bets at those odds. New evidence updates your beliefs by Bayes' rule. Applies to one-off events ("the probability it rains tomorrow") and to hypotheses ("the probability the coin is fair").
-- **Propensity.** $P(A)$ is a real, physical disposition of the system — a tendency. Useful for talking about quantum mechanics, where the probabilities seem to be features of the world rather than features of our ignorance.
+## A grounding example
 
-All three interpretations satisfy Kolmogorov's axioms. The math is the same; the *meaning* is contested.
-
-## A scientific example
-
-When a clinical trial reports "the drug reduces mortality by $40\\%$ ($p = 0.03$)," the $p$-value is a frequentist statement: under the null hypothesis (drug has no effect), the probability of seeing data this extreme or more is $0.03$. This is *not* the probability that the null hypothesis is false — that would be a Bayesian statement, requiring a prior. The widespread confusion of these two statements is responsible for a substantial fraction of misreported science. The math doesn't care which interpretation you adopt; the *conclusion you can draw* depends on it absolutely.`,
+Cross-culturally, the gods people most invest in tend to be **morally concerned** and to *care about how people treat one another*. Ara Norenzayan's "big gods" research argues that belief in powerful, watchful, punishing deities expanded as societies grew, because the sense of being constantly observed by a moralizing god promoted honesty and cooperation among strangers — relationships too large and anonymous for reciprocity and reputation alone to police. Whether byproduct, adaptation, or both, religion is built out of, and constrained by, the standard equipment of the evolved mind.`,
   },
   {
-    slug: "computability-halting",
-    title: "Computability and the halting problem",
+    slug: "capstone-synthesis",
+    title: "Capstone synthesis",
     weekNumber: 4,
-    blurb: "There is no algorithm that decides whether an algorithm halts.",
-    lectureTitle: "4.8 Computability and the halting problem",
-    body: `# Computability and the halting problem
+    blurb: "Pulling the framework together; promise and limits.",
+    lectureTitle: "4.8 Capstone synthesis",
+    body: `# Capstone synthesis
 
-To finish the course, we ask: what can be computed, in principle, by any mechanical procedure?
+We began with a single idea — the mind is a product of natural selection — and followed it from the logic of the gene to the structure of the family, the dynamics of mating, and the architecture of culture. This final lecture pulls the threads together and faces the field's hardest questions honestly.
 
-## Turing machines
+## The unifying framework
 
-Alan Turing (1936) formalized an *idealized computer*: a finite state controller reading and writing symbols on an unbounded tape, according to a finite table of rules. A **Turing machine** is fully specified by that table.
+Every topic in this course flows from a few principles. Selection builds **functional design** to solve **recurrent adaptive problems**. The mind is therefore a set of **specialized, conditional programs** ("if-then" mechanisms sensitive to context). These programs maximize **inclusive fitness**, often producing behavior that is generous, emotional, or self-sacrificing rather than coldly selfish. And they were tuned to an **ancestral environment** that often differs from our own, producing predictable **mismatches**.
 
-The **Church–Turing thesis** says: every function that is computable, by any mechanical procedure whatsoever — pencil and paper, modern computer, abacus, biological cell — is computable by some Turing machine. This is a thesis, not a theorem, because "mechanical procedure" has no a priori mathematical definition. But every alternative model of computation people have invented (lambda calculus, recursive functions, register machines, modern CPUs) turns out to compute exactly the same class of functions. The Turing-computable functions are, empirically, *the* computable functions.
+## Recurring tools of reasoning
 
-## The halting problem
+Notice the analytical moves we used again and again: distinguishing **proximate from ultimate** causes; applying **Hamilton's rule** $rB > C$ to social behavior; invoking **parental investment** to predict sex differences; using **error management** to explain biased mechanisms (fear, disgust, jealousy); and separating **adaptation from byproduct from noise**. These tools generalize far beyond the examples here.
 
-A natural question: given a Turing machine $M$ and an input $x$, does $M$ eventually halt, or does it run forever?
+## The limits and the future
 
-Turing's headline result: **no algorithm can decide this in general.** The **halting problem** is *undecidable*.
+The field has real challenges. Reconstructing the ancestral past is hard, and "just-so stories" — plausible but untested adaptive guesses — are a genuine hazard. Good evolutionary psychology answers this with *a priori* predictions, cross-cultural tests, and convergent evidence from genetics, neuroscience, and the archaeological record, rather than after-the-fact storytelling. The strongest findings in this course were predicted *before* they were measured.
 
-## The proof
+## A grounding example
 
-Suppose, for contradiction, there is a Turing machine $H$ that, given $\\langle M, x \\rangle$, outputs "yes" if $M(x)$ halts and "no" otherwise. Build a new machine $D$ that, given an input $\\langle M \\rangle$ (the description of a machine), runs $H$ on $\\langle M, M \\rangle$ and then:
-
-- if $H$ says "yes" (i.e. $M$ halts on input $M$), $D$ loops forever;
-- if $H$ says "no," $D$ halts.
-
-Now ask: what does $D$ do on input $\\langle D \\rangle$?
-
-- If $D$ halts on $\\langle D \\rangle$, then by construction $H$ said "yes" — which means $D$ does not halt on $\\langle D \\rangle$. Contradiction.
-- If $D$ does not halt, then $H$ said "no" — which means $D$ does halt on $\\langle D \\rangle$. Contradiction.
-
-Either way, contradiction. Therefore no such $H$ exists. The halting problem is uncomputable. ∎
-
-This argument is the *exact same* diagonal trick that Cantor used to prove $\\mathbb{R}$ uncountable (1.8) and that Gödel used in the incompleteness theorem (4.6). The three results — uncountability, incompleteness, undecidability — are siblings of one self-referential move.
-
-## What follows
-
-Once you have one undecidable problem, you get many. By a standard reduction technique, you can show:
-
-- It is undecidable whether two given programs compute the same function.
-- It is undecidable whether a given Diophantine equation $p(x_1, \\ldots, x_n) = 0$ with integer coefficients has an integer solution (**Hilbert's 10th problem**, settled by Matiyasevich, 1970).
-- It is undecidable whether a given mathematical statement in first-order logic over the integers is true.
-
-There are well-posed yes/no questions about numbers that no algorithm — and, granting the Church–Turing thesis, *no possible procedure* — can answer.
-
-## The arc
-
-We began the course with counting on our fingers. We end it with the discovery that some questions about the integers are mechanically unanswerable. The reach of mathematics is enormous; its limits are sharp; and the proofs that establish those limits use the same handful of conceptual moves — quantification, self-reference, diagonalization — that we have met again and again. *That* is conceptual mathematics.`,
+Return to the very first example: our craving for sweet and fatty food. In one lecture it illustrated adaptation; now it can showcase the whole framework. It is **functional design** (a nutrient-detection system), shaped by a **recurrent problem** (calorie scarcity), expressed as a **conditional program** (we crave more when deprived), serving **fitness** in the ancestral past, and now generating a **mismatch** (obesity in a world of abundance) that we understand through the **proximate** machinery of taste and the **ultimate** logic of selection — *without* committing the **naturalistic fallacy** of calling the craving good. One humble example, read through the entire toolkit. That is the method of evolutionary psychology.`,
   },
 ];
 
@@ -1315,141 +826,152 @@ const ASSIGNMENTS: SeedAssignment[] = [
   // ───────────── Week 1 ─────────────
   {
     kind: "homework",
-    title: "Homework 1.1 — Numbers and their extensions",
+    title: "Homework 1.1 — Selection, adaptation, and the gene",
     weekNumber: 1,
     isTimed: false,
     timeLimitMinutes: null,
     instructions:
-      "Short-answer problems on counting, rationals, irrationals, and the reals. Use the math keyboard for the blackboard-bold number sets (ℕ, ℤ, ℚ, ℝ, ℂ) and any symbols.",
+      "Short-answer problems on the foundations: what the field claims, how selection works, and the gene's-eye view. Answer in your own words; precise use of the key terms matters.",
     problems: [
       {
-        topicSlug: "counting-integers-numberline",
+        topicSlug: "evopsych-what-why",
         prompt:
-          "Using ∈ and ∉, write two true membership statements: one placing −7 in the integers, and one excluding −7 from the natural numbers ℕ = {1, 2, 3, …}.",
-        correctAnswer: "−7 ∈ ℤ and −7 ∉ ℕ",
+          "State the central claim of evolutionary psychology about the architecture of the mind in one sentence.",
+        correctAnswer:
+          "The mind is a set of evolved, specialized information-processing mechanisms shaped by natural selection to solve recurrent ancestral adaptive problems.",
         explanation:
-          "$-7 \\in \\mathbb{Z}$ (it is an integer), and $-7 \\notin \\mathbb{N}$ under the convention $\\mathbb{N} = \\{1, 2, 3, \\ldots\\}$.",
+          "Cosmides and Tooby's core thesis: the brain is an organ built by selection, composed of many domain-specific programs rather than one general-purpose computer.",
       },
       {
-        topicSlug: "rationals-ratios",
+        topicSlug: "natural-selection-adaptation",
         prompt:
-          "Using set-builder notation, write the definition of the rational numbers ℚ as ratios of integers (be sure to exclude the impossible denominator).",
-        correctAnswer: "ℚ = { p/q : p, q ∈ ℤ, q ≠ 0 }",
+          "Name the three conditions that must hold for natural selection to operate.",
+        correctAnswer: "Variation, heritability, and differential reproduction.",
         explanation:
-          "$\\mathbb{Q} = \\{\\,p/q : p, q \\in \\mathbb{Z},\\ q \\neq 0\\,\\}$. Excluding $q = 0$ is essential — division by zero is undefined.",
+          "Darwin's logic needs only these three: individuals vary, some variation is inherited, and some variants out-reproduce others. Their conjunction necessarily produces adaptive change.",
+        hint: "Think about what must differ, what must be passed on, and what must differ in outcome.",
       },
       {
-        topicSlug: "irrationals-sqrt2",
+        topicSlug: "genes-inheritance-replication",
         prompt:
-          "State, in symbols, the membership claim that √2 is real but not rational. Use ∈, ∉, ℝ, ℚ.",
-        correctAnswer: "√2 ∈ ℝ and √2 ∉ ℚ",
+          "In Dawkins's framework, what is the difference between a replicator and a vehicle, and which are genes versus organisms?",
+        correctAnswer:
+          "A replicator copies itself (the gene); a vehicle carries replicators and interacts with the world (the organism).",
         explanation:
-          "$\\sqrt 2 \\in \\mathbb{R}$ but $\\sqrt 2 \\notin \\mathbb{Q}$ — proven by the classical contradiction argument from $\\sqrt 2 = p/q$ in lowest terms.",
+          "Genes are the replicators that persist across generations; bodies are temporary vehicles built to propagate the genes they carry.",
       },
       {
-        topicSlug: "reals-completeness",
+        topicSlug: "natural-selection-adaptation",
         prompt:
-          "Write the chain of strict subset inclusions from the natural numbers up through the complex numbers (use ⊂ to indicate proper subsets).",
-        correctAnswer: "ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ",
+          "Define what makes a trait an 'adaptation,' and name its defining signature.",
+        correctAnswer:
+          "An adaptation is a trait that exists because it solved a recurrent ancestral reproductive problem; its signature is complex functional design (improbable, coordinated machinery suited to a task).",
         explanation:
-          "$\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R} \\subset \\mathbb{C}$. Each inclusion is strict — each extension is genuinely larger.",
+          "Functional design — many parts working together for a specific function — is the hallmark that distinguishes adaptations from byproducts and noise.",
       },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 1.2 — Complex numbers, representation, infinity",
+    title: "Homework 1.2 — Sexual selection, kin selection, modularity",
     weekNumber: 1,
     isTimed: false,
     timeLimitMinutes: null,
     instructions:
-      "Use the math keyboard for i, π, exponents, and blackboard-bold set symbols.",
+      "Apply Hamilton's rule and the logic of sexual selection and modularity. Where a formula is requested, write it out.",
     problems: [
       {
-        topicSlug: "complex-rotations",
+        topicSlug: "inclusive-fitness-kin-selection",
         prompt:
-          "Write the defining equation of the imaginary unit i, and then write Euler's identity (the special case linking 0, 1, π, e, and i).",
-        correctAnswer: "i² = −1; e^{iπ} + 1 = 0",
-        explanation:
-          "$i^2 = -1$ defines the imaginary unit. Euler's identity $e^{i\\pi} + 1 = 0$ links five fundamental constants in a single equation.",
-      },
-      {
-        topicSlug: "zero-negatives-leaps",
-        prompt:
-          "For each of the equations x + 1 = 0, 2x = 1, x² = 2, x² + 1 = 0, give the smallest standard number system (use ℕ, ℤ, ℚ, ℝ, ℂ) in which the equation has a solution.",
+          "Write Hamilton's rule as an inequality and define each of its three terms.",
         correctAnswer:
-          "x + 1 = 0 → ℤ; 2x = 1 → ℚ; x² = 2 → ℝ; x² + 1 = 0 → ℂ",
+          "rB > C, where r is the coefficient of relatedness, B is the reproductive benefit to the recipient, and C is the cost to the actor.",
         explanation:
-          "Each enlargement of the number system was driven by an equation the previous system could not solve.",
+          "An altruistic act is favored by selection when the benefit to the recipient, weighted by relatedness, exceeds the cost to the actor: $rB > C$.",
+        hint: "It relates relatedness, benefit, and cost.",
       },
       {
-        topicSlug: "bases-place-value",
+        topicSlug: "inclusive-fitness-kin-selection",
         prompt:
-          "Write the number seventeen (a) in base 10, (b) in base 2, and (c) in base 16.",
-        correctAnswer: "(a) 17, (b) 10001, (c) 11",
+          "Give the coefficient of relatedness (r) between (a) full siblings and (b) first cousins.",
+        correctAnswer: "(a) r = 1/2 for full siblings; (b) r = 1/8 for first cousins.",
         explanation:
-          "$17_{10} = 10001_2 = 11_{16}$. The number is the same; only the representation changes with the base.",
+          "Full siblings share half their genes on average ($r = 1/2$); first cousins share an eighth ($r = 1/8$).",
       },
       {
-        topicSlug: "countable-uncountable",
+        topicSlug: "sexual-selection",
         prompt:
-          "Using ∼ for 'has the same cardinality as', write two true statements: (a) that the integers and the rationals are equinumerous, and (b) that the reals are *not* equinumerous with the naturals.",
-        correctAnswer: "ℤ ∼ ℚ and ℝ ≁ ℕ",
+          "Name the two mechanisms of sexual selection and briefly distinguish them.",
+        correctAnswer:
+          "Intrasexual selection (same-sex competition for mates, e.g., male-male combat) and intersexual selection (mate choice, e.g., female choice of ornamented males).",
         explanation:
-          "$\\mathbb{Z}$ and $\\mathbb{Q}$ are both countable (cardinality $\\aleph_0$), so $\\mathbb{Z} \\sim \\mathbb{Q}$. By Cantor's diagonal argument, $\\mathbb{R}$ is uncountable, so $\\mathbb{R} \\not\\sim \\mathbb{N}$.",
+          "Sexual selection operates through competition within a sex and through choice by the other sex; both can build costly traits like antlers and ornaments.",
+      },
+      {
+        topicSlug: "adapted-mind-modularity",
+        prompt:
+          "Why does evolutionary psychology predict a modular, domain-specific mind rather than one general-purpose problem-solver?",
+        correctAnswer:
+          "Because different adaptive problems require different solutions, a mechanism tuned to one problem would fail at others, so selection favors many specialized mechanisms each carrying built-in knowledge of its domain.",
+        explanation:
+          "A single general engine cannot embody the conflicting optimal rules of mating, foraging, and predator-avoidance at once; specialization outperforms generality.",
       },
     ],
   },
   {
     kind: "test",
-    title: "Week 1 Test — The number systems",
+    title: "Week 1 Test — Foundations",
     weekNumber: 1,
     isTimed: true,
     timeLimitMinutes: 30,
     instructions:
-      "Timed. 30 minutes. Math keyboard available; pasting is disabled. Answers should be written in compact symbolic form using the on-screen math keyboard.",
+      "Timed. 30 minutes. Pasting is disabled. Answer in clear, compact prose using the field's terminology precisely.",
     problems: [
       {
-        topicSlug: "counting-integers-numberline",
+        topicSlug: "levels-of-explanation",
         prompt:
-          "Using a single statement, write that the integers are closed under subtraction but the natural numbers are not. (Give a specific counterexample for ℕ.)",
-        correctAnswer: "∀ a, b ∈ ℤ, a − b ∈ ℤ; but 3 − 5 = −2 ∉ ℕ",
-        explanation:
-          "For all $a, b \\in \\mathbb{Z}$, $a - b \\in \\mathbb{Z}$. But $3 - 5 = -2 \\notin \\mathbb{N}$ shows $\\mathbb{N}$ is not closed under subtraction.",
-      },
-      {
-        topicSlug: "irrationals-sqrt2",
-        prompt:
-          "Outline the proof that √2 ∉ ℚ as a contradiction: state the assumption, the algebraic consequence, and the contradiction reached.",
+          "Distinguish a proximate explanation from an ultimate explanation, and give one example of each for the same behavior.",
         correctAnswer:
-          "Assume √2 = p/q in lowest terms ⇒ p² = 2q² ⇒ p even ⇒ p = 2k ⇒ q² = 2k² ⇒ q even ⇒ p, q share factor 2, contradicting 'lowest terms'.",
+          "A proximate explanation cites immediate mechanism (e.g., a mother nurtures her baby because of oxytocin); an ultimate explanation cites evolutionary function (e.g., because caring for offspring propagated her genes).",
         explanation:
-          "Assume $\\sqrt 2 = p/q$ in lowest terms. Then $p^2 = 2q^2$, so $p$ is even, $p = 2k$, then $q^2 = 2k^2$, so $q$ is even — contradicting 'lowest terms.'",
+          "Proximate = how it works now; ultimate = why selection built it. They are complementary answers to different questions, not rivals.",
       },
       {
-        topicSlug: "reals-completeness",
+        topicSlug: "levels-of-explanation",
         prompt:
-          "State the Least Upper Bound (supremum) property of ℝ in symbols.",
+          "Name and define the naturalistic fallacy, and explain in one sentence why evolutionary psychology is not committed to it.",
         correctAnswer:
-          "∀ S ⊆ ℝ with S ≠ ∅ and S bounded above, ∃ sup(S) ∈ ℝ",
+          "The naturalistic fallacy is inferring 'ought' from 'is' — assuming whatever evolved is therefore good; evolutionary psychology only describes why tendencies exist and never claims they are morally justified.",
         explanation:
-          "Every nonempty subset $S \\subseteq \\mathbb{R}$ with an upper bound has a least upper bound $\\sup(S) \\in \\mathbb{R}$. This property fails in $\\mathbb{Q}$.",
+          "Explaining the origin of a behavior (violence, deception) is not endorsing it; description is not prescription.",
       },
       {
-        topicSlug: "complex-rotations",
+        topicSlug: "natural-selection-adaptation",
         prompt:
-          "Using i, write the two complex square roots of −9.",
-        correctAnswer: "±3i",
+          "Distinguish an adaptation from a byproduct, giving one example of a byproduct.",
+        correctAnswer:
+          "An adaptation was selected for its function; a byproduct rides along with an adaptation without being selected itself (e.g., the whiteness of bone is a byproduct of calcium).",
         explanation:
-          "$x^2 = -9 \\Rightarrow x = \\pm 3i$, since $(3i)^2 = 9 \\cdot i^2 = -9$.",
+          "Not every trait is an adaptation. Byproducts lack their own functional design; they are side effects of features that were selected.",
+        hint: "One was selected for a job; the other is a side effect.",
       },
       {
-        topicSlug: "countable-uncountable",
+        topicSlug: "sexual-selection",
         prompt:
-          "Using ℵ₀, write the cardinality of ℚ and a strict inequality showing |ℝ| is larger.",
-        correctAnswer: "|ℚ| = ℵ₀ and |ℝ| > ℵ₀",
+          "State the handicap principle and explain why a costly ornament is an honest signal.",
+        correctAnswer:
+          "The handicap principle holds that a signal is reliable because it is costly: only a high-quality individual can afford to produce or carry it, so the cost guarantees honesty.",
         explanation:
-          "$|\\mathbb{Q}| = \\aleph_0$ (the rationals are countable). $|\\mathbb{R}| > \\aleph_0$ by Cantor's diagonal argument; $|\\mathbb{R}| = 2^{\\aleph_0}$.",
+          "A peacock's huge tail is honest precisely because a sickly bird could not survive while bearing it; cost prevents faking.",
+      },
+      {
+        topicSlug: "adapted-mind-modularity",
+        prompt:
+          "Describe what the Wason selection task reveals about the structure of human reasoning.",
+        correctAnswer:
+          "People fail abstract logic versions but succeed when the same logic is framed as detecting cheaters in a social contract, revealing a specialized cheater-detection mechanism rather than a single general logic engine.",
+        explanation:
+          "Content matters: identical logical structure is solved easily in a social-exchange frame, evidence for a domain-specific reasoning module.",
       },
     ],
   },
@@ -1457,166 +979,154 @@ const ASSIGNMENTS: SeedAssignment[] = [
   // ───────────── Week 2 ─────────────
   {
     kind: "homework",
-    title: "Homework 2.1 — Operations, structural laws, groups",
+    title: "Homework 2.1 — Survival, food, and fear",
     weekNumber: 2,
     isTimed: false,
     timeLimitMinutes: null,
     instructions:
-      "Use the math keyboard for ∀, ∃, ∈, ∘, and any operator symbols.",
+      "Short-answer problems on the survival mechanisms of the evolved individual.",
     problems: [
       {
-        topicSlug: "what-is-operation",
+        topicSlug: "survival-evolved-body",
         prompt:
-          "Using the function-arrow notation, write the formal definition of a binary operation ∗ on a set S.",
-        correctAnswer: "∗ : S × S → S",
+          "What is the environment of evolutionary adaptedness (EEA), and why does it matter for understanding modern maladaptive behavior?",
+        correctAnswer:
+          "The EEA is the statistical composite of ancestral conditions (largely the Pleistocene) to which our mechanisms were tuned; it matters because today's environment differs, causing once-adaptive mechanisms to misfire (mismatch).",
         explanation:
-          "$\\ast : S \\times S \\to S$. The codomain $S$ encodes the closure requirement: combining two elements of $S$ must produce an element of $S$.",
+          "Cravings for sugar, salt, and rest were adaptive under ancestral scarcity but cause harm amid modern abundance — a mismatch between the EEA and now.",
       },
       {
-        topicSlug: "commutative-associative-distributive",
+        topicSlug: "foraging-food-palate",
         prompt:
-          "Using ∀, write the commutative law for an operation ∗ on a set S, and the associative law for the same ∗.",
+          "Explain why humans evolved strong preferences for sweet and fatty foods.",
         correctAnswer:
-          "∀ a, b ∈ S, a ∗ b = b ∗ a; ∀ a, b, c ∈ S, (a ∗ b) ∗ c = a ∗ (b ∗ c)",
+          "Sweet signaled ripe fruit and quick energy, and fat was a rare, calorie-dense resource; under ancestral calorie scarcity, a taste system that rewarded eating them was favored by selection.",
         explanation:
-          "Commutativity: $\\forall a, b \\in S,\\ a \\ast b = b \\ast a$. Associativity: $\\forall a, b, c \\in S,\\ (a \\ast b) \\ast c = a \\ast (b \\ast c)$.",
+          "Taste is an evolved nutrient-detection system; the preference was adaptive when calories were scarce, even though it harms us amid abundance.",
       },
       {
-        topicSlug: "groups-symmetry",
+        topicSlug: "fear-predators-threat-detection",
         prompt:
-          "List the four axioms a set G with operation ∗ must satisfy to be a group. Use compact symbolic notation (closure, associativity, identity, inverses).",
+          "Define a 'prepared fear' and give two examples.",
         correctAnswer:
-          "(1) ∀ a, b ∈ G, a∗b ∈ G; (2) ∀ a, b, c, (a∗b)∗c = a∗(b∗c); (3) ∃ e ∈ G, ∀ a, e∗a = a∗e = a; (4) ∀ a ∈ G, ∃ a⁻¹ ∈ G, a∗a⁻¹ = a⁻¹∗a = e",
+          "A prepared fear is one humans acquire readily because it tracked ancestral dangers; examples include fear of snakes, spiders, heights, or the dark.",
         explanation:
-          "Closure, associativity, identity element $e$, inverses. An abelian group additionally satisfies $a \\ast b = b \\ast a$.",
+          "Prepared fears target ancestral threats, not modern statistical dangers like cars — which is why they are learned so easily and persist.",
+        hint: "Think of dangers common in the ancestral world, not the modern one.",
+      },
+      {
+        topicSlug: "fear-predators-threat-detection",
+        prompt:
+          "State error management theory and use it to explain why the fear system produces many false alarms.",
+        correctAnswer:
+          "Error management theory holds that when the costs of two error types are unequal, selection biases the system toward the cheaper error; fear over-fires because a false alarm (fleeing a stick) is far cheaper than a missed real threat (ignoring a snake).",
+        explanation:
+          "Like a smoke detector, the fear system is tuned to over-react because false negatives were potentially fatal while false positives were trivial.",
       },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 2.2 — Rings, fields, vector spaces, functions, modular arithmetic",
+    title: "Homework 2.2 — Habitat, disease, and life history",
     weekNumber: 2,
     isTimed: false,
     timeLimitMinutes: null,
     instructions:
-      "Use the math keyboard for blackboard-bold sets, ∀/∃, ≡, ∘, ∈, ∉.",
+      "Short-answer problems on habitat cognition, the behavioral immune system, and life history theory.",
     problems: [
       {
-        topicSlug: "rings-fields",
+        topicSlug: "disease-avoidance-immune-system",
         prompt:
-          "Give the precise condition on the positive integer n for the ring ℤ/nℤ to be a field. State it as a single sentence in symbols.",
-        correctAnswer: "ℤ/nℤ is a field ⟺ n is prime",
-        explanation:
-          "$\\mathbb{Z}/n\\mathbb{Z}$ is a field if and only if $n$ is prime. For composite $n = ab$ with $1 < a, b < n$, the classes $[a]$ and $[b]$ are nonzero zero-divisors and have no multiplicative inverses.",
-      },
-      {
-        topicSlug: "vector-spaces",
-        prompt:
-          "Using Σ notation, write the general form of a linear combination of vectors v₁, …, vₖ with scalars α₁, …, αₖ from a field F.",
-        correctAnswer: "Σ_{i=1}^{k} α_i v_i",
-        explanation:
-          "A linear combination is $\\sum_{i=1}^{k} \\alpha_i v_i$, with each $\\alpha_i \\in F$ and each $v_i$ a vector. The span of $\\{v_1, \\ldots, v_k\\}$ is the set of all such combinations.",
-      },
-      {
-        topicSlug: "functions-mappings",
-        prompt:
-          "Using ∀ and ⇒, write the formal definition that a function f : A → B is injective.",
-        correctAnswer: "∀ a₁, a₂ ∈ A, f(a₁) = f(a₂) ⇒ a₁ = a₂",
-        explanation:
-          "$f$ is injective iff $\\forall a_1, a_2 \\in A,\\ f(a_1) = f(a_2) \\Rightarrow a_1 = a_2$. Equivalently: different inputs give different outputs.",
-      },
-      {
-        topicSlug: "relations-equivalence-iso",
-        prompt:
-          "List the three properties (in symbols) that a relation ∼ on a set S must satisfy to be an equivalence relation.",
+          "What is the behavioral immune system, and what emotion is its main driver?",
         correctAnswer:
-          "Reflexive: ∀ a, a ∼ a. Symmetric: ∀ a, b, a ∼ b ⇒ b ∼ a. Transitive: ∀ a, b, c, (a ∼ b ∧ b ∼ c) ⇒ a ∼ c.",
+          "It is a suite of psychological mechanisms that detect cues of infection and motivate avoidance, driven mainly by disgust.",
         explanation:
-          "Reflexivity, symmetry, transitivity. An equivalence relation partitions $S$ into disjoint equivalence classes.",
+          "It is a cheap, early line of defense that helps us avoid pathogens before they enter the body, in contrast to the costly biological immune system.",
       },
       {
-        topicSlug: "modular-arithmetic",
+        topicSlug: "life-history-theory",
         prompt:
-          "Using the ≡ ... (mod n) notation, write Fermat's Little Theorem for a prime p and an integer a not divisible by p.",
-        correctAnswer: "a^{p−1} ≡ 1 (mod p)",
+          "Name the three central trade-offs studied by life history theory.",
+        correctAnswer:
+          "Current vs. future reproduction; quantity vs. quality of offspring; and mating effort vs. parenting effort.",
         explanation:
-          "Fermat's Little Theorem: $a^{p-1} \\equiv 1 \\pmod p$ when $\\gcd(a, p) = 1$. It is the foundation of probabilistic primality testing and RSA encryption.",
+          "Because time and energy are finite, investment in one function comes at the expense of another; the optimal balance depends on the environment.",
+      },
+      {
+        topicSlug: "life-history-theory",
+        prompt:
+          "Contrast a 'fast' and a 'slow' life history strategy and name the kind of environment that favors each.",
+        correctAnswer:
+          "Fast: mature early, reproduce young, many offspring, low investment — favored by harsh, unpredictable, high-mortality environments. Slow: mature late, reproduce later, few offspring, high investment — favored by stable, safe environments.",
+        explanation:
+          "Environments calibrate where organisms fall on the fast–slow continuum; humans are overall slow but shift based on early-life cues.",
+        hint: "One responds to danger and unpredictability, the other to stability.",
+      },
+      {
+        topicSlug: "habitat-preferences-cognition",
+        prompt:
+          "State the savanna hypothesis and one piece of evidence offered for it.",
+        correctAnswer:
+          "The savanna hypothesis proposes an evolved human preference for savanna-like habitats (open grassland with trees and water); evidence includes cross-cultural preference for such landscapes, strongest in young children.",
+        explanation:
+          "The preference's appearance before much cultural shaping (in children) is taken as evidence it is evolved rather than learned.",
       },
     ],
   },
   {
     kind: "midterm",
-    title: "Midterm — Weeks 1 & 2",
+    title: "Midterm — Foundations and the evolved individual",
     weekNumber: 2,
     isTimed: true,
-    timeLimitMinutes: 60,
+    timeLimitMinutes: 45,
     instructions:
-      "Cumulative midterm on the number systems and on algebraic structures. 60 minutes. Math keyboard available; pasting disabled.",
+      "Timed. 45 minutes. Cumulative over Weeks 1–2. Pasting is disabled. Answer precisely and concisely.",
     problems: [
       {
-        topicSlug: "rationals-ratios",
+        topicSlug: "inclusive-fitness-kin-selection",
         prompt:
-          "Using set-builder notation, write the definition of ℚ as ratios of integers.",
-        correctAnswer: "ℚ = { p/q : p, q ∈ ℤ, q ≠ 0 }",
-        explanation:
-          "$\\mathbb{Q} = \\{\\,p/q : p, q \\in \\mathbb{Z},\\ q \\neq 0\\,\\}$.",
-      },
-      {
-        topicSlug: "irrationals-sqrt2",
-        prompt:
-          "Write the membership claim that √2 is real but not rational.",
-        correctAnswer: "√2 ∈ ℝ and √2 ∉ ℚ",
-        explanation:
-          "$\\sqrt 2 \\in \\mathbb{R}$ and $\\sqrt 2 \\notin \\mathbb{Q}$.",
-      },
-      {
-        topicSlug: "complex-rotations",
-        prompt:
-          "State the defining equation of the imaginary unit i and write Euler's identity.",
-        correctAnswer: "i² = −1; e^{iπ} + 1 = 0",
-        explanation:
-          "$i^2 = -1$ and $e^{i\\pi} + 1 = 0$.",
-      },
-      {
-        topicSlug: "countable-uncountable",
-        prompt:
-          "Using ℵ₀, write the cardinality of ℕ. Then write a strict inequality comparing |ℕ| and |ℝ|.",
-        correctAnswer: "|ℕ| = ℵ₀ and |ℕ| < |ℝ|",
-        explanation:
-          "$|\\mathbb{N}| = \\aleph_0$ and $|\\mathbb{N}| < |\\mathbb{R}|$ (Cantor).",
-      },
-      {
-        topicSlug: "groups-symmetry",
-        prompt:
-          "Using ∃ and ∀, state the identity-element axiom and the inverses axiom for a group (G, ∗).",
+          "Define inclusive fitness, distinguishing its direct and indirect components.",
         correctAnswer:
-          "∃ e ∈ G, ∀ a ∈ G, e ∗ a = a ∗ e = a; and ∀ a ∈ G, ∃ a⁻¹ ∈ G, a ∗ a⁻¹ = a⁻¹ ∗ a = e",
+          "Inclusive fitness is an organism's total genetic contribution to future generations: direct fitness (its own offspring) plus indirect fitness (its effect on relatives' reproduction, weighted by relatedness).",
         explanation:
-          "Identity: $\\exists e,\\ \\forall a,\\ e \\ast a = a \\ast e = a$. Inverses: $\\forall a,\\ \\exists a^{-1},\\ a \\ast a^{-1} = a^{-1} \\ast a = e$.",
+          "Selection maximizes inclusive fitness, not mere personal survival or even personal reproduction — which is why helping kin can be favored.",
       },
       {
-        topicSlug: "rings-fields",
+        topicSlug: "evopsych-what-why",
         prompt:
-          "State the condition on n for ℤ/nℤ to be a field.",
-        correctAnswer: "ℤ/nℤ is a field ⟺ n is prime",
+          "List Tinbergen's four questions (the four levels of explanation for any trait).",
+        correctAnswer:
+          "Mechanism (how it works), development (how it grows in the individual), function (what it was selected for), and phylogeny (its evolutionary history).",
         explanation:
-          "$\\mathbb{Z}/n\\mathbb{Z}$ is a field iff $n$ is prime.",
+          "Tinbergen's framework shows that mechanism, development, function, and phylogeny are complementary levels — evolutionary psychology specializes in function.",
+        hint: "Two are about the present individual; two are about evolutionary origins.",
       },
       {
-        topicSlug: "vector-spaces",
+        topicSlug: "disease-avoidance-immune-system",
         prompt:
-          "Using Σ, write the linear combination of v₁, v₂, v₃ with scalars α₁, α₂, α₃.",
-        correctAnswer: "Σ_{i=1}^{3} α_i v_i = α₁v₁ + α₂v₂ + α₃v₃",
+          "Explain why pregnant women in the first trimester tend to show heightened disgust and food aversions, in evolutionary terms.",
+        correctAnswer:
+          "In the first trimester the immune system is suppressed and the embryo is most vulnerable to toxins and pathogens, so heightened disgust provides extra behavioral pathogen avoidance exactly when the need is greatest.",
         explanation:
-          "$\\sum_{i=1}^{3} \\alpha_i v_i$.",
+          "The behavioral immune system is dialed up when the body is most at risk — an adaptive compensation for the suppressed biological defenses of early pregnancy.",
       },
       {
-        topicSlug: "modular-arithmetic",
+        topicSlug: "foraging-food-palate",
         prompt:
-          "Using the ≡ ... (mod n) notation, write Fermat's Little Theorem.",
-        correctAnswer: "a^{p−1} ≡ 1 (mod p) when gcd(a, p) = 1",
+          "Describe the Garcia effect (one-trial taste aversion) and what it shows about the specialization of learning.",
+        correctAnswer:
+          "After a single bout of nausea following a novel flavor — even hours later — animals and humans avoid that flavor for life, showing that food-aversion learning is specialized (delayed, single-trial, and able to override conscious belief) rather than following general learning rules.",
         explanation:
-          "$a^{p-1} \\equiv 1 \\pmod p$ for prime $p$ and $\\gcd(a, p) = 1$.",
+          "The Garcia effect violates ordinary timing rules of learning, revealing an evolved poison-avoidance system tuned to the structure of the food-toxin problem.",
+      },
+      {
+        topicSlug: "survival-evolved-body",
+        prompt:
+          "Explain why it is more accurate to say organisms are designed to reproduce than to survive, with one illustration.",
+        correctAnswer:
+          "Survival is only a means to reproduction, so selection trades survival for reproduction when it pays — e.g., salmon die after spawning, and young human males take fitness-relevant risks; mechanisms serve lifetime reproductive success, not longevity.",
+        explanation:
+          "Because reproduction is the currency of selection, longevity is sacrificed whenever doing so raises reproductive output.",
       },
     ],
   },
@@ -1624,138 +1134,154 @@ const ASSIGNMENTS: SeedAssignment[] = [
   // ───────────── Week 3 ─────────────
   {
     kind: "homework",
-    title: "Homework 3.1 — Limits, continuity, derivatives, integrals",
+    title: "Homework 3.1 — The logic of mating and mate preferences",
     weekNumber: 3,
     isTimed: false,
     timeLimitMinutes: null,
     instructions:
-      "Use the math keyboard for limits, derivatives, integrals, and quantifiers.",
+      "Short-answer problems on the foundations of mating and on female and male preferences.",
     problems: [
       {
-        topicSlug: "limits-taming-infinity",
+        topicSlug: "mating-fundamentals",
         prompt:
-          "Write the ε–δ definition of lim_{x → a} f(x) = L using ∀, ∃, and |·|.",
+          "State parental investment theory's central prediction about which sex becomes choosier and which competes.",
         correctAnswer:
-          "∀ ε > 0, ∃ δ > 0 : 0 < |x − a| < δ ⇒ |f(x) − L| < ε",
+          "The sex that invests more in offspring becomes the limiting resource and is choosier; the lower-investing sex competes for access to the higher-investing sex.",
         explanation:
-          "$\\forall \\varepsilon > 0,\\ \\exists \\delta > 0$ such that $0 < |x - a| < \\delta \\Rightarrow |f(x) - L| < \\varepsilon$.",
+          "Trivers's theory: in mammals females invest more (gestation, lactation), so females are choosy and males compete; the pattern reverses where male investment is higher.",
+        hint: "Think about who pays the higher cost of reproduction.",
       },
       {
-        topicSlug: "continuity",
+        topicSlug: "mating-fundamentals",
         prompt:
-          "State, as a single equation, the definition that a function f is continuous at the point a.",
-        correctAnswer: "lim_{x → a} f(x) = f(a)",
+          "What is anisogamy, and why is it considered the root asymmetry underlying sex differences in mating?",
+        correctAnswer:
+          "Anisogamy is the difference in gamete size — females produce few large costly eggs, males many small cheap sperm; this cellular asymmetry cascades into the differing mating strategies of the sexes.",
         explanation:
-          "$f$ is continuous at $a$ iff $\\lim_{x \\to a} f(x) = f(a)$ — meaning the limit exists, $f(a)$ exists, and the two are equal.",
+          "The unequal minimum investment set by gamete size is the starting point from which parental investment and sexual selection differences follow.",
       },
       {
-        topicSlug: "derivatives-instantaneous-rate",
+        topicSlug: "female-mate-preferences",
         prompt:
-          "Using a limit, write the definition of the derivative f'(a).",
-        correctAnswer: "f'(a) = lim_{h → 0} (f(a + h) − f(a)) / h",
+          "Why does selection predict that women, on average, weight a long-term partner's resources and status more than men do?",
+        correctAnswer:
+          "Because ancestral women bore the heavy costs of reproduction and their success depended on the investment they and their offspring received; resources and status are cues to a partner's ability to provide that investment.",
         explanation:
-          "$f'(a) = \\lim_{h \\to 0} \\dfrac{f(a+h) - f(a)}{h}$, when the limit exists.",
+          "The preference tracks ancestral provisioning problems during pregnancy and lactation, not arbitrary materialism.",
       },
       {
-        topicSlug: "integrals-accumulation",
+        topicSlug: "male-mate-preferences",
         prompt:
-          "Using ∫, write the definite integral of f from a to b. Include the dx.",
-        correctAnswer: "∫_a^b f(x) dx",
+          "Explain why men evolved preferences for observable cues like youthfulness and clear skin rather than 'fertility' directly.",
+        correctAnswer:
+          "Fertility is not directly observable, so selection favored preferences for observable cues (youth, clear skin, healthy features) that reliably correlated with fertility in the ancestral environment.",
         explanation:
-          "$\\int_a^b f(x)\\,\\mathrm{d}x$. The $\\mathrm{d}x$ is the limit of the rectangle widths in the Riemann sum.",
+          "Men did not evolve to read fertility itself but to track its visible correlates; e.g., a waist-to-hip ratio near 0.7 is one such cue.",
       },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 3.2 — FTC, series, geometry, topology",
+    title: "Homework 3.2 — Strategies, beauty, jealousy, parenting",
     weekNumber: 3,
     isTimed: false,
     timeLimitMinutes: null,
-    instructions: "Use the math keyboard freely.",
+    instructions:
+      "Short-answer problems on sexual strategies, attraction, jealousy, and parental investment.",
     problems: [
       {
-        topicSlug: "ftc",
+        topicSlug: "short-long-term-strategies",
         prompt:
-          "State Part 2 of the Fundamental Theorem of Calculus: if F' = f on [a, b], express ∫_a^b f(x) dx in terms of F.",
-        correctAnswer: "∫_a^b f(x) dx = F(b) − F(a)",
+          "What does it mean to say human mating strategies are 'pluralistic' and 'conditional'?",
+        correctAnswer:
+          "Humans have a repertoire of both short-term and long-term strategies that are deployed facultatively depending on circumstances (sex ratio, mate value, environment), rather than one fixed strategy.",
         explanation:
-          "$\\int_a^b f(x)\\,\\mathrm{d}x = F(b) - F(a)$ for any antiderivative $F$ of $f$.",
+          "Sexual strategies theory holds that the same person can pursue different strategies depending on context; they are switched on and off by circumstance.",
       },
       {
-        topicSlug: "sequences-series-zeno",
+        topicSlug: "attraction-beauty-fitness-signals",
         prompt:
-          "Using Σ, write the closed-form sum of the infinite geometric series 1 + r + r² + r³ + ⋯ when |r| < 1.",
-        correctAnswer: "Σ_{n=0}^{∞} r^n = 1 / (1 − r), valid for |r| < 1",
+          "Why is bilateral symmetry considered an honest cue of mate quality?",
+        correctAnswer:
+          "Because fluctuating asymmetry increases with developmental stress, disease, and mutation load, symmetry honestly signals developmental stability and good genes.",
         explanation:
-          "$\\sum_{n=0}^{\\infty} r^n = \\dfrac{1}{1 - r}$ when $|r| < 1$. This is the resolution of Zeno's paradox: infinitely many shrinking steps sum to a finite total.",
+          "Only an organism that developed without much disruption ends up symmetric, so symmetry cannot easily be faked.",
+        hint: "Consider what tends to make a body develop less symmetrically.",
       },
       {
-        topicSlug: "euclidean-non-euclidean",
+        topicSlug: "jealousy-conflict-mate-retention",
         prompt:
-          "For a triangle on a sphere of constant positive curvature, write an inequality comparing the sum of its interior angles to π.",
-        correctAnswer: "α + β + γ > π",
+          "State Buss's sex-difference hypothesis about jealousy and the adaptive logic behind it.",
+        correctAnswer:
+          "Men are predicted to be relatively more distressed by a partner's sexual infidelity (risk of cuckoldry) and women relatively more by emotional infidelity (risk of losing his investment), reflecting paternity uncertainty versus investment loss.",
         explanation:
-          "On a sphere (positive curvature), the angle sum of any triangle exceeds $\\pi$. On a hyperbolic surface (negative curvature), the sum is less than $\\pi$. Only in Euclidean geometry is the sum exactly $\\pi$.",
+          "The two sexes faced different reproductive threats from infidelity, so jealousy is predicted to be tuned to different cues.",
       },
       {
-        topicSlug: "topology-dimension-curvature",
+        topicSlug: "parental-investment-parenting",
         prompt:
-          "Using V, E, F, write the Euler characteristic χ of a polyhedron, and give its value for any triangulation of the sphere.",
-        correctAnswer: "χ = V − E + F; for the sphere, χ = 2",
+          "Explain Trivers's parent-offspring conflict: why are families not perfectly harmonious?",
+        correctAnswer:
+          "A child is related to itself by r = 1 but to a sibling by only r = 1/2, so it is selected to demand more investment than the parent — equally related to all offspring — is selected to give, producing conflict (e.g., weaning conflict).",
         explanation:
-          "$\\chi = V - E + F$. For any triangulation of the sphere, $\\chi = 2$ (Euler, 1758). For the torus, $\\chi = 0$.",
+          "Because relatedness differs between the child's perspective and the parent's, their genetic interests over investment do not perfectly coincide.",
       },
     ],
   },
   {
     kind: "test",
-    title: "Week 3 Test — Calculus, geometry, topology",
+    title: "Week 3 Test — Mating and reproduction",
     weekNumber: 3,
     isTimed: true,
-    timeLimitMinutes: 40,
-    instructions: "Timed. 40 minutes. Math keyboard available; pasting disabled.",
+    timeLimitMinutes: 30,
+    instructions:
+      "Timed. 30 minutes. Pasting is disabled. Answer precisely using the course's terminology.",
     problems: [
       {
-        topicSlug: "limits-taming-infinity",
+        topicSlug: "mating-fundamentals",
         prompt:
-          "Write the ε–δ definition of lim_{x → a} f(x) = L.",
+          "What is the Bateman gradient, and what does its sex difference imply about mating strategies?",
         correctAnswer:
-          "∀ ε > 0, ∃ δ > 0 : 0 < |x − a| < δ ⇒ |f(x) − L| < ε",
+          "The Bateman gradient describes how reproductive success rises with number of mates; it is steep for males and flat for females, implying extra mates benefit males far more, which underlies divergent mating strategies.",
         explanation:
-          "$\\forall \\varepsilon > 0,\\ \\exists \\delta > 0 : 0 < |x - a| < \\delta \\Rightarrow |f(x) - L| < \\varepsilon$.",
+          "Bateman's fruit-fly experiments showed male success climbed with mate number while female success plateaued — the quantitative root of sex differences in mating effort.",
       },
       {
-        topicSlug: "derivatives-instantaneous-rate",
+        topicSlug: "short-long-term-strategies",
         prompt:
-          "Using a limit, write the definition of f'(a).",
-        correctAnswer: "f'(a) = lim_{h → 0} (f(a + h) − f(a)) / h",
+          "Describe the Clark and Hatfield study result and what it illustrates about sex differences in short-term mating.",
+        correctAnswer:
+          "Attractive strangers offered a date, an apartment visit, or sex; about half of both sexes accepted a date, but roughly 75% of men yet 0% of women agreed to immediate sex, illustrating the divergent payoffs of short-term mating.",
         explanation:
-          "$f'(a) = \\lim_{h \\to 0} \\dfrac{f(a+h) - f(a)}{h}$.",
+          "The large sex difference in willingness to accept an immediate sexual offer reflects the different ancestral costs and benefits of short-term mating.",
       },
       {
-        topicSlug: "ftc",
+        topicSlug: "attraction-beauty-fitness-signals",
         prompt:
-          "State the Fundamental Theorem of Calculus Part 2 in symbols.",
-        correctAnswer: "If F' = f on [a, b], then ∫_a^b f(x) dx = F(b) − F(a)",
+          "Why are 'average' faces (composites) typically rated as more attractive, in evolutionary terms?",
+        correctAnswer:
+          "Averageness may signal genetic diversity, developmental normality, and the absence of harmful mutations, so a preference for average features tracks cues of health and good genes.",
         explanation:
-          "$\\int_a^b f(x)\\,\\mathrm{d}x = F(b) - F(a)$.",
+          "Composite faces near the population mean are consistently judged attractive, consistent with averageness as a fitness cue.",
       },
       {
-        topicSlug: "sequences-series-zeno",
+        topicSlug: "parental-investment-parenting",
         prompt:
-          "Sum the geometric series Σ_{n=0}^{∞} (1/2)^n.",
-        correctAnswer: "Σ_{n=0}^{∞} (1/2)^n = 1/(1 − 1/2) = 2",
+          "What is the 'Cinderella effect,' and how does discriminative parental solicitude explain it? (Note that explanation is not justification.)",
+        correctAnswer:
+          "The Cinderella effect is the elevated risk of abuse/homicide for children living with a stepparent versus two genetic parents; discriminative solicitude predicts lower investment where genetic relatedness (and its motivating love) is absent.",
         explanation:
-          "$\\sum_{n=0}^{\\infty} (1/2)^n = \\dfrac{1}{1 - 1/2} = 2$.",
+          "A stepparent lacks the genetic stake that drives parental investment; the evolutionary account predicts where risk concentrates without excusing the behavior.",
+        hint: "Think about how relatedness affects the motivation to invest.",
       },
       {
-        topicSlug: "topology-dimension-curvature",
+        topicSlug: "male-mate-preferences",
         prompt:
-          "Give the Euler characteristic of (a) a sphere and (b) a torus.",
-        correctAnswer: "(a) χ = 2; (b) χ = 0",
+          "What is paternity uncertainty, and name one feature of male sexual psychology it is thought to have shaped.",
+        correctAnswer:
+          "Paternity uncertainty is the male's inability (ancestrally) to be sure a child is his; it is thought to have shaped male sexual jealousy (and preferences for fidelity cues in long-term mates).",
         explanation:
-          "Sphere: $\\chi = 2$. Torus: $\\chi = 0$. Each is a topological invariant.",
+          "Because females are always certain of maternity but males could not be certain of paternity, this asymmetry shaped male mate-guarding and jealousy.",
       },
     ],
   },
@@ -1763,205 +1289,180 @@ const ASSIGNMENTS: SeedAssignment[] = [
   // ───────────── Week 4 ─────────────
   {
     kind: "homework",
-    title: "Homework 4.1 — Logic, proof, induction, sets",
+    title: "Homework 4.1 — Kinship, cooperation, aggression",
     weekNumber: 4,
     isTimed: false,
     timeLimitMinutes: null,
     instructions:
-      "Use the math keyboard for ∀, ∃, ∧, ∨, ¬, →, ↔, ∈, ∉.",
+      "Short-answer problems on the social world: family, reciprocity, and conflict.",
     problems: [
       {
-        topicSlug: "propositional-predicate-logic",
+        topicSlug: "kinship-family-dynamics",
         prompt:
-          "Using ¬, ∀, and ∃, write the equivalences that negate a universal and an existential statement.",
+          "Describe the Westermarck effect and what it reveals about how humans recognize kin.",
         correctAnswer:
-          "¬(∀ x, P(x)) ≡ ∃ x, ¬P(x); ¬(∃ x, P(x)) ≡ ∀ x, ¬P(x)",
+          "The Westermarck effect is a sexual aversion that develops between people raised in close proximity in early childhood; it shows humans use co-residence as a cue for kinship in incest avoidance, even when those people are unrelated.",
         explanation:
-          "$\\neg(\\forall x\\, P(x)) \\equiv \\exists x\\, \\neg P(x)$; $\\neg(\\exists x\\, P(x)) \\equiv \\forall x\\, \\neg P(x)$. The negation of 'every swan is white' is 'some swan is not white'.",
+          "Kibbutz studies showed children raised together rarely married, revealing the cue-based machinery (co-residence) behind incest avoidance.",
       },
       {
-        topicSlug: "what-is-proof",
+        topicSlug: "cooperation-reciprocal-altruism",
         prompt:
-          "State, in symbols, the inference rule modus ponens (from P and P → Q, conclude Q) and the rule modus tollens.",
+          "State the conditions under which reciprocal altruism can evolve among non-kin.",
         correctAnswer:
-          "Modus ponens: P, P → Q ⊢ Q. Modus tollens: P → Q, ¬Q ⊢ ¬P.",
+          "Repeated interaction among individuals who can recognize one another and remember past dealings, so that help given now is likely to be reciprocated later.",
         explanation:
-          "Modus ponens: $P,\\ P \\to Q \\vdash Q$. Modus tollens: $P \\to Q,\\ \\neg Q \\vdash \\neg P$. Both are fundamental inference rules.",
+          "Trivers showed altruism toward non-relatives can evolve when interactions repeat and partners can track each other's cooperation history.",
+        hint: "Think about what is needed to make 'I help you now, you help me later' stable.",
       },
       {
-        topicSlug: "mathematical-induction",
+        topicSlug: "cooperation-reciprocal-altruism",
         prompt:
-          "Using Σ, write the closed-form formula for the sum of the first n positive integers, which is the classical example proven by induction.",
-        correctAnswer: "Σ_{k=1}^{n} k = n(n + 1) / 2",
+          "Name the winning strategy in Axelrod's prisoner's-dilemma tournaments and describe its rule.",
+        correctAnswer:
+          "Tit-for-tat: cooperate on the first move, then copy whatever the partner did on the previous move.",
         explanation:
-          "$\\sum_{k=1}^{n} k = \\dfrac{n(n+1)}{2}$. Proven by induction: base $n = 1$ gives $1 = 1$; step uses $\\frac{k(k+1)}{2} + (k+1) = \\frac{(k+1)(k+2)}{2}$.",
+          "Tit-for-tat is nice, retaliatory, forgiving, and clear, and it stabilizes cooperation among self-interested agents in repeated games.",
       },
       {
-        topicSlug: "sets-russell-paradox",
+        topicSlug: "aggression-status-dominance",
         prompt:
-          "Using set-builder notation, write Russell's set R — the set of all sets that are not members of themselves.",
-        correctAnswer: "R = { x : x ∉ x }",
+          "What is the 'young male syndrome,' and why does it make evolutionary sense?",
+        correctAnswer:
+          "It is the peak of risk-taking and violence in young men; it makes sense because young men historically faced the fiercest competition for status and mates and had the least to lose.",
         explanation:
-          "$R = \\{\\,x : x \\notin x\\,\\}$. The question 'is $R \\in R$?' yields a contradiction either way, which is why naive (unrestricted-comprehension) set theory is inconsistent.",
+          "Homicide and risk-taking show a consistent age-sex signature because the reproductive stakes of status competition were highest for young men.",
       },
     ],
   },
   {
     kind: "homework",
-    title: "Homework 4.2 — Independence, Gödel, probability, computability",
+    title: "Homework 4.2 — Coalitions, language, emotions, culture",
     weekNumber: 4,
     isTimed: false,
     timeLimitMinutes: null,
-    instructions: "Use the math keyboard for ℵ, ∈, ∪, Σ, ≥.",
+    instructions:
+      "Short-answer problems on group psychology, language, emotion, and culture.",
     problems: [
       {
-        topicSlug: "axioms-independence",
+        topicSlug: "coalitions-groups-warfare",
         prompt:
-          "Using ℵ-notation, write the Continuum Hypothesis as an equation, and state in words what its independence from ZFC means.",
+          "What did the Kurzban, Tooby, and Cosmides 'erasing race' study suggest about how the mind categorizes people?",
         correctAnswer:
-          "CH: |ℝ| = ℵ₁. Independence: neither CH nor ¬CH is provable from ZFC (Gödel 1940, Cohen 1963).",
+          "It suggested the mind has no dedicated race module but a coalition-detector that uses race only when race predicts alliance; when team membership was made salient, categorization by race dropped sharply.",
         explanation:
-          "$|\\mathbb{R}| = \\aleph_1$ is the CH. Gödel showed ZFC + CH is consistent (1940); Cohen showed ZFC + ¬CH is also consistent (1963). So CH is independent of ZFC.",
+          "Coalitional psychology latches onto whatever currently predicts alliance and releases it when a better predictor (team) is available.",
       },
       {
-        topicSlug: "godel-incompleteness",
+        topicSlug: "language-communication",
         prompt:
-          "State Gödel's First Incompleteness Theorem in one sentence: for any sufficiently strong consistent effective system T, what must exist?",
+          "State the 'poverty of the stimulus' argument for an innate language faculty.",
         correctAnswer:
-          "There exists a statement G in the language of T such that G is true but T does not prove G and T does not prove ¬G.",
+          "The language input children hear is too sparse and error-ridden to account for the rich, rule-governed grammar they acquire, implying the child brings innate linguistic structure (universal grammar) to the task.",
         explanation:
-          "Any sufficiently strong consistent effective axiom system $T$ contains a sentence $G$ that is true (in the standard model) but neither $G$ nor $\\neg G$ is provable in $T$.",
+          "The gap between impoverished input and rich grammatical output points to built-in structure, not learning from scratch.",
+        hint: "Compare what children hear with what they end up able to produce.",
       },
       {
-        topicSlug: "probability-foundations",
+        topicSlug: "emotions-evolved-programs",
         prompt:
-          "State Kolmogorov's three axioms of probability for a probability measure P on a sample space Ω with σ-algebra ℱ.",
+          "What does it mean to call an emotion a 'superordinate program,' as Cosmides and Tooby do?",
         correctAnswer:
-          "(1) P(Ω) = 1; (2) P(A) ≥ 0 for all A ∈ ℱ; (3) for disjoint A₁, A₂, … ∈ ℱ, P(⋃_n A_n) = Σ_n P(A_n).",
+          "An emotion is a program that coordinates many subsystems at once — attention, perception, physiology, goals, memory, and decision-making — into a mode of operation matched to a recurrent type of situation.",
         explanation:
-          "Normalization $P(\\Omega) = 1$, non-negativity $P(A) \\ge 0$, and countable additivity $P(\\bigcup_n A_n) = \\sum_n P(A_n)$ for disjoint events.",
+          "Fear, for example, simultaneously reorganizes the whole organism for threat; emotions are coordinating programs, not noise.",
       },
       {
-        topicSlug: "computability-halting",
+        topicSlug: "culture-religion-evolved-mind",
         prompt:
-          "State the halting problem and Turing's headline result about it (in one sentence each).",
+          "Distinguish evoked culture from transmitted culture.",
         correctAnswer:
-          "Halting problem: given a Turing machine M and input x, does M halt on x? Turing's theorem: no algorithm decides the halting problem — it is undecidable.",
+          "Evoked culture is variation produced when a universal evolved psychology meets different local conditions; transmitted culture is ideas and practices passed from mind to mind by social learning.",
         explanation:
-          "The halting problem is undecidable: there is no Turing machine $H$ that, given $\\langle M, x \\rangle$, always correctly outputs whether $M$ halts on $x$. Proved by diagonalization.",
+          "Both depend on evolved psychology — one as the program responding to local inputs, the other as the learning machinery that copies others.",
       },
     ],
   },
   {
     kind: "final",
-    title: "Final Exam — Conceptual mathematics",
+    title: "Final Exam — The whole evolved mind",
     weekNumber: 4,
     isTimed: true,
-    timeLimitMinutes: 90,
+    timeLimitMinutes: 60,
     instructions:
-      "Cumulative final covering all four weeks. 90 minutes. Math keyboard available; pasting disabled.",
+      "Timed. 60 minutes. Cumulative over the entire course. Pasting is disabled. Answer precisely; synthesis questions reward connecting principles across weeks.",
     problems: [
       {
-        topicSlug: "rationals-ratios",
+        topicSlug: "capstone-synthesis",
         prompt:
-          "Using set-builder notation, write the definition of ℚ.",
-        correctAnswer: "ℚ = { p/q : p, q ∈ ℤ, q ≠ 0 }",
-        explanation:
-          "$\\mathbb{Q} = \\{\\,p/q : p, q \\in \\mathbb{Z},\\ q \\neq 0\\,\\}$.",
-      },
-      {
-        topicSlug: "countable-uncountable",
-        prompt:
-          "Using ℵ₀, compare the cardinalities of ℚ and ℝ with a strict inequality.",
-        correctAnswer: "|ℚ| = ℵ₀ < |ℝ|",
-        explanation:
-          "$|\\mathbb{Q}| = \\aleph_0 < |\\mathbb{R}|$. The rationals are countable, the reals are not.",
-      },
-      {
-        topicSlug: "groups-symmetry",
-        prompt:
-          "Using ∃ and ∀, state the identity-element axiom for a group (G, ∗).",
-        correctAnswer: "∃ e ∈ G, ∀ a ∈ G, e ∗ a = a ∗ e = a",
-        explanation:
-          "$\\exists e \\in G,\\ \\forall a \\in G,\\ e \\ast a = a \\ast e = a$.",
-      },
-      {
-        topicSlug: "modular-arithmetic",
-        prompt:
-          "Using ≡ … (mod n), write Fermat's Little Theorem.",
-        correctAnswer: "a^{p−1} ≡ 1 (mod p), for prime p and gcd(a, p) = 1",
-        explanation:
-          "$a^{p-1} \\equiv 1 \\pmod p$ for prime $p$ and $\\gcd(a, p) = 1$.",
-      },
-      {
-        topicSlug: "limits-taming-infinity",
-        prompt:
-          "Write the ε–δ definition of lim_{x → a} f(x) = L.",
+          "Using the craving for sweet and fatty food, illustrate the concept of evolutionary mismatch in one or two sentences.",
         correctAnswer:
-          "∀ ε > 0, ∃ δ > 0 : 0 < |x − a| < δ ⇒ |f(x) − L| < ε",
+          "A taste system selected to reward scarce calories in the ancestral environment now drives overconsumption amid modern abundance, so a once-adaptive mechanism produces a maladaptive outcome (obesity) — a mismatch between the EEA and the current environment.",
         explanation:
-          "$\\forall \\varepsilon > 0,\\ \\exists \\delta > 0 : 0 < |x - a| < \\delta \\Rightarrow |f(x) - L| < \\varepsilon$.",
+          "Mismatch occurs when a mechanism tuned to ancestral conditions misfires in a novel modern environment; the sugar/fat craving is the canonical case.",
       },
       {
-        topicSlug: "ftc",
+        topicSlug: "inclusive-fitness-kin-selection",
         prompt:
-          "State Part 2 of the Fundamental Theorem of Calculus in symbols.",
-        correctAnswer: "If F' = f on [a, b], then ∫_a^b f(x) dx = F(b) − F(a)",
-        explanation:
-          "$\\int_a^b f(x)\\,\\mathrm{d}x = F(b) - F(a)$ for any antiderivative $F$ of $f$.",
-      },
-      {
-        topicSlug: "sequences-series-zeno",
-        prompt:
-          "Using Σ, write the closed form of the geometric series Σ_{n=0}^{∞} r^n for |r| < 1.",
-        correctAnswer: "Σ_{n=0}^{∞} r^n = 1 / (1 − r)",
-        explanation:
-          "$\\sum_{n=0}^{\\infty} r^n = \\dfrac{1}{1 - r}$ for $|r| < 1$.",
-      },
-      {
-        topicSlug: "mathematical-induction",
-        prompt:
-          "Using Σ, write the closed-form formula proved by the classical induction example: the sum of 1 through n.",
-        correctAnswer: "Σ_{k=1}^{n} k = n(n + 1) / 2",
-        explanation:
-          "$\\sum_{k=1}^{n} k = \\dfrac{n(n+1)}{2}$.",
-      },
-      {
-        topicSlug: "sets-russell-paradox",
-        prompt:
-          "Using set-builder notation, write Russell's set R that produces the paradox.",
-        correctAnswer: "R = { x : x ∉ x }",
-        explanation:
-          "$R = \\{\\,x : x \\notin x\\,\\}$. Asking whether $R \\in R$ yields a contradiction either way.",
-      },
-      {
-        topicSlug: "godel-incompleteness",
-        prompt:
-          "State Gödel's First Incompleteness Theorem in one sentence.",
+          "A behavior costs the actor 2 units of fitness and benefits a full sibling (r = 1/2) by 5 units. Using Hamilton's rule, state whether selection favors it and show the comparison.",
         correctAnswer:
-          "Any sufficiently strong consistent effective formal system T contains a true statement G such that T proves neither G nor ¬G.",
+          "rB = (1/2)(5) = 2.5 > C = 2, so rB > C and selection favors the behavior.",
         explanation:
-          "Any consistent effective axiom system capable of encoding arithmetic is incomplete: there is a true statement $G$ that is not provable in the system.",
+          "Apply $rB > C$: with $r = 1/2$, $B = 5$, $C = 2$, we get $2.5 > 2$, so the altruistic act is favored.",
+        hint: "Compute rB and compare it to C.",
+      },
+      {
+        topicSlug: "cooperation-reciprocal-altruism",
+        prompt:
+          "Contrast the evolutionary basis of helping kin with helping non-kin, naming the mechanism behind each.",
+        correctAnswer:
+          "Helping kin is explained by kin selection / inclusive fitness (relatives carry copies of one's genes); helping non-kin is explained by reciprocal altruism (repeated, reciprocated exchange among individuals who recognize and remember each other).",
+        explanation:
+          "Two distinct mechanisms underlie human cooperation: shared genes for kin, and reciprocity (plus reputation and cheater detection) for non-kin.",
+      },
+      {
+        topicSlug: "emotions-evolved-programs",
+        prompt:
+          "Describe Ekman's cross-cultural research with the Fore and what it demonstrates about basic emotions.",
+        correctAnswer:
+          "Ekman showed the isolated Fore of Papua New Guinea matched the same facial expressions to emotional stories that Westerners do (and vice versa), demonstrating that basic emotional expressions are universal and evolved rather than culturally learned.",
+        explanation:
+          "Mutual cross-cultural legibility of emotional faces, in a population with no exposure to Western media, supports an evolved, species-typical emotional repertoire.",
+      },
+      {
+        topicSlug: "levels-of-explanation",
+        prompt:
+          "A student says, 'Evolutionary psychology claims men's aggression is genetically fixed and therefore acceptable.' Identify the two distinct errors in this sentence.",
+        correctAnswer:
+          "First, genetic determinism: adaptations are typically conditional (context-sensitive) not fixed. Second, the naturalistic fallacy: explaining why a tendency exists never makes it morally acceptable (is does not imply ought).",
+        explanation:
+          "The sentence conflates 'evolved' with 'fixed' (determinism) and 'natural' with 'good' (naturalistic fallacy) — two of the most common misunderstandings of the field.",
+      },
+      {
+        topicSlug: "language-communication",
+        prompt:
+          "What does the phenomenon of creolization (children turning a pidgin into a full grammatical language) demonstrate about language?",
+        correctAnswer:
+          "It demonstrates that children given impoverished, grammarless input spontaneously generate full grammatical structure, supporting the existence of an innate language faculty that supplies the missing structure.",
+        explanation:
+          "Creolization (and the emergence of Nicaraguan Sign Language) shows children create grammar, not merely imitate it — strong evidence for the language instinct.",
       },
     ],
   },
 ];
 
-// A stable fingerprint of the seed content. If the database holds topics that
-// don't match this set, we wipe and re-seed instead of leaving stale content
-// from a previous version of the course.
 const EXPECTED_TOPIC_SLUGS = TOPICS.map((t) => t.slug).sort().join(",");
 
 // Bump this whenever lecture bodies, assignment problems, or correct answers
 // change in a way that should propagate to the database on the next boot.
 // The value is stored alongside topics and compared in seedIfEmpty.
-const CONTENT_REVISION = "2026-05-27.conceptual-math.r1";
+const CONTENT_REVISION = "2026-05-29.evo-psych.r1";
 
 // A sentinel phrase present in exactly one lecture body — used to detect that
 // the database holds the *current* revision of the content (not just a set of
 // matching slugs). Bump whenever the seed content is overhauled.
-const REVISION_SENTINEL_SLUG = "counting-integers-numberline";
-const REVISION_SENTINEL_PHRASE = "John Wallis popularized the picture of integers";
+const REVISION_SENTINEL_SLUG = "evopsych-what-why";
+const REVISION_SENTINEL_PHRASE = "the mind is a set of information-processing devices";
 
 export async function seedIfEmpty(): Promise<void> {
   const existing = await db.execute(sql`select count(*)::int as n from topics`);

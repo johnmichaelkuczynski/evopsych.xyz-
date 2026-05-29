@@ -49,7 +49,7 @@ export async function gradeAnswer(opts: {
 
   try {
     const out = await chatJson<{ correct: boolean; explanation: string }>(
-      "You grade short quantitative-reasoning answers. Decide if the student's answer is mathematically equivalent to the correct answer (accept equivalent forms like 1/2 and 0.5, simplified fractions, equivalent algebraic expressions, units treated reasonably). Output strict JSON {\"correct\": boolean, \"explanation\": string} where explanation is 1-3 short sentences and includes the correct answer.",
+      "You grade short evolutionary-psychology answers. Decide if the student's answer is conceptually equivalent to the correct answer: accept any answer that conveys the same key concept, mechanism, theory, researcher, or relationship, even if worded differently, paraphrased, less formal, or partially incomplete as long as the core idea is right. For numeric answers (e.g. coefficients of relatedness or Hamilton's-rule calculations) accept equivalent forms like 1/2 and 0.5. Do NOT require exact wording or extra detail beyond what the prompt asks. Output strict JSON {\"correct\": boolean, \"explanation\": string} where explanation is 1-3 short sentences and includes the correct answer.",
       JSON.stringify({
         prompt: opts.prompt,
         correct_answer: correct,

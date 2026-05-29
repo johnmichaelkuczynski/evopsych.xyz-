@@ -329,11 +329,11 @@ export default function Diagnostics() {
               </h2>
               <p className="text-sm text-muted-foreground mt-1">
                 Sends every lecture body and every stored "correct answer" to OpenAI and asks for
-                an independent verdict on whether each is actually correct. Flags wrong physics,
-                misuse of notation (e.g. calling an equation an identity), wrong formulas, and
-                answers that don't actually satisfy their prompt. This is the audit you run before
-                shipping; it takes several minutes because every lecture and every problem is an
-                LLM call.
+                an independent verdict on whether each is actually correct. Flags misattributed
+                theories or researchers, misdescribed studies, confused evolutionary mechanisms,
+                wrong formulas (e.g. Hamilton's rule), and answers that don't actually satisfy their
+                prompt. This is the audit you run before shipping; it takes several minutes because
+                every lecture and every problem is an LLM call.
               </p>
             </div>
             <button

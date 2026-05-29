@@ -63,8 +63,8 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
     >
       {/* Left Pane: Lecture Content */}
       <div className="w-1/2 h-full border-r border-border p-12 overflow-hidden flex flex-col relative">
-        <div className="text-xs font-bold tracking-widest text-muted-foreground mb-4">WEEK 1 — THE NUMBER SYSTEMS</div>
-        <h1 className="text-3xl font-serif text-primary mb-8">1.1 Counting, the integers, and the number line</h1>
+        <div className="text-xs font-bold tracking-widest text-muted-foreground mb-4">WEEK 1 — FOUNDATIONS OF EVOLUTIONARY PSYCHOLOGY</div>
+        <h1 className="text-3xl font-serif text-primary mb-8">1.1 What evolutionary psychology is and why it exists</h1>
         
         <div className="flex bg-muted/50 rounded-lg p-1 w-fit mb-10 border border-border">
           <div className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${phase < 1 ? 'bg-white shadow-sm text-primary' : 'text-muted-foreground'}`}>Short</div>
@@ -73,12 +73,12 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
         </div>
 
         <div className="prose prose-sm max-w-none text-foreground/80 space-y-6">
-          <h2 className="font-serif text-2xl text-primary">What is a number?</h2>
+          <h2 className="font-serif text-2xl text-primary">What is the mind?</h2>
           <p>
-            We start with the simplest objects in mathematics and the hardest question you can ask of them: what <em>is</em> a number? Before any equation, derivative, or proof, there is just counting — one apple, two apples, three.
+            We start with the deepest question in psychology and the one most classes skip: what <em>is</em> the mind? Evolutionary psychology answers that the mind is a set of information-processing devices — cognitive adaptations — built by natural selection to solve the recurring problems our ancestors faced.
           </p>
           <p>
-            The natural numbers ℕ = {'{1, 2, 3, …}'} are what you use to count. Extend them with zero and the negatives and you get the integers ℤ. Picture them as evenly-spaced ticks on an infinite line.
+            Just as the eye is an adaptation for seeing, the mind is a bundle of specialized programs for tasks like finding food, avoiding predators, choosing mates, and cooperating with kin.
           </p>
           
           <AnimatePresence>
@@ -90,10 +90,10 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
                 className="space-y-6"
               >
                 <p>
-                  The picture of integers as ticks on a line — popularised by John Wallis in the 17th century — is so familiar it hides a conceptual leap. Negative numbers were once dismissed as "absurd" or "fictitious." Calling them <em>points on a line</em>, rather than just bookkeeping for debts, is what made them feel real.
+                  The brain is not a blank, general-purpose computer that learns everything from scratch. It comes equipped with evolved circuitry — a view popularized by Leda Cosmides and John Tooby in the early 1990s — tuned to problems hunter-gatherers faced over millions of years.
                 </p>
                 <p>
-                  In symbols, the integers are ℤ = {'{…, -3, -2, -1, 0, 1, 2, 3, …}'} and the positive integers are ℤ₊ = {'{n ∈ ℤ : n &gt; 0}'} = ℕ. You will write set-builder statements like this on every homework — being precise about <em>which</em> set you mean is half of mathematics.
+                  This is the core claim of the field: the mind is a set of information-processing devices, each shaped to solve a specific adaptive problem. You will return to this lens — function, mechanism, and evolutionary history — in every lecture of this course.
                 </p>
               </motion.div>
             )}
@@ -120,13 +120,13 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
               >
                 <div className="mb-4 text-xs font-semibold text-muted-foreground uppercase tracking-widest">Starter questions for this section</div>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">Why is zero "a number" but ∞ isn't?</div>
-                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">What's the difference between ℕ and ℤ?</div>
-                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">Why are the rationals countable but the reals are not?</div>
+                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">Why is the mind described as "modular" rather than one general learner?</div>
+                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">What's the difference between an adaptation and a by-product?</div>
+                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">How do we test a hypothesis about an evolved mechanism?</div>
                 </div>
                 <div className="w-full h-24 border border-border rounded-lg bg-muted/20 p-3 text-muted-foreground text-sm flex items-end shadow-inner">
                   <div className="w-full flex justify-between">
-                    <span>Ask a question about counting and the number line...</span>
+                    <span>Ask a question about what evolutionary psychology is...</span>
                     <div className="w-8 h-8 rounded bg-primary text-white flex items-center justify-center cursor-pointer opacity-50">↑</div>
                   </div>
                 </div>
@@ -157,7 +157,7 @@ export function Scene2({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x
                     className="p-6 border border-border rounded-xl shadow-sm bg-white"
                   >
                     <p className="text-foreground font-medium mb-6">
-                      Write the set of positive integers in set-builder notation, as a subset of ℤ.
+                      In one or two sentences, explain what it means to call the mind "a set of information-processing devices" built by natural selection.
                     </p>
                     <div className="w-full h-12 border border-border rounded-md bg-muted/10 mb-4 px-3 flex items-center text-muted-foreground">Type your answer...</div>
                     <div className="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium w-fit ml-auto">Submit</div>
