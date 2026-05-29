@@ -1,97 +1,57 @@
-# Teach Yourself Evolutionary Psychology
+# 🧬 Teach Yourself Evolutionary Psychology
 
-A self-paced, single-user web course on the adapted mind — from natural selection to cooperation, language, and culture. It ships a full lecture / tutor / practice / grading / detection / diagnostics stack, with a curriculum of 29 evolutionary-psychology micro-lectures across four weeks.
-
-> Read the idea, see it grounded in a real example, then state the idea precisely.
+**A Four-Week Course on the Adapted Mind — From Natural Selection to Cooperation, Language, and Culture**
 
 ---
 
-## Features
+## 🧩 Overview
 
-- **29 micro-lectures across 4 weeks** (7 / 7 / 7 / 8), each at three depths (short / medium / long).
-- **Section-scoped AI tutor** — streaming, grounded in the active lecture.
-- **Adaptive practice** — per-session difficulty (1–4) adjusts after each attempt; problems are generated on demand.
-- **AI-graded assignments** — 12 assignments (homework, tests, midterm, final) with conceptual short-answer problems. Answers can be plain language or symbolic (e.g. Hamilton's rule `$rB > C$`) via the on-screen math/symbol keyboard.
-- **Two-layer AI-authorship detection** — static (GPTZero + structural heuristic) and diachronic (keystroke-pattern analysis).
-- **Two one-click diagnostics** — a system self-test and an end-to-end synthetic-student run.
-- **Auto-reseed** — the database re-seeds itself when the curriculum content changes.
-- **Companion demo video** — a narrated screencast of the live UI (`qr-course-demo`).
+Teach Yourself Evolutionary Psychology is a self-paced, single-user web course that asks the question most psychology classes skip: *why* do we have the minds we do? It grounds human behavior in the logic of natural selection rather than cataloguing isolated findings.
+
+It delivers a complete, end-to-end learning loop — three-depth lectures, a section-scoped AI tutor, adaptive practice, AI-graded assignments, and two-layer authorship detection — across **29 micro-lectures** organized into four themed weeks.
+
+Designed for curious readers, students, and educators, it teaches the conceptual backbone that runs through every undergraduate text in the field — adaptation, selection, kinship, mating, cooperation, and culture — presented in one connected arc rather than a pile of disconnected experiments.
 
 ---
 
-## Architecture
+## 🧠 What It Does
 
-This is a pnpm monorepo. The contract is defined once in OpenAPI; React Query hooks and Zod validators are generated from it.
-
-| Path | Description |
-| --- | --- |
-| `artifacts/qr-course` | React + Vite frontend (the course UI). |
-| `artifacts/qr-course-demo` | React + Framer Motion demo video with scene-synced narration + music. |
-| `artifacts/api-server` | Express API: course, lectures, tutor (SSE), practice, grading, analytics, diagnostics. |
-| `lib/db` | Drizzle schema + `drizzle-kit push` for the Postgres database. |
-| `lib/api-spec` | OpenAPI document and code generation. |
-
-See [BLUEPRINT.md](./BLUEPRINT.md) for the full technical blueprint.
+- **Four-Week Curriculum (29 Micro-Lectures)** — Foundations of evolutionary psychology (Week 1), survival and the evolved individual (Week 2), mating and reproduction (Week 3), and social life, cooperation, and culture (Week 4), sequenced so each idea builds on the last.
+- **Three-Depth Lectures** — Every lecture is available at short, medium, and long depth, so you can skim the core idea or read the full treatment of the same concept.
+- **One Real Example per Lecture** — Each micro-lecture grounds its concept in a worked example from biology, anthropology, history, or experimental psychology — Hamilton's rule and the evolution of altruism, Trivers' parental-investment theory, the Wason selection task, snake-fear preparedness, Buss's cross-cultural mate-preference surveys, and more.
+- **Section-Scoped AI Tutor** — A streaming tutor grounded in the active lecture answers questions, offers starter prompts, and stays on-topic for the section you're reading.
+- **Adaptive Practice Engine** — Per-session difficulty (1–4) adjusts after each attempt, and practice problems are generated on demand for the current concept.
+- **AI-Graded Assignments** — 12 assignments (homework, tests, midterm, final) with conceptual short-answer problems. Each problem asks you to *state the key idea precisely* — in plain language or in symbolic form (Hamilton's rule `$rB > C$`, relatedness coefficients) via the on-screen math/symbol keyboard.
+- **Two-Layer AI-Authorship Detection** — Every submission is checked for AI authorship both statically (GPTZero + structural heuristic) and diachronically (keystroke-pattern analysis).
+- **Built-In Product Demo Video** — A companion artifact ships as a short, narrated screencast of the live UI.
 
 ---
 
-## Required secrets
+## ⚙️ Technical Features
 
-| Secret | Purpose |
-| --- | --- |
-| `OPENAI_API_KEY` | Tutor, practice generator, AI graders, lecture-expansion job. Required at boot. |
-| `GPTZERO_API_KEY` | GPTZero leg of static AI detection. If absent, falls back to an LLM scorer + heuristic. |
-| `DATABASE_URL` | Postgres connection string (Neon or Replit Postgres). |
-
-Secrets are requested via the Replit secrets panel; none are hard-coded.
-
----
-
-## Running locally
-
-The app runs via Replit **workflows**, not root-level `pnpm dev`. Each artifact has its own workflow:
-
-- `artifacts/api-server: API Server`
-- `artifacts/qr-course: web`
-- `artifacts/qr-course-demo: web`
-
-### Database setup
-
-The schema lives in `@workspace/db`. After provisioning a fresh database (or pointing `DATABASE_URL` at a new one), push the schema and restart the API server so it seeds the course content:
-
-```bash
-pnpm --filter @workspace/db run push
-# then restart the "API Server" workflow
-```
-
-On boot, `seedIfEmpty` populates 29 topics · 29 lectures · 12 assignments · 53 problems, and re-seeds automatically whenever the curriculum content changes.
-
-### Typecheck
-
-```bash
-pnpm --filter @workspace/api-server run typecheck
-pnpm --filter @workspace/qr-course run typecheck
-pnpm --filter @workspace/qr-course-demo run typecheck
-```
+- **Conceptual Answer Harness** — Every problem prompt is structured so the canonical answer is a precise statement of an evolutionary-psychology concept, occasionally a piece of notation. Both prompt rendering (KaTeX) and answer grading (a LaTeX-aware AI grader with a numeric short-circuit) handle these cleanly.
+- **Two-Layer AI-Authorship Detection** — Static detection sends each answer to GPTZero's `predict/text` endpoint and blends `0.85 × GPTZero + 0.15 × structural-heuristic`; if GPTZero is unavailable, it falls back to an LLM scorer plus heuristic. Diachronic detection scores the keystroke timeline — keystroke count, erase count, bulk-insert events, rewrite segments, and duration — to penalize paste-then-reword behavior and impossibly sustained typing.
+- **Two Diagnostic Self-Tests** — A **System** diagnostic checks environment, database round-trip, seed integrity, OpenAI chat + JSON mode, the detection pipeline, and the grader. A **Synthetic-Student** diagnostic proves the full stack end-to-end: a fake student reads lectures, submits every assignment, runs practice, asks the tutor, triggers detection, and verifies analytics.
+- **Auto-Reseed on Curriculum Change** — `seedIfEmpty` compares the database's topic slugs to the expected curriculum *and* checks a sentinel phrase in a designated lecture; if either differs, it wipes and re-seeds in dependency order. A single content swap propagates cleanly.
+- **Contract-First API** — A single OpenAPI document is the source of truth; React Query hooks for the UI and Zod validators for the server are generated from it.
+- **Streaming AI Tutor** — Token-by-token Server-Sent-Event streaming with a section-scoped system prompt grounded in the active lecture.
+- **pnpm Monorepo Architecture** — `artifacts/qr-course` (React + Vite frontend), `artifacts/api-server` (Express API), `artifacts/qr-course-demo` (demo video), `lib/db` (Drizzle schema + Postgres), and `lib/api-spec` (OpenAPI + codegen).
 
 ---
 
-## Diagnostics
+## 🎓 Designed For
 
-Two self-tests verify the full stack (both reachable from the in-app **Diagnostic** button, and via the API through the shared proxy at `localhost:80`):
-
-| Diagnostic | Endpoint | What it checks |
-| --- | --- | --- |
-| **System** | `GET /api/diagnostics/system` | Environment, DB round-trip, seed integrity, OpenAI chat + JSON mode, detection pipeline, grader equivalence. |
-| **Synthetic student** | `POST /api/diagnostics/synthetic-run` | End-to-end: a fake student reads every lecture, submits all 12 assignments, runs adaptive practice, asks the tutor, triggers AI detection, and verifies analytics. |
+- **Curious Readers:** Anyone who wants to understand *why* the mind works the way it does — a short, focused course on the conceptual scaffolding behind human behavior.
+- **Students of Psychology & Biology:** Self-paced coverage of the conceptual backbone — adaptation, kin selection, mating strategies, cooperation, and culture — with worked examples and precise-statement practice.
+- **Educators & Lecturers:** A connected, example-grounded arc through evolutionary psychology, with built-in practice, grading, and authorship checks for assigned writing.
+- **Runtime Maintainers:** A clean exercise of the lecture / tutor / grading / detection stack under a conceptual-precision curriculum, complete with one-click diagnostics.
 
 ---
 
-## Curriculum
+## 💡 Core Idea
 
-- **Week 1 — Foundations of evolutionary psychology**
-- **Week 2 — Survival and the evolved individual**
-- **Week 3 — Mating and reproduction**
-- **Week 4 — Social life, cooperation, and culture**
+Teach Yourself Evolutionary Psychology reframes a psychology course as a chain of *explanations*, not a catalogue of findings.
 
-Every lecture grounds its concept in a worked example (Hamilton's rule, Trivers' parental investment, the Wason selection task, snake-fear preparedness, Buss's mate-preference surveys, and more), and every problem asks the student to state the key idea precisely.
+Most courses teach what people do in this experiment or that survey. Far fewer teach the evolutionary logic that explains where those behaviors come from and why they hang together. This course is built around the second list: read the idea, see it grounded in a real example, then state the idea precisely in your own words.
+
+**Teach Yourself Evolutionary Psychology — read the idea, ground the idea, state the idea.**
