@@ -9,12 +9,33 @@ export interface TraceInput {
   durationMs: number;
 }
 
+export interface DetectionSegment {
+  text: string;
+  score: number;
+}
+
 export interface DetectionOutcome {
   aiScore: number;
   aiFlagged: boolean;
   diachronicScore: number;
   diachronicFlagged: boolean;
   rationale: string;
+}
+
+export interface DetailedDetectionOutcome extends DetectionOutcome {
+  segments: DetectionSegment[];
+}
+
+function clamp01(n: number): number {
+  return Math.max(0, Math.min(1, n));
+}
+
+// Split text into sentence-ish segments while preserving every character,
+// so concatenating the segments reproduces the original text exactly.
+export function splitIntoSegments(text: string): string[] {
+  if (!text.trim()) return [];
+  const segs = text.match(/[^.!?]*[.!?]+[\s]*|[^.!?]+$/g);
+  return segs && segs.length ? segs : [text];
 }
 
 // Diachronic detection: keystroke pattern shows the user is rewording AI output.
@@ -74,8 +95,20 @@ export function heuristicAiScore(text: string): number {
   return Math.min(1, lenScore * 0.4 + hitScore * 0.5);
 }
 
-// Real GPTZero API call. Returns null if no key or on failure (caller falls back).
-export async function gptzeroAiScore(text: string): Promise<number | null> {
+// Per-segment fallback scores when GPTZero is unavailable: blend the document-level
+// score with each segment's own heuristic so the coloring still varies sentence to sentence.
+function heuristicSegments(text: string, base: number): DetectionSegment[] {
+  return splitIntoSegments(text).map((seg) => ({
+    text: seg,
+    score: clamp01(0.55 * base + 0.45 * heuristicAiScore(seg)),
+  }));
+}
+
+// Real GPTZero API call. Returns the document-level score plus per-sentence scores,
+// or null if no key / failure (caller falls back).
+export async function gptzeroDetailed(
+  text: string,
+): Promise<{ overall: number; sentences: DetectionSegment[] } | null> {
   const apiKey = process.env.GPTZERO_API_KEY;
   if (!apiKey) return null;
   const t = text.trim();
@@ -92,24 +125,44 @@ export async function gptzeroAiScore(text: string): Promise<number | null> {
     });
     if (!res.ok) return null;
     const data: unknown = await res.json();
-    // GPTZero shape: { documents: [{ class_probabilities: { ai, human, mixed }, completely_generated_prob, ... }] }
-    const doc = (data as { documents?: Array<Record<string, unknown>> })?.documents?.[0];
+    // GPTZero shape: { documents: [{ class_probabilities: { ai, human, mixed }, completely_generated_prob, sentences: [{ sentence, generated_prob }] }] }
+    const doc = (data as { documents?: Array<Record<string, unknown>> })
+      ?.documents?.[0];
     if (!doc) return null;
     const cls = doc.class_probabilities as
       | { ai?: number; human?: number; mixed?: number }
       | undefined;
-    const cg = typeof doc.completely_generated_prob === "number"
-      ? (doc.completely_generated_prob as number)
-      : null;
-    const aiProb =
+    const cg =
+      typeof doc.completely_generated_prob === "number"
+        ? (doc.completely_generated_prob as number)
+        : null;
+    const overall =
       typeof cls?.ai === "number"
         ? cls.ai + (typeof cls.mixed === "number" ? cls.mixed * 0.5 : 0)
         : cg;
-    if (typeof aiProb !== "number") return null;
-    return Math.max(0, Math.min(1, aiProb));
+    if (typeof overall !== "number") return null;
+    const rawSentences = Array.isArray(doc.sentences)
+      ? (doc.sentences as Array<Record<string, unknown>>)
+      : [];
+    const sentences: DetectionSegment[] = rawSentences
+      .map((s) => ({
+        text: typeof s.sentence === "string" ? (s.sentence as string) : "",
+        score:
+          typeof s.generated_prob === "number"
+            ? clamp01(s.generated_prob as number)
+            : clamp01(overall),
+      }))
+      .filter((s) => s.text.length > 0);
+    return { overall: clamp01(overall), sentences };
   } catch {
     return null;
   }
+}
+
+// Backwards-compatible document-level GPTZero score.
+export async function gptzeroAiScore(text: string): Promise<number | null> {
+  const d = await gptzeroDetailed(text);
+  return d ? d.overall : null;
 }
 
 export async function llmAiScore(text: string): Promise<number | null> {
@@ -129,26 +182,47 @@ export async function llmAiScore(text: string): Promise<number | null> {
   }
 }
 
-export async function detect(
+// Full detection including per-segment color scores. Used by the real-time scan endpoint.
+export async function detectCore(
   text: string,
   trace: TraceInput,
-): Promise<DetectionOutcome> {
+): Promise<DetailedDetectionOutcome> {
   const heuristic = heuristicAiScore(text);
-  const gptzero = await gptzeroAiScore(text);
+  const gz = await gptzeroDetailed(text);
   let aiScore: number;
-  if (gptzero != null) {
+  let segments: DetectionSegment[];
+  if (gz != null) {
     // Real GPTZero result — trust it heavily, anchor with a small heuristic blend.
-    aiScore = 0.85 * gptzero + 0.15 * heuristic;
+    aiScore = 0.85 * gz.overall + 0.15 * heuristic;
+    const localSegs = splitIntoSegments(text);
+    const m = gz.sentences.length;
+    if (m === localSegs.length && localSegs.length > 0) {
+      // Zip GPTZero per-sentence scores onto the exact original text.
+      segments = localSegs.map((seg, i) => ({
+        text: seg,
+        score: gz.sentences[i].score,
+      }));
+    } else if (m > 0 && localSegs.length > 0) {
+      // Counts differ: keep the exact original segments and project GPTZero
+      // sentence scores onto them by proportional position (never substitute text).
+      segments = localSegs.map((seg, i) => ({
+        text: seg,
+        score: gz.sentences[Math.min(m - 1, Math.floor((i * m) / localSegs.length))].score,
+      }));
+    } else {
+      segments = heuristicSegments(text, gz.overall);
+    }
   } else {
     const llm = await llmAiScore(text);
     aiScore = llm == null ? heuristic : 0.4 * heuristic + 0.6 * llm;
+    segments = heuristicSegments(text, aiScore);
   }
   const diaScore = diachronicScore(text, trace);
 
   const reasons: string[] = [];
-  if (gptzero != null) {
+  if (gz != null) {
     reasons.push(
-      `GPTZero scored this response ${(gptzero * 100).toFixed(0)}% likely AI-generated.`,
+      `GPTZero scored this response ${(gz.overall * 100).toFixed(0)}% likely AI-generated.`,
     );
   }
   if (aiScore >= 0.55) reasons.push("Text patterns match common LLM outputs.");
@@ -160,10 +234,19 @@ export async function detect(
     reasons.push("No strong indicators of AI generation or AI rewording.");
 
   return {
-    aiScore: Number(aiScore.toFixed(3)),
+    aiScore: Number(clamp01(aiScore).toFixed(3)),
     aiFlagged: aiScore >= 0.55,
     diachronicScore: Number(diaScore.toFixed(3)),
     diachronicFlagged: diaScore >= 0.55,
     rationale: reasons.join(" "),
+    segments,
   };
+}
+
+export async function detect(
+  text: string,
+  trace: TraceInput,
+): Promise<DetectionOutcome> {
+  const { segments: _segments, ...rest } = await detectCore(text, trace);
+  return rest;
 }

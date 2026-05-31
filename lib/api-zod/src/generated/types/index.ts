@@ -24,6 +24,7 @@ export * from './courseOverview';
 export * from './courseOverviewTotals';
 export * from './detectionResult';
 export * from './detectionScanInput';
+export * from './detectionSegment';
 export * from './healthStatus';
 export * from './keystrokeTrace';
 export * from './lecture';

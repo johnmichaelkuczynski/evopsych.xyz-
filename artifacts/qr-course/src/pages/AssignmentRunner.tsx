@@ -126,13 +126,32 @@ export default function AssignmentRunner() {
                   <div className="mt-1 text-sm"><MarkdownRenderer content={pr.explanation} /></div>
                 </div>
                 
-                {/* AI Flags */}
-                {result.detection.find(d => d.problemId === pr.problemId)?.aiFlagged && (
-                  <div className="mt-4 p-3 bg-secondary rounded-md text-sm border border-secondary-border">
-                    <strong className="text-chart-4">Flagged content accepted — no penalty during initial phase.</strong>
-                    <p className="text-muted-foreground mt-1">{result.detection.find(d => d.problemId === pr.problemId)?.rationale}</p>
-                  </div>
-                )}
+                {/* AI authorship detection */}
+                {(() => {
+                  const det = result.detection.find(d => d.problemId === pr.problemId);
+                  if (!det) return null;
+                  const pct = Math.round(det.aiScore * 100);
+                  const band =
+                    det.aiScore >= 0.66
+                      ? "bg-red-500 text-white"
+                      : det.aiScore >= 0.34
+                        ? "bg-yellow-400 text-black"
+                        : "bg-green-600 text-white";
+                  return (
+                    <div className="mt-4 p-3 bg-secondary rounded-md text-sm border border-secondary-border">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-semibold">AI authorship:</span>
+                        <span className={`text-xs font-bold px-2 py-0.5 rounded-md ${band}`}>
+                          {pct}% AI
+                        </span>
+                        {det.aiFlagged && (
+                          <span className="text-xs font-semibold text-chart-4">Flagged — accepted, no penalty during initial phase.</span>
+                        )}
+                      </div>
+                      <p className="text-muted-foreground mt-1">{det.rationale}</p>
+                    </div>
+                  );
+                })()}
               </div>
             ))}
           </div>

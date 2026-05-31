@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { DetectionSegment } from './detectionSegment';
 
 export interface DetectionResult {
   /** @nullable */
@@ -16,4 +17,6 @@ export interface DetectionResult {
   diachronicScore: number;
   diachronicFlagged: boolean;
   rationale: string;
+  /** Per-sentence AI scores for color-coding the answer text (red=AI, green=human) */
+  segments?: DetectionSegment[];
 }

@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
 import { ScanTextBody, ScanTextResponse } from "@workspace/api-zod";
-import { detect } from "../lib/detection";
+import { detectCore } from "../lib/detection";
 
 const router: IRouter = Router();
 
@@ -11,7 +11,7 @@ router.post("/detection/scan", async (req, res): Promise<void> => {
     return;
   }
   const { text, trace } = parsed.data;
-  const result = await detect(text, trace);
+  const result = await detectCore(text, trace);
   res.json(
     ScanTextResponse.parse({
       problemId: null,

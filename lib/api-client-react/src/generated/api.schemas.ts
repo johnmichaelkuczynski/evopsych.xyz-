@@ -177,6 +177,12 @@ export interface ProblemResult {
   explanation: string;
 }
 
+export interface DetectionSegment {
+  text: string;
+  /** 0..1 probability this segment of text is AI-generated */
+  score: number;
+}
+
 export interface DetectionResult {
   /** @nullable */
   problemId: number | null;
@@ -187,6 +193,8 @@ export interface DetectionResult {
   diachronicScore: number;
   diachronicFlagged: boolean;
   rationale: string;
+  /** Per-sentence AI scores for color-coding the answer text (red=AI, green=human) */
+  segments?: DetectionSegment[];
 }
 
 export interface AttemptResult {

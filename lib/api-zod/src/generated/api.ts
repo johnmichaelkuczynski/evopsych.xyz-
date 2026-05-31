@@ -261,7 +261,11 @@ export const SubmitAttemptResponse = zod.object({
   "aiFlagged": zod.boolean(),
   "diachronicScore": zod.number().describe('0..1 probability the user is rewording AI output (based on keystroke pattern)'),
   "diachronicFlagged": zod.boolean(),
-  "rationale": zod.string()
+  "rationale": zod.string(),
+  "segments": zod.array(zod.object({
+  "text": zod.string(),
+  "score": zod.number().describe('0..1 probability this segment of text is AI-generated')
+})).optional().describe('Per-sentence AI scores for color-coding the answer text (red=AI, green=human)')
 }))
 })
 
@@ -386,7 +390,11 @@ export const ScanTextResponse = zod.object({
   "aiFlagged": zod.boolean(),
   "diachronicScore": zod.number().describe('0..1 probability the user is rewording AI output (based on keystroke pattern)'),
   "diachronicFlagged": zod.boolean(),
-  "rationale": zod.string()
+  "rationale": zod.string(),
+  "segments": zod.array(zod.object({
+  "text": zod.string(),
+  "score": zod.number().describe('0..1 probability this segment of text is AI-generated')
+})).optional().describe('Per-sentence AI scores for color-coding the answer text (red=AI, green=human)')
 })
 
 

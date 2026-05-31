@@ -645,6 +645,15 @@ components:
         trace:
           $ref: "#/components/schemas/KeystrokeTrace"
 
+    DetectionSegment:
+      type: object
+      required: [text, score]
+      properties:
+        text: { type: string }
+        score:
+          type: number
+          description: 0..1 probability this segment of text is AI-generated
+
     DetectionResult:
       type: object
       required: [problemId, aiScore, aiFlagged, diachronicScore, diachronicFlagged, rationale]
@@ -659,6 +668,11 @@ components:
           description: 0..1 probability the user is rewording AI output (based on keystroke pattern)
         diachronicFlagged: { type: boolean }
         rationale: { type: string }
+        segments:
+          type: array
+          description: Per-sentence AI scores for color-coding the answer text (red=AI, green=human)
+          items:
+            $ref: "#/components/schemas/DetectionSegment"
 
     AnalyticsSummary:
       type: object
