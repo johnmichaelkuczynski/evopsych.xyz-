@@ -1,0 +1,11 @@
+<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EvoPsych">
+  <rect width="56" height="56" rx="12" fill="#1B294B"/>
+  <g stroke="#F8FAFC" stroke-width="2.4" stroke-linecap="round">
+    <path d="M21 14C21 21 35 21 35 28C35 35 21 35 21 42"/>
+    <path d="M35 14C35 21 21 21 21 28C21 35 35 35 35 42"/>
+    <line x1="22.5" y1="18.5" x2="33.5" y2="18.5"/>
+    <line x1="20.5" y1="24" x2="35.5" y2="24"/>
+    <line x1="20.5" y1="32" x2="35.5" y2="32"/>
+    <line x1="22.5" y1="37.5" x2="33.5" y2="37.5"/>
+  </g>
+</svg>

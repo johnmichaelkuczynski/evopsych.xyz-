@@ -15,8 +15,14 @@ import {
 import { chatText, chatJson, FAST_MODEL, TEXT_MODEL } from "../lib/ai";
 import { detect } from "../lib/detection";
 import { gradeAnswer } from "../lib/grading";
+import { requireAuth } from "../middlewares/requireAuth";
 
 const router: IRouter = Router();
+
+// Operator/diagnostic tooling includes destructive actions (progress reset,
+// lecture rewriting, synthetic runs). Require a signed-in session for the whole
+// surface now that the app has auth.
+router.use("/diagnostics", requireAuth);
 
 // Keep the Replit dev preview proxy from idle-timing-out long-running
 // OpenAI-heavy diagnostics. We send the JSON Content-Type and start writing
