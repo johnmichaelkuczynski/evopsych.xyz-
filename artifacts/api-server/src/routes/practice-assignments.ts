@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { and, asc, desc, eq, inArray } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import {
   db,
   assignmentsTable,
@@ -461,35 +461,62 @@ async function loadDetail(id: number) {
 }
 
 router.get("/practice-assignments", async (req, res): Promise<void> => {
+  const hasFilter =
+    req.query.sourceAssignmentId !== undefined &&
+    req.query.sourceAssignmentId !== "";
   const sourceAssignmentId = parseIdParam(req.query.sourceAssignmentId);
-  if (!Number.isFinite(sourceAssignmentId)) {
+  if (hasFilter && !Number.isFinite(sourceAssignmentId)) {
     res.status(400).json({ error: "invalid sourceAssignmentId" });
     return;
   }
   const sets = await db
     .select()
     .from(practiceAssignmentsTable)
-    .where(eq(practiceAssignmentsTable.sourceAssignmentId, sourceAssignmentId))
+    .where(
+      hasFilter
+        ? eq(practiceAssignmentsTable.sourceAssignmentId, sourceAssignmentId)
+        : undefined,
+    )
     .orderBy(desc(practiceAssignmentsTable.id));
 
-  const result = await Promise.all(
-    sets.map(async (s) => {
-      const probs = await db
-        .select({ id: practiceAssignmentProblemsTable.id })
-        .from(practiceAssignmentProblemsTable)
-        .where(eq(practiceAssignmentProblemsTable.practiceAssignmentId, s.id));
-      return {
-        id: s.id,
-        sourceAssignmentId: s.sourceAssignmentId,
-        title: s.title,
-        status: s.status as "in_progress" | "submitted",
-        scorePercent: s.scorePercent ?? null,
-        problemCount: probs.length,
-        createdAt: s.createdAt.toISOString(),
-        submittedAt: s.submittedAt?.toISOString() ?? null,
-      };
-    }),
-  );
+  const titleById = new Map<number, string>();
+  const sourceIds = [...new Set(sets.map((s) => s.sourceAssignmentId))];
+  if (sourceIds.length > 0) {
+    const sources = await db
+      .select({ id: assignmentsTable.id, title: assignmentsTable.title })
+      .from(assignmentsTable)
+      .where(inArray(assignmentsTable.id, sourceIds));
+    for (const src of sources) titleById.set(src.id, src.title);
+  }
+
+  const countById = new Map<number, number>();
+  const setIds = sets.map((s) => s.id);
+  if (setIds.length > 0) {
+    const counts = await db
+      .select({
+        practiceAssignmentId:
+          practiceAssignmentProblemsTable.practiceAssignmentId,
+        n: sql<number>`count(*)::int`,
+      })
+      .from(practiceAssignmentProblemsTable)
+      .where(
+        inArray(practiceAssignmentProblemsTable.practiceAssignmentId, setIds),
+      )
+      .groupBy(practiceAssignmentProblemsTable.practiceAssignmentId);
+    for (const c of counts) countById.set(c.practiceAssignmentId, c.n);
+  }
+
+  const result = sets.map((s) => ({
+    id: s.id,
+    sourceAssignmentId: s.sourceAssignmentId,
+    sourceTitle: titleById.get(s.sourceAssignmentId) ?? "Assignment",
+    title: s.title,
+    status: s.status as "in_progress" | "submitted",
+    scorePercent: s.scorePercent ?? null,
+    problemCount: countById.get(s.id) ?? 0,
+    createdAt: s.createdAt.toISOString(),
+    submittedAt: s.submittedAt?.toISOString() ?? null,
+  }));
   res.json(ListPracticeAssignmentsResponse.parse(result));
 });
 

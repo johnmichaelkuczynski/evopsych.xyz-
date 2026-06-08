@@ -456,12 +456,13 @@ export const GenerateReportResponse = zod.object({
  * @summary List generated practice assignments for a source graded assignment
  */
 export const ListPracticeAssignmentsQueryParams = zod.object({
-  "sourceAssignmentId": zod.coerce.number()
+  "sourceAssignmentId": zod.coerce.number().optional()
 })
 
 export const ListPracticeAssignmentsResponseItem = zod.object({
   "id": zod.number(),
   "sourceAssignmentId": zod.number(),
+  "sourceTitle": zod.string(),
   "title": zod.string(),
   "status": zod.enum(['in_progress', 'submitted']),
   "scorePercent": zod.number().nullish(),

@@ -7,5 +7,5 @@
  */
 
 export type ListPracticeAssignmentsParams = {
-sourceAssignmentId: number;
+sourceAssignmentId?: number;
 };

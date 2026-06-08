@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 
 export default function Assignments() {
   const { data: assignments, isLoading } = useListAssignments();
@@ -63,8 +64,13 @@ export default function Assignments() {
                         </div>
                         <div className="flex flex-col gap-2">
                           <Link href={`/assignments/${item.id}/practice`}>
-                            <Button className="w-full" variant="secondary" data-testid={`button-practice-${item.id}`}>
-                              ✨ Practice first (unlimited, with tutor)
+                            <Button
+                              className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                              variant="outline"
+                              data-testid={`button-practice-${item.id}`}
+                            >
+                              <Sparkles className="w-4 h-4 mr-2" />
+                              Practice first (unlimited, with tutor)
                             </Button>
                           </Link>
                           <Link href={`/assignments/${item.id}`}>

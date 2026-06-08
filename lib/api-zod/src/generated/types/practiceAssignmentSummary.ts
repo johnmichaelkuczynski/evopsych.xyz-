@@ -10,6 +10,7 @@ import type { PracticeAssignmentSummaryStatus } from './practiceAssignmentSummar
 export interface PracticeAssignmentSummary {
   id: number;
   sourceAssignmentId: number;
+  sourceTitle: string;
   title: string;
   status: PracticeAssignmentSummaryStatus;
   /** @nullable */

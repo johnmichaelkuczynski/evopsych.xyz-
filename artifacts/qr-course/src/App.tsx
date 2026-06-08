@@ -27,6 +27,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Dashboard from "@/pages/Dashboard";
 import Assignments from "@/pages/Assignments";
+import Practice from "@/pages/Practice";
 import Analytics from "@/pages/Analytics";
 import WeekView from "@/pages/WeekView";
 import LectureView from "@/pages/LectureView";
@@ -169,6 +170,7 @@ function requireAuth<P extends object>(
 
 const ProtectedDashboard = requireAuth(Dashboard);
 const ProtectedAssignments = requireAuth(Assignments);
+const ProtectedPractice = requireAuth(Practice);
 const ProtectedAssignmentRunner = requireAuth(AssignmentRunner);
 const ProtectedPracticeHub = requireAuth(PracticeHub);
 const ProtectedPracticeAssignmentRunner = requireAuth(PracticeAssignmentRunner);
@@ -210,6 +212,7 @@ function Router() {
       <Route path="/sign-up/*?" component={SignUpPage} />
       <Route path="/dashboard" component={ProtectedDashboard} />
       <Route path="/assignments" component={ProtectedAssignments} />
+      <Route path="/practice" component={ProtectedPractice} />
       <Route path="/assignments/:assignmentId/practice" component={ProtectedPracticeHub} />
       <Route path="/assignments/:id" component={ProtectedAssignmentRunner} />
       <Route path="/practice-assignments/:id" component={ProtectedPracticeAssignmentRunner} />

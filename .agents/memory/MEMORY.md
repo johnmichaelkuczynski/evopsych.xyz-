@@ -1,3 +1,4 @@
 - [GPTZero short-text reliability](gptzero-detection.md) — GPTZero is unreliable < ~250 chars (false pos & neg); don't tune thresholds off one short example.
 - [Clerk server proxy is prod-only](clerk-server-proxy.md) — NODE_ENV gate in api-server Clerk proxy is the canonical template, not a bug; do not "fix" it.
 - [Single-user backend](qr-course-single-user.md) — EvoPsych backend has no userId scoping by design (only diagnostics is auth-gated); don't add per-feature ownership.
+- [Practice list scaling](practice-list-scaling.md) — practice sets are unbounded by design; list queries must batch/group counts, never N+1 per row.

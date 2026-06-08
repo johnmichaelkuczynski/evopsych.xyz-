@@ -380,7 +380,7 @@ paths:
       parameters:
         - name: sourceAssignmentId
           in: query
-          required: true
+          required: false
           schema: { type: integer }
       responses:
         "200":
@@ -892,10 +892,11 @@ components:
 
     PracticeAssignmentSummary:
       type: object
-      required: [id, sourceAssignmentId, title, status, problemCount, createdAt]
+      required: [id, sourceAssignmentId, sourceTitle, title, status, problemCount, createdAt]
       properties:
         id: { type: integer }
         sourceAssignmentId: { type: integer }
+        sourceTitle: { type: string }
         title: { type: string }
         status:
           type: string

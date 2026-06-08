@@ -362,6 +362,7 @@ export const PracticeAssignmentSummaryStatus = {
 export interface PracticeAssignmentSummary {
   id: number;
   sourceAssignmentId: number;
+  sourceTitle: string;
   title: string;
   status: PracticeAssignmentSummaryStatus;
   /** @nullable */
@@ -504,6 +505,6 @@ export interface CourseOverview {
 }
 
 export type ListPracticeAssignmentsParams = {
-sourceAssignmentId: number;
+sourceAssignmentId?: number;
 };
 

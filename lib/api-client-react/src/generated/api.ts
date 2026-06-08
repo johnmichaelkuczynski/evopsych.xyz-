@@ -1555,7 +1555,7 @@ export const useGenerateReport = <TError = ErrorType<unknown>,
       return useMutation(getGenerateReportMutationOptions(options));
     }
 
-export const getListPracticeAssignmentsUrl = (params: ListPracticeAssignmentsParams,) => {
+export const getListPracticeAssignmentsUrl = (params?: ListPracticeAssignmentsParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
@@ -1573,7 +1573,7 @@ export const getListPracticeAssignmentsUrl = (params: ListPracticeAssignmentsPar
 /**
  * @summary List generated practice assignments for a source graded assignment
  */
-export const listPracticeAssignments = async (params: ListPracticeAssignmentsParams, options?: RequestInit): Promise<PracticeAssignmentSummary[]> => {
+export const listPracticeAssignments = async (params?: ListPracticeAssignmentsParams, options?: RequestInit): Promise<PracticeAssignmentSummary[]> => {
 
   return customFetch<PracticeAssignmentSummary[]>(getListPracticeAssignmentsUrl(params),
   {
@@ -1595,7 +1595,7 @@ export const getListPracticeAssignmentsQueryKey = (params?: ListPracticeAssignme
     }
 
 
-export const getListPracticeAssignmentsQueryOptions = <TData = Awaited<ReturnType<typeof listPracticeAssignments>>, TError = ErrorType<unknown>>(params: ListPracticeAssignmentsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPracticeAssignments>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export const getListPracticeAssignmentsQueryOptions = <TData = Awaited<ReturnType<typeof listPracticeAssignments>>, TError = ErrorType<unknown>>(params?: ListPracticeAssignmentsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPracticeAssignments>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -1622,7 +1622,7 @@ export type ListPracticeAssignmentsQueryError = ErrorType<unknown>
  */
 
 export function useListPracticeAssignments<TData = Awaited<ReturnType<typeof listPracticeAssignments>>, TError = ErrorType<unknown>>(
- params: ListPracticeAssignmentsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPracticeAssignments>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+ params?: ListPracticeAssignmentsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPracticeAssignments>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
