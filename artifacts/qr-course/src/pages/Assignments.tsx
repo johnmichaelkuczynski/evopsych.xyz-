@@ -61,12 +61,19 @@ export default function Assignments() {
                             <span className="font-semibold text-foreground">Score: {item.bestScore}%</span>
                           )}
                         </div>
-                        <Link href={`/assignments/${item.id}`}>
-                          <Button className="w-full" variant={item.status === 'submitted' ? "outline" : "default"}>
-                            {item.status === 'submitted' ? 'Review Results' : 
-                             item.status === 'in_progress' ? 'Resume' : 'Start'}
-                          </Button>
-                        </Link>
+                        <div className="flex flex-col gap-2">
+                          <Link href={`/assignments/${item.id}/practice`}>
+                            <Button className="w-full" variant="secondary" data-testid={`button-practice-${item.id}`}>
+                              ✨ Practice first (unlimited, with tutor)
+                            </Button>
+                          </Link>
+                          <Link href={`/assignments/${item.id}`}>
+                            <Button className="w-full" variant={item.status === 'submitted' ? "outline" : "default"}>
+                              {item.status === 'submitted' ? 'Review Results' :
+                               item.status === 'in_progress' ? 'Resume' : 'Start graded'}
+                            </Button>
+                          </Link>
+                        </div>
                       </CardContent>
                     </Card>
                   ))}

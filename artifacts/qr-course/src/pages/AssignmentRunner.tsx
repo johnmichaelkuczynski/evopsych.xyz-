@@ -170,11 +170,21 @@ export default function AssignmentRunner() {
             <h1 className="text-2xl font-serif font-bold text-primary">{assignment.title}</h1>
             <p className="text-sm text-muted-foreground">Problem {currentProblemIdx + 1} of {assignment.problems.length}</p>
           </div>
-          {attempt?.deadlineAt && (
-            <div className="text-destructive font-mono font-bold px-3 py-1 rounded bg-destructive/10 border border-destructive/20">
-              Deadline: {new Date(attempt.deadlineAt).toLocaleTimeString()}
-            </div>
-          )}
+          <div className="flex items-center gap-3">
+            <Link href={`/assignments/${assignmentId}/practice`}>
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground" data-testid="link-practice-from-graded">
+                ✨ Need warmup? Practice
+              </Button>
+            </Link>
+            {attempt?.deadlineAt && (
+              <div className="text-destructive font-mono font-bold px-3 py-1 rounded bg-destructive/10 border border-destructive/20">
+                Deadline: {new Date(attempt.deadlineAt).toLocaleTimeString()}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="rounded-md bg-secondary/40 border border-border px-3 py-2 text-xs text-muted-foreground -mt-2">
+          This is the graded attempt — the AI tutor is unavailable here. It's always available in Practice.
         </div>
 
         {currentProblem ? (

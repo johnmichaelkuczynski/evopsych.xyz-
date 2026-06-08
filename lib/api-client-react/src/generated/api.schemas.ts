@@ -347,6 +347,150 @@ export interface AnalyticsReport {
   recommendations: string[];
 }
 
+export interface GeneratePracticeAssignmentInput {
+  sourceAssignmentId: number;
+}
+
+export type PracticeAssignmentSummaryStatus = typeof PracticeAssignmentSummaryStatus[keyof typeof PracticeAssignmentSummaryStatus];
+
+
+export const PracticeAssignmentSummaryStatus = {
+  in_progress: 'in_progress',
+  submitted: 'submitted',
+} as const;
+
+export interface PracticeAssignmentSummary {
+  id: number;
+  sourceAssignmentId: number;
+  title: string;
+  status: PracticeAssignmentSummaryStatus;
+  /** @nullable */
+  scorePercent?: number | null;
+  problemCount: number;
+  createdAt: string;
+  /** @nullable */
+  submittedAt?: string | null;
+}
+
+export interface PracticeAssignmentProblem {
+  id: number;
+  position: number;
+  prompt: string;
+  topicId: number;
+  /** @nullable */
+  topicTitle?: string | null;
+  /** @nullable */
+  hint?: string | null;
+}
+
+export interface PracticeAssignmentAnswerState {
+  problemId: number;
+  answer: string;
+  /** @nullable */
+  correct?: boolean | null;
+  /** @nullable */
+  feedback?: string | null;
+  /** @nullable */
+  correctAnswer?: string | null;
+  /** @nullable */
+  explanation?: string | null;
+}
+
+export type PracticeAssignmentDetailKind = typeof PracticeAssignmentDetailKind[keyof typeof PracticeAssignmentDetailKind];
+
+
+export const PracticeAssignmentDetailKind = {
+  homework: 'homework',
+  test: 'test',
+  midterm: 'midterm',
+  final: 'final',
+} as const;
+
+export type PracticeAssignmentDetailStatus = typeof PracticeAssignmentDetailStatus[keyof typeof PracticeAssignmentDetailStatus];
+
+
+export const PracticeAssignmentDetailStatus = {
+  in_progress: 'in_progress',
+  submitted: 'submitted',
+} as const;
+
+export interface PracticeAssignmentDetail {
+  id: number;
+  sourceAssignmentId: number;
+  sourceTitle: string;
+  kind: PracticeAssignmentDetailKind;
+  title: string;
+  /** @nullable */
+  weekNumber?: number | null;
+  status: PracticeAssignmentDetailStatus;
+  /** @nullable */
+  scorePercent?: number | null;
+  /** @nullable */
+  readiness?: string | null;
+  problems: PracticeAssignmentProblem[];
+  answers: PracticeAssignmentAnswerState[];
+}
+
+export interface PracticeAssignmentAnswerInput {
+  answer: string;
+  trace: KeystrokeTrace;
+}
+
+export interface PracticeAssignmentProblemResult {
+  problemId: number;
+  correct: boolean;
+  userAnswer: string;
+  correctAnswer: string;
+  explanation: string;
+  feedback: string;
+}
+
+export interface LearnerProfile {
+  summary: string;
+  strengths: string[];
+  weaknesses: string[];
+  focusAreas: string[];
+  /** @nullable */
+  updatedAt?: string | null;
+}
+
+export interface PracticeAssignmentResult {
+  id: number;
+  score: number;
+  total: number;
+  percent: number;
+  perProblem: PracticeAssignmentProblemResult[];
+  readiness: string;
+  profile: LearnerProfile;
+}
+
+export type FeedbackMessageRole = typeof FeedbackMessageRole[keyof typeof FeedbackMessageRole];
+
+
+export const FeedbackMessageRole = {
+  user: 'user',
+  assistant: 'assistant',
+} as const;
+
+export interface FeedbackMessage {
+  id: number;
+  /** @nullable */
+  problemId?: number | null;
+  role: FeedbackMessageRole;
+  content: string;
+  createdAt: string;
+}
+
+export interface FeedbackChatInput {
+  /** @nullable */
+  problemId?: number | null;
+  message: string;
+}
+
+export interface FeedbackChatReply {
+  messages: FeedbackMessage[];
+}
+
 export type CourseOverviewTotals = {
   assignmentsCompleted: number;
   assignmentsTotal: number;
@@ -358,4 +502,8 @@ export interface CourseOverview {
   weeks: Week[];
   totals: CourseOverviewTotals;
 }
+
+export type ListPracticeAssignmentsParams = {
+sourceAssignmentId: number;
+};
 

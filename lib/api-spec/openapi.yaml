@@ -372,6 +372,162 @@ paths:
               schema:
                 $ref: "#/components/schemas/AnalyticsReport"
 
+  /practice-assignments:
+    get:
+      operationId: listPracticeAssignments
+      tags: [practice-assignments]
+      summary: List generated practice assignments for a source graded assignment
+      parameters:
+        - name: sourceAssignmentId
+          in: query
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PracticeAssignmentSummary"
+    post:
+      operationId: generatePracticeAssignment
+      tags: [practice-assignments]
+      summary: Generate a fresh practice version of a graded assignment (no repeats, never reuses real questions)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneratePracticeAssignmentInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PracticeAssignmentDetail"
+
+  /practice-assignments/{id}:
+    get:
+      operationId: getPracticeAssignment
+      tags: [practice-assignments]
+      summary: Get a practice assignment with its problems and saved answers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PracticeAssignmentDetail"
+
+  /practice-assignments/{id}/answers/{problemId}:
+    put:
+      operationId: savePracticeAssignmentAnswer
+      tags: [practice-assignments]
+      summary: Save a draft answer (with keystroke trace) for one practice problem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+        - name: problemId
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PracticeAssignmentAnswerInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnswerSaved"
+
+  /practice-assignments/{id}/submit:
+    post:
+      operationId: submitPracticeAssignment
+      tags: [practice-assignments]
+      summary: Grade the practice assignment, produce rich feedback + readiness pointers, update learner profile
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PracticeAssignmentResult"
+
+  /practice-assignments/{id}/feedback-chat:
+    get:
+      operationId: getPracticeFeedbackChat
+      tags: [practice-assignments]
+      summary: Get the full feedback-dialogue thread for a practice assignment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FeedbackMessage"
+    post:
+      operationId: sendPracticeFeedbackChat
+      tags: [practice-assignments]
+      summary: Send a message in the feedback dialogue and get the tutor's reply
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeedbackChatInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedbackChatReply"
+
+  /learner-profile:
+    get:
+      operationId: getLearnerProfile
+      tags: [practice-assignments]
+      summary: Get the evolving learner profile (strengths, weaknesses, focus areas)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearnerProfile"
+
 components:
   schemas:
     HealthStatus:
@@ -727,6 +883,154 @@ components:
         recommendations:
           type: array
           items: { type: string }
+
+    GeneratePracticeAssignmentInput:
+      type: object
+      required: [sourceAssignmentId]
+      properties:
+        sourceAssignmentId: { type: integer }
+
+    PracticeAssignmentSummary:
+      type: object
+      required: [id, sourceAssignmentId, title, status, problemCount, createdAt]
+      properties:
+        id: { type: integer }
+        sourceAssignmentId: { type: integer }
+        title: { type: string }
+        status:
+          type: string
+          enum: [in_progress, submitted]
+        scorePercent: { type: ["number", "null"] }
+        problemCount: { type: integer }
+        createdAt: { type: string, format: date-time }
+        submittedAt: { type: ["string", "null"], format: date-time }
+
+    PracticeAssignmentProblem:
+      type: object
+      required: [id, position, prompt, topicId]
+      properties:
+        id: { type: integer }
+        position: { type: integer }
+        prompt: { type: string }
+        topicId: { type: integer }
+        topicTitle: { type: ["string", "null"] }
+        hint: { type: ["string", "null"] }
+
+    PracticeAssignmentAnswerState:
+      type: object
+      required: [problemId, answer]
+      properties:
+        problemId: { type: integer }
+        answer: { type: string }
+        correct: { type: ["boolean", "null"] }
+        feedback: { type: ["string", "null"] }
+        correctAnswer: { type: ["string", "null"] }
+        explanation: { type: ["string", "null"] }
+
+    PracticeAssignmentDetail:
+      type: object
+      required: [id, sourceAssignmentId, sourceTitle, kind, title, status, problems, answers]
+      properties:
+        id: { type: integer }
+        sourceAssignmentId: { type: integer }
+        sourceTitle: { type: string }
+        kind:
+          type: string
+          enum: [homework, test, midterm, final]
+        title: { type: string }
+        weekNumber: { type: ["integer", "null"] }
+        status:
+          type: string
+          enum: [in_progress, submitted]
+        scorePercent: { type: ["number", "null"] }
+        readiness: { type: ["string", "null"] }
+        problems:
+          type: array
+          items:
+            $ref: "#/components/schemas/PracticeAssignmentProblem"
+        answers:
+          type: array
+          items:
+            $ref: "#/components/schemas/PracticeAssignmentAnswerState"
+
+    PracticeAssignmentAnswerInput:
+      type: object
+      required: [answer, trace]
+      properties:
+        answer: { type: string }
+        trace:
+          $ref: "#/components/schemas/KeystrokeTrace"
+
+    PracticeAssignmentProblemResult:
+      type: object
+      required: [problemId, correct, userAnswer, correctAnswer, explanation, feedback]
+      properties:
+        problemId: { type: integer }
+        correct: { type: boolean }
+        userAnswer: { type: string }
+        correctAnswer: { type: string }
+        explanation: { type: string }
+        feedback: { type: string }
+
+    PracticeAssignmentResult:
+      type: object
+      required: [id, score, total, percent, perProblem, readiness, profile]
+      properties:
+        id: { type: integer }
+        score: { type: number }
+        total: { type: number }
+        percent: { type: number }
+        perProblem:
+          type: array
+          items:
+            $ref: "#/components/schemas/PracticeAssignmentProblemResult"
+        readiness: { type: string }
+        profile:
+          $ref: "#/components/schemas/LearnerProfile"
+
+    FeedbackMessage:
+      type: object
+      required: [id, role, content, createdAt]
+      properties:
+        id: { type: integer }
+        problemId: { type: ["integer", "null"] }
+        role:
+          type: string
+          enum: [user, assistant]
+        content: { type: string }
+        createdAt: { type: string, format: date-time }
+
+    FeedbackChatInput:
+      type: object
+      required: [message]
+      properties:
+        problemId: { type: ["integer", "null"] }
+        message: { type: string }
+
+    FeedbackChatReply:
+      type: object
+      required: [messages]
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/FeedbackMessage"
+
+    LearnerProfile:
+      type: object
+      required: [summary, strengths, weaknesses, focusAreas]
+      properties:
+        summary: { type: string }
+        strengths:
+          type: array
+          items: { type: string }
+        weaknesses:
+          type: array
+          items: { type: string }
+        focusAreas:
+          type: array
+          items: { type: string }
+        updatedAt: { type: ["string", "null"], format: date-time }
 
     CourseOverview:
       type: object

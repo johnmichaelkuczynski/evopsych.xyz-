@@ -31,6 +31,8 @@ import Analytics from "@/pages/Analytics";
 import WeekView from "@/pages/WeekView";
 import LectureView from "@/pages/LectureView";
 import AssignmentRunner from "@/pages/AssignmentRunner";
+import PracticeHub from "@/pages/PracticeHub";
+import PracticeAssignmentRunner from "@/pages/PracticeAssignmentRunner";
 import Diagnostics from "@/pages/Diagnostics";
 import TopicPractice from "@/pages/TopicPractice";
 
@@ -168,6 +170,8 @@ function requireAuth<P extends object>(
 const ProtectedDashboard = requireAuth(Dashboard);
 const ProtectedAssignments = requireAuth(Assignments);
 const ProtectedAssignmentRunner = requireAuth(AssignmentRunner);
+const ProtectedPracticeHub = requireAuth(PracticeHub);
+const ProtectedPracticeAssignmentRunner = requireAuth(PracticeAssignmentRunner);
 const ProtectedAnalytics = requireAuth(Analytics);
 const ProtectedDiagnostics = requireAuth(Diagnostics);
 const ProtectedWeekView = requireAuth(WeekView);
@@ -206,7 +210,9 @@ function Router() {
       <Route path="/sign-up/*?" component={SignUpPage} />
       <Route path="/dashboard" component={ProtectedDashboard} />
       <Route path="/assignments" component={ProtectedAssignments} />
+      <Route path="/assignments/:assignmentId/practice" component={ProtectedPracticeHub} />
       <Route path="/assignments/:id" component={ProtectedAssignmentRunner} />
+      <Route path="/practice-assignments/:id" component={ProtectedPracticeAssignmentRunner} />
       <Route path="/analytics" component={ProtectedAnalytics} />
       <Route path="/diagnostics" component={ProtectedDiagnostics} />
       <Route path="/weeks/:weekNumber" component={ProtectedWeekView} />
