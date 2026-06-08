@@ -124,7 +124,7 @@ router.get("/course/overview", async (_req, res) => {
 
   res.json(
     GetCourseOverviewResponse.parse({
-      title: "Teach Yourself Evolutionary Psychology",
+      title: "Evolutionary Psychology",
       weeks,
       totals: { assignmentsCompleted, assignmentsTotal, practiceCount },
     }),

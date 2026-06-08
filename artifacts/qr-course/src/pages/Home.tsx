@@ -51,7 +51,7 @@ export default function Home() {
             A four-week course on the adapted mind
           </div>
           <h1 className="font-serif text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-            Teach Yourself Evolutionary Psychology
+            Evolutionary Psychology
           </h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
             Why do we fear some things so easily, favor kin, feel jealousy, cooperate with
@@ -111,7 +111,7 @@ export default function Home() {
 
       <footer className="border-t border-border">
         <div className="max-w-6xl mx-auto px-6 py-6 text-center text-sm text-muted-foreground">
-          Teach Yourself Evolutionary Psychology — read the idea, ground the idea, state the idea.
+          Evolutionary Psychology — read the idea, ground the idea, state the idea.
         </div>
       </footer>
     </div>

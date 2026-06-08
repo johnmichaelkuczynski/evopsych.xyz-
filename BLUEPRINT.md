@@ -1,4 +1,4 @@
-# Technical Blueprint — Teach Yourself Evolutionary Psychology
+# Technical Blueprint — Evolutionary Psychology
 
 This document describes the system architecture, data flow, and the contracts that hold the pieces together. For a feature overview and setup steps, see [README.md](./README.md).
 

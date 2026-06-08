@@ -1,4 +1,4 @@
-# 🧬 Teach Yourself Evolutionary Psychology
+# 🧬 Evolutionary Psychology
 
 **A Four-Week Course on the Adapted Mind — From Natural Selection to Cooperation, Language, and Culture**
 
@@ -6,7 +6,7 @@
 
 ## 🧩 Overview
 
-Teach Yourself Evolutionary Psychology is a self-paced, single-user web course that asks the question most psychology classes skip: *why* do we have the minds we do? It grounds human behavior in the logic of natural selection rather than cataloguing isolated findings.
+Evolutionary Psychology is a self-paced, single-user web course that asks the question most psychology classes skip: *why* do we have the minds we do? It grounds human behavior in the logic of natural selection rather than cataloguing isolated findings.
 
 It delivers a complete, end-to-end learning loop — three-depth lectures, a section-scoped AI tutor, adaptive practice, AI-graded assignments, and two-layer authorship detection — across **29 micro-lectures** organized into four themed weeks.
 
@@ -50,8 +50,8 @@ Designed for curious readers, students, and educators, it teaches the conceptual
 
 ## 💡 Core Idea
 
-Teach Yourself Evolutionary Psychology reframes a psychology course as a chain of *explanations*, not a catalogue of findings.
+Evolutionary Psychology reframes a psychology course as a chain of *explanations*, not a catalogue of findings.
 
 Most courses teach what people do in this experiment or that survey. Far fewer teach the evolutionary logic that explains where those behaviors come from and why they hang together. This course is built around the second list: read the idea, see it grounded in a real example, then state the idea precisely in your own words.
 
-**Teach Yourself Evolutionary Psychology — read the idea, ground the idea, state the idea.**
+**Evolutionary Psychology — read the idea, ground the idea, state the idea.**

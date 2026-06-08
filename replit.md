@@ -1,4 +1,4 @@
-# 🧬 Teach Yourself Evolutionary Psychology
+# 🧬 Evolutionary Psychology
 
 **A Four-Week Course on the Adapted Mind — From Natural Selection to Cooperation, Language, and Culture**
 
@@ -6,7 +6,7 @@
 
 ## 🧩 Overview
 
-Teach Yourself Evolutionary Psychology is a self-paced, single-user web course that asks the question most psychology classes skip: *why* do we have the minds we do? Why do we fear some things more easily than others? Why do mating preferences differ? Why do we cooperate with strangers, favor kin, feel jealousy, fall for status, and build cultures and religions? The organizing answer is one idea: the mind is a set of information-processing devices — cognitive adaptations — built by natural selection to solve the recurring problems faced by our ancestors.
+Evolutionary Psychology is a self-paced, single-user web course that asks the question most psychology classes skip: *why* do we have the minds we do? Why do we fear some things more easily than others? Why do mating preferences differ? Why do we cooperate with strangers, favor kin, feel jealousy, fall for status, and build cultures and religions? The organizing answer is one idea: the mind is a set of information-processing devices — cognitive adaptations — built by natural selection to solve the recurring problems faced by our ancestors.
 
 The runtime — lectures with short / medium / long depth, section-scoped AI tutor, adaptive practice, AI-graded homework / tests / midterm / final, two-layer AI-authorship detection, and one-click diagnostics — supports a single goal: teaching the conceptual backbone of evolutionary psychology — the same backbone that runs through every undergraduate text in the field — presented in one connected arc.
 
@@ -65,7 +65,7 @@ Most psychology courses teach *findings* — what people do in this experiment o
 
 Read the idea, see it grounded in a real example, then state the idea precisely in your own words.
 
-**Teach Yourself Evolutionary Psychology — read the idea, ground the idea, state the idea.**
+**Evolutionary Psychology — read the idea, ground the idea, state the idea.**
 
 ---
 
