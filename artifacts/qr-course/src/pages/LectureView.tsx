@@ -15,12 +15,12 @@ import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { AnswerInput } from "@/components/AnswerInput";
 import { TutorPane } from "@/components/TutorPane";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MessageSquare, Sparkles, X, RefreshCw, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowLeft, MessageSquare, Sparkles, X, RefreshCw, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 
 export default function LectureView() {
   const params = useParams();
   const lectureId = Number(params.lectureId);
-  const { data: lecture, isLoading } = useGetLecture(lectureId);
+  const { data: lecture, isLoading, refetch } = useGetLecture(lectureId);
 
   // shared selected-text state (used by both Tutor and Practice)
   const [selectedText, setSelectedText] = useState("");
@@ -49,13 +49,64 @@ export default function LectureView() {
 
   const [tab, setTab] = useState<"tutor" | "practice">("tutor");
   const [level, setLevel] = useState<"short" | "medium" | "long">("short");
+  const [generatingLevel, setGeneratingLevel] = useState<
+    "medium" | "long" | null
+  >(null);
+  const [genError, setGenError] = useState<string | null>(null);
 
-  const availableLevels = useMemo(() => {
-    const out: Array<"short" | "medium" | "long"> = ["short"];
-    if (lecture?.bodyMedium) out.push("medium");
-    if (lecture?.bodyLong) out.push("long");
-    return out;
-  }, [lecture?.bodyMedium, lecture?.bodyLong]);
+  // wouter reuses this component across /lectures/:id, so an in-flight generation
+  // can outlive a navigation. Track the current id in a ref to detect that.
+  const lectureIdRef = useRef(lectureId);
+  lectureIdRef.current = lectureId;
+
+  function hasLevel(lvl: "short" | "medium" | "long"): boolean {
+    if (lvl === "short") return true;
+    if (lvl === "medium") return !!lecture?.bodyMedium;
+    return !!lecture?.bodyLong;
+  }
+
+  async function selectLevel(lvl: "short" | "medium" | "long") {
+    if (lvl === "short" || hasLevel(lvl)) {
+      setLevel(lvl);
+      return;
+    }
+    if (generatingLevel) return;
+    const requestedId = lectureId;
+    setGeneratingLevel(lvl);
+    setGenError(null);
+    try {
+      const res = await fetch(
+        `/api/diagnostics/expand-lectures?level=${lvl}&id=${requestedId}`,
+        { method: "POST" },
+      );
+      if (!res.ok) {
+        const payload = (await res.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(payload?.error ?? `HTTP ${res.status}`);
+      }
+      const data = (await res.json()) as { updated?: number; failed?: number };
+      if (!data.updated)
+        throw new Error("Generation didn't return content — please try again.");
+      const refreshed = await refetch();
+      // The user may have navigated to a different lecture while we waited.
+      if (requestedId !== lectureIdRef.current) return;
+      const body =
+        lvl === "medium"
+          ? refreshed.data?.bodyMedium
+          : refreshed.data?.bodyLong;
+      if (!body)
+        throw new Error("Generated content didn't load — please try again.");
+      setLevel(lvl);
+    } catch (e) {
+      if (requestedId !== lectureIdRef.current) return;
+      setGenError(
+        `Couldn't generate the ${lvl} version: ${(e as Error).message}`,
+      );
+    } finally {
+      setGeneratingLevel((cur) => (requestedId === lectureIdRef.current ? null : cur));
+    }
+  }
 
   const activeBody =
     level === "long" && lecture?.bodyLong
@@ -96,33 +147,50 @@ export default function LectureView() {
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Week {lecture.weekNumber}
                   </div>
-                  <div className="inline-flex rounded-md border border-border overflow-hidden text-xs">
-                    {(["short", "medium", "long"] as const).map((lvl) => {
-                      const enabled = availableLevels.includes(lvl);
-                      const active = level === lvl;
-                      return (
-                        <button
-                          key={lvl}
-                          onClick={() => enabled && setLevel(lvl)}
-                          disabled={!enabled}
-                          title={
-                            enabled
-                              ? `${lvl[0].toUpperCase() + lvl.slice(1)} version`
-                              : `${lvl[0].toUpperCase() + lvl.slice(1)} version not generated yet — click "Generate medium + long lectures" in the top bar`
-                          }
-                          className={`px-3 py-1.5 font-medium uppercase tracking-wider transition-colors ${
-                            active
-                              ? "bg-primary text-primary-foreground"
-                              : enabled
-                                ? "bg-background hover:bg-secondary text-foreground"
-                                : "bg-background/50 text-muted-foreground/50 cursor-not-allowed"
-                          }`}
-                          data-testid={`button-level-${lvl}`}
-                        >
-                          {lvl}
-                        </button>
-                      );
-                    })}
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="inline-flex rounded-md border border-border overflow-hidden text-xs">
+                      {(["short", "medium", "long"] as const).map((lvl) => {
+                        const exists = hasLevel(lvl);
+                        const active = level === lvl;
+                        const isGenerating = generatingLevel === lvl;
+                        const anyGenerating = generatingLevel !== null;
+                        return (
+                          <button
+                            key={lvl}
+                            onClick={() => selectLevel(lvl)}
+                            disabled={anyGenerating}
+                            title={
+                              exists
+                                ? `${lvl[0].toUpperCase() + lvl.slice(1)} version`
+                                : `Generate the ${lvl} version of this lecture`
+                            }
+                            className={`inline-flex items-center gap-1 px-3 py-1.5 font-medium uppercase tracking-wider transition-colors ${
+                              active
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-background hover:bg-secondary text-foreground"
+                            } ${anyGenerating ? "opacity-70" : ""}`}
+                            data-testid={`button-level-${lvl}`}
+                          >
+                            {isGenerating ? (
+                              <Loader2 className="w-3 h-3 animate-spin" />
+                            ) : (
+                              !exists && <Sparkles className="w-3 h-3" />
+                            )}
+                            {lvl}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {generatingLevel && (
+                      <span className="text-[11px] text-muted-foreground">
+                        Generating the {generatingLevel} version of this lecture…
+                      </span>
+                    )}
+                    {genError && !generatingLevel && (
+                      <span className="text-[11px] text-red-600 max-w-xs text-right">
+                        {genError}
+                      </span>
+                    )}
                   </div>
                 </div>
               </header>
