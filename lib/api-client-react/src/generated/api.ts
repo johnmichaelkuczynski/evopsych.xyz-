@@ -32,6 +32,7 @@ import type {
   CourseOverview,
   DetectionResult,
   DetectionScanInput,
+  ExportCourseParams,
   FeedbackChatInput,
   FeedbackChatReply,
   FeedbackMessage,
@@ -54,6 +55,8 @@ import type {
   TopicAnalytics,
   TutorAskInput,
   TutorReply,
+  VisitorCount,
+  VisitorTrackResult,
   Week
 } from './api.schemas';
 
@@ -442,6 +445,237 @@ export function useListTopics<TData = Awaited<ReturnType<typeof listTopics>>, TE
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getListTopicsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getExportCourseUrl = (params?: ExportCourseParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/course/export?${stringifiedParams}` : `/api/course/export`
+}
+
+/**
+ * @summary Download the course (short lectures + sample homework and exams) as PDF or TXT
+ */
+export const exportCourse = async (params?: ExportCourseParams, options?: RequestInit): Promise<string | Blob> => {
+
+  return customFetch<string | Blob>(getExportCourseUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getExportCourseQueryKey = (params?: ExportCourseParams,) => {
+    return [
+    `/api/course/export`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getExportCourseQueryOptions = <TData = Awaited<ReturnType<typeof exportCourse>>, TError = ErrorType<unknown>>(params?: ExportCourseParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof exportCourse>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getExportCourseQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof exportCourse>>> = ({ signal }) => exportCourse(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof exportCourse>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ExportCourseQueryResult = NonNullable<Awaited<ReturnType<typeof exportCourse>>>
+export type ExportCourseQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Download the course (short lectures + sample homework and exams) as PDF or TXT
+ */
+
+export function useExportCourse<TData = Awaited<ReturnType<typeof exportCourse>>, TError = ErrorType<unknown>>(
+ params?: ExportCourseParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof exportCourse>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getExportCourseQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getTrackVisitorUrl = () => {
+
+
+
+
+  return `/api/visitors/track`
+}
+
+/**
+ * @summary Record a visit from this browser (mints an anonymous visitor cookie)
+ */
+export const trackVisitor = async ( options?: RequestInit): Promise<VisitorTrackResult> => {
+
+  return customFetch<VisitorTrackResult>(getTrackVisitorUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+export const getTrackVisitorMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof trackVisitor>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof trackVisitor>>, TError,void, TContext> => {
+
+const mutationKey = ['trackVisitor'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof trackVisitor>>, void> = () => {
+
+
+          return  trackVisitor(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type TrackVisitorMutationResult = NonNullable<Awaited<ReturnType<typeof trackVisitor>>>
+
+    export type TrackVisitorMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Record a visit from this browser (mints an anonymous visitor cookie)
+ */
+export const useTrackVisitor = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof trackVisitor>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof trackVisitor>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getTrackVisitorMutationOptions(options));
+    }
+
+export const getGetVisitorCountUrl = () => {
+
+
+
+
+  return `/api/visitors/count`
+}
+
+/**
+ * @summary Unique visitor count (owner-only)
+ */
+export const getVisitorCount = async ( options?: RequestInit): Promise<VisitorCount> => {
+
+  return customFetch<VisitorCount>(getGetVisitorCountUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetVisitorCountQueryKey = () => {
+    return [
+    `/api/visitors/count`
+    ] as const;
+    }
+
+
+export const getGetVisitorCountQueryOptions = <TData = Awaited<ReturnType<typeof getVisitorCount>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getVisitorCount>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetVisitorCountQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getVisitorCount>>> = ({ signal }) => getVisitorCount({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getVisitorCount>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetVisitorCountQueryResult = NonNullable<Awaited<ReturnType<typeof getVisitorCount>>>
+export type GetVisitorCountQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Unique visitor count (owner-only)
+ */
+
+export function useGetVisitorCount<TData = Awaited<ReturnType<typeof getVisitorCount>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getVisitorCount>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetVisitorCountQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

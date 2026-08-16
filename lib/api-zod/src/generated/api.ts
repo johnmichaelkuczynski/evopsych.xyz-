@@ -118,6 +118,32 @@ export const ListTopicsResponse = zod.array(ListTopicsResponseItem)
 
 
 /**
+ * @summary Download the course (short lectures + sample homework and exams) as PDF or TXT
+ */
+export const exportCourseQueryFormatDefault = `txt`;
+
+export const ExportCourseQueryParams = zod.object({
+  "format": zod.enum(['pdf', 'txt']).default(exportCourseQueryFormatDefault)
+})
+
+
+/**
+ * @summary Record a visit from this browser (mints an anonymous visitor cookie)
+ */
+export const TrackVisitorResponse = zod.object({
+  "ok": zod.boolean()
+})
+
+
+/**
+ * @summary Unique visitor count (owner-only)
+ */
+export const GetVisitorCountResponse = zod.object({
+  "uniqueVisitors": zod.number()
+})
+
+
+/**
  * @summary List all assignments (homeworks, tests, midterm, final)
  */
 export const ListAssignmentsResponseItem = zod.object({

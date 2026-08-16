@@ -5,6 +5,14 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+export interface VisitorTrackResult {
+  ok: boolean;
+}
+
+export interface VisitorCount {
+  uniqueVisitors: number;
+}
+
 export interface HealthStatus {
   status: string;
 }
@@ -503,6 +511,18 @@ export interface CourseOverview {
   weeks: Week[];
   totals: CourseOverviewTotals;
 }
+
+export type ExportCourseParams = {
+format?: ExportCourseFormat;
+};
+
+export type ExportCourseFormat = typeof ExportCourseFormat[keyof typeof ExportCourseFormat];
+
+
+export const ExportCourseFormat = {
+  pdf: 'pdf',
+  txt: 'txt',
+} as const;
 
 export type ListPracticeAssignmentsParams = {
 sourceAssignmentId?: number;

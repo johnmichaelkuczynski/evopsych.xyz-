@@ -1,16 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, PenTool, Dumbbell, BarChart3, Activity, RotateCcw, Sparkles, LogOut } from "lucide-react";
+import { LayoutDashboard, PenTool, Dumbbell, BarChart3, Activity, RotateCcw, Sparkles, LogOut, LogIn, Users } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser, useClerk } from "@clerk/react";
+import { useGetVisitorCount } from "@workspace/api-client-react";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const OWNER_EMAIL = "johnmichaelkuczynski@gmail.com";
+
+function useIsOwner(): boolean {
+  const { user } = useUser();
+  return (
+    user?.primaryEmailAddress?.emailAddress?.toLowerCase() === OWNER_EMAIL
+  );
+}
+
+// Private unique-visitor counter, rendered only for the course owner. The
+// backend independently verifies the owner's email before returning a count.
+function VisitorCounter() {
+  const isOwner = useIsOwner();
+  const { data } = useGetVisitorCount({
+    query: { queryKey: ["visitors", "count"], enabled: isOwner },
+  });
+
+  if (!isOwner || data === undefined) return null;
+  return (
+    <div
+      className="flex items-center gap-2 text-xs text-muted-foreground px-1"
+      data-testid="text-visitor-count"
+    >
+      <Users className="w-3.5 h-3.5" />
+      {data.uniqueVisitors.toLocaleString()} unique visitors
+    </div>
+  );
+}
 
 function UserPanel() {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
 
-  if (!isLoaded || !user) return null;
+  if (!isLoaded) return null;
+
+  if (!user) {
+    return (
+      <div className="p-4 border-t border-border flex flex-col gap-2">
+        <Link href="/sign-in">
+          <button
+            className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            data-testid="button-sidebar-signin"
+          >
+            <LogIn className="w-4 h-4" />
+            Sign in
+          </button>
+        </Link>
+        <p className="text-[11px] text-muted-foreground leading-snug">
+          Browsing as a guest — sign in with Google for unlimited AI tutoring
+          and saved progress.
+        </p>
+      </div>
+    );
+  }
 
   const name =
     user.fullName ||
@@ -22,6 +72,7 @@ function UserPanel() {
 
   return (
     <div className="p-4 border-t border-border flex flex-col gap-3">
+      <VisitorCounter />
       <div className="flex items-center gap-3 min-w-0">
         {user.imageUrl ? (
           <img
@@ -105,8 +156,12 @@ function TopBar() {
   const [location, setLocation] = useLocation();
   const active = location.startsWith("/diagnostics");
   const qc = useQueryClient();
+  const isOwner = useIsOwner();
   const [resetting, setResetting] = useState(false);
   const [expanding, setExpanding] = useState(false);
+
+  // Admin tooling is owner-only (server-side auth still applies).
+  if (!isOwner) return null;
 
   async function handleExpandLectures() {
     if (

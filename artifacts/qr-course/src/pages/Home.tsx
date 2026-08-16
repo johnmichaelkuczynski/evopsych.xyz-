@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { BookOpen, Brain, Dna, GraduationCap } from "lucide-react";
+import { TopicsRail } from "@/components/TopicsRail";
 
 const weeks = [
   {
@@ -44,7 +45,12 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6">
+      <main className="max-w-7xl mx-auto px-6 flex items-start gap-10">
+        <aside className="hidden lg:block sticky top-6 pt-10">
+          <TopicsRail />
+        </aside>
+
+        <div className="flex-1 min-w-0">
         <section className="py-16 md:py-24 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-secondary/60 text-xs font-medium text-muted-foreground mb-6">
             <Dna className="w-3.5 h-3.5" />
@@ -59,19 +65,23 @@ export default function Home() {
             then state it precisely in your own words.
           </p>
           <div className="mt-9 flex items-center justify-center gap-3">
-            <Link href="/sign-up">
-              <button className="px-6 py-3 rounded-md text-base font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
-                Start the course
+            <Link href="/dashboard">
+              <button
+                className="px-6 py-3 rounded-md text-base font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+                data-testid="button-start-course"
+              >
+                Start the course — no account needed
               </button>
             </Link>
             <Link href="/sign-in">
               <button className="px-6 py-3 rounded-md text-base font-medium border border-border hover:bg-secondary transition-colors">
-                I already have an account
+                Sign in
               </button>
             </Link>
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
-            Sign in with Google or email — your progress is saved to your account.
+            Browse everything freely. Sign in with Google when you want unlimited
+            AI tutoring and saved progress.
           </p>
         </section>
 
@@ -107,6 +117,11 @@ export default function Home() {
             body="Homework, tests, a midterm, and a final — graded for conceptual precision, with built-in AI-authorship detection."
           />
         </section>
+
+        <section className="lg:hidden pb-16">
+          <TopicsRail />
+        </section>
+        </div>
       </main>
 
       <footer className="border-t border-border">

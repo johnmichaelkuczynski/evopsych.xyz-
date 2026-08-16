@@ -18,9 +18,16 @@ import {
   QueryClient,
   QueryClientProvider,
   useQueryClient,
+  QueryCache,
+  MutationCache,
 } from "@tanstack/react-query";
 import { useClerk } from "@clerk/react";
 import { Toaster } from "@/components/ui/toaster";
+import {
+  LoginGateDialog,
+  isLoginRequiredError,
+  fireLoginRequired,
+} from "@/components/LoginGate";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
@@ -37,7 +44,20 @@ import PracticeAssignmentRunner from "@/pages/PracticeAssignmentRunner";
 import Diagnostics from "@/pages/Diagnostics";
 import TopicPractice from "@/pages/TopicPractice";
 
-const queryClient = new QueryClient();
+// Any API call rejected with the backend's LOGIN_REQUIRED payload (anonymous
+// visitor exhausted the free AI budget) opens the sign-in dialog.
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) => {
+      if (isLoginRequiredError(error)) fireLoginRequired();
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      if (isLoginRequiredError(error)) fireLoginRequired();
+    },
+  }),
+});
 
 // REQUIRED — copy verbatim. Resolves the key from window.location.hostname so the
 // same build serves multiple Clerk custom domains.
@@ -150,7 +170,9 @@ function HomeRedirect() {
 }
 
 // Wrap a page component so signed-out visitors are bounced to the landing page.
-// Defined at module scope so each wrapper has a stable identity (no remounts).
+// Only Diagnostics (admin tooling) is still behind the wall — the course itself
+// is open to anonymous visitors, who hit a login gate only after using up the
+// free AI budget.
 function requireAuth<P extends object>(
   Component: ComponentType<P>,
 ): ComponentType<P> {
@@ -168,17 +190,38 @@ function requireAuth<P extends object>(
   };
 }
 
-const ProtectedDashboard = requireAuth(Dashboard);
-const ProtectedAssignments = requireAuth(Assignments);
-const ProtectedPractice = requireAuth(Practice);
-const ProtectedAssignmentRunner = requireAuth(AssignmentRunner);
-const ProtectedPracticeHub = requireAuth(PracticeHub);
-const ProtectedPracticeAssignmentRunner = requireAuth(PracticeAssignmentRunner);
-const ProtectedAnalytics = requireAuth(Analytics);
 const ProtectedDiagnostics = requireAuth(Diagnostics);
-const ProtectedWeekView = requireAuth(WeekView);
-const ProtectedLectureView = requireAuth(LectureView);
-const ProtectedTopicPractice = requireAuth(TopicPractice);
+
+// Records one unique-visitor ping per app load (anonymous cookie-based).
+function VisitorTracker() {
+  useEffect(() => {
+    fetch("/api/visitors/track", { method: "POST" }).catch(() => {});
+  }, []);
+  return null;
+}
+
+const PAGE_TITLES: [prefix: string, title: string][] = [
+  ["/dashboard", "Dashboard — Evolutionary Psychology Course"],
+  ["/assignments", "Assignments — Evolutionary Psychology Course"],
+  ["/practice", "Practice — Evolutionary Psychology Course"],
+  ["/analytics", "Analytics — Evolutionary Psychology Course"],
+  ["/weeks/", "Weekly Lectures — Evolutionary Psychology Course"],
+  ["/lectures/", "Lecture — Evolutionary Psychology Course"],
+  ["/sign-in", "Sign In — Evolutionary Psychology Course"],
+  ["/sign-up", "Sign Up — Evolutionary Psychology Course"],
+];
+
+// Keeps document.title in sync with the route for search engines and tabs.
+function PageTitle() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const match = PAGE_TITLES.find(([prefix]) => location.startsWith(prefix));
+    document.title =
+      match?.[1] ??
+      "Evolutionary Psychology — Free AI-Powered Online Course";
+  }, [location]);
+  return null;
+}
 
 // Clears the query cache when the signed-in user changes, so one account never
 // sees another's cached data.
@@ -210,17 +253,17 @@ function Router() {
       <Route path="/" component={HomeRedirect} />
       <Route path="/sign-in/*?" component={SignInPage} />
       <Route path="/sign-up/*?" component={SignUpPage} />
-      <Route path="/dashboard" component={ProtectedDashboard} />
-      <Route path="/assignments" component={ProtectedAssignments} />
-      <Route path="/practice" component={ProtectedPractice} />
-      <Route path="/assignments/:assignmentId/practice" component={ProtectedPracticeHub} />
-      <Route path="/assignments/:id" component={ProtectedAssignmentRunner} />
-      <Route path="/practice-assignments/:id" component={ProtectedPracticeAssignmentRunner} />
-      <Route path="/analytics" component={ProtectedAnalytics} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/assignments" component={Assignments} />
+      <Route path="/practice" component={Practice} />
+      <Route path="/assignments/:assignmentId/practice" component={PracticeHub} />
+      <Route path="/assignments/:id" component={AssignmentRunner} />
+      <Route path="/practice-assignments/:id" component={PracticeAssignmentRunner} />
+      <Route path="/analytics" component={Analytics} />
       <Route path="/diagnostics" component={ProtectedDiagnostics} />
-      <Route path="/weeks/:weekNumber" component={ProtectedWeekView} />
-      <Route path="/lectures/:lectureId" component={ProtectedLectureView} />
-      <Route path="/practice/topic/:topicId" component={ProtectedTopicPractice} />
+      <Route path="/weeks/:weekNumber" component={WeekView} />
+      <Route path="/lectures/:lectureId" component={LectureView} />
+      <Route path="/practice/topic/:topicId" component={TopicPractice} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -255,8 +298,11 @@ function ClerkProviderWithRoutes() {
     >
       <QueryClientProvider client={queryClient}>
         <ClerkQueryClientCacheInvalidator />
+        <VisitorTracker />
+        <PageTitle />
         <TooltipProvider>
           <Router />
+          <LoginGateDialog />
           <Toaster />
         </TooltipProvider>
       </QueryClientProvider>

@@ -100,6 +100,51 @@ paths:
                 items:
                   $ref: "#/components/schemas/Topic"
 
+  /course/export:
+    get:
+      operationId: exportCourse
+      tags: [course]
+      summary: Download the course (short lectures + sample homework and exams) as PDF or TXT
+      parameters:
+        - name: format
+          in: query
+          required: false
+          schema: { type: string, enum: [pdf, txt], default: txt }
+      responses:
+        "200":
+          description: Course file download
+          content:
+            text/plain:
+              schema: { type: string }
+            application/pdf:
+              schema: { type: string, format: binary }
+
+  /visitors/track:
+    post:
+      operationId: trackVisitor
+      tags: [visitors]
+      summary: Record a visit from this browser (mints an anonymous visitor cookie)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorTrackResult"
+
+  /visitors/count:
+    get:
+      operationId: getVisitorCount
+      tags: [visitors]
+      summary: Unique visitor count (owner-only)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorCount"
+
   /assignments:
     get:
       operationId: listAssignments
@@ -530,6 +575,18 @@ paths:
 
 components:
   schemas:
+    VisitorTrackResult:
+      type: object
+      required: [ok]
+      properties:
+        ok: { type: boolean }
+
+    VisitorCount:
+      type: object
+      required: [uniqueVisitors]
+      properties:
+        uniqueVisitors: { type: integer }
+
     HealthStatus:
       type: object
       properties:

@@ -50,6 +50,9 @@ async function buildAll() {
       "oracledb",
       "mongodb-client-encryption",
       "nodemailer",
+      // pdfkit reads its standard-font .afm data files relative to its own
+      // package dir, so it cannot be bundled.
+      "pdfkit",
       "handlebars",
       "knex",
       "typeorm",
