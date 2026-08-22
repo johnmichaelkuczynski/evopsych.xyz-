@@ -31,18 +31,6 @@ export default function Home() {
           </div>
           <span className="font-serif font-semibold text-lg tracking-tight">EvoPsych</span>
         </div>
-        <div className="flex items-center gap-2">
-          <Link href="/sign-in">
-            <button className="px-4 py-2 rounded-md text-sm font-medium border border-border hover:bg-secondary transition-colors">
-              Sign in
-            </button>
-          </Link>
-          <Link href="/sign-up">
-            <button className="px-4 py-2 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
-              Get started
-            </button>
-          </Link>
-        </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-6 flex items-start gap-10">
@@ -70,18 +58,12 @@ export default function Home() {
                 className="px-6 py-3 rounded-md text-base font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
                 data-testid="button-start-course"
               >
-                Start the course — no account needed
-              </button>
-            </Link>
-            <Link href="/sign-in">
-              <button className="px-6 py-3 rounded-md text-base font-medium border border-border hover:bg-secondary transition-colors">
-                Sign in
+                Start the course
               </button>
             </Link>
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
-            Browse everything freely. Sign in with Google when you want unlimited
-            AI tutoring and saved progress.
+            Browse the entire course, practice, tutoring, and grading freely.
           </p>
         </section>
 

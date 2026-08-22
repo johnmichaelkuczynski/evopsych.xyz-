@@ -9,10 +9,6 @@ export interface VisitorTrackResult {
   ok: boolean;
 }
 
-export interface VisitorCount {
-  uniqueVisitors: number;
-}
-
 export interface HealthStatus {
   status: string;
 }

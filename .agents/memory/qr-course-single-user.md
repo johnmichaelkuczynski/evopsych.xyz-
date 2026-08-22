@@ -1,16 +1,12 @@
 ---
 name: qr-course single-user backend
-description: The EvoPsych course backend is intentionally single-user; only diagnostics is auth-gated server-side.
+description: The EvoPsych course is intentionally public and globally scoped, with no login or user accounts.
 ---
 
-The `artifacts/api-server` backend for the EvoPsych course is **single-user by design**.
+The EvoPsych course is **public and single-user/global by design**.
 
-- No table carries a `userId`; no route filters by user except `routes/diagnostics.ts`, which mounts `requireAuth`.
-- All other data (assignments, attempts, analytics, practice-assignments, learner_profile) is global/unscoped.
-- User-facing auth is enforced **only on the frontend** via the Clerk `requireAuth` HOC wrapping pages in `App.tsx`.
+There is no account system, login UI, auth middleware, owner role, or anonymous AI quota. All course features and diagnostics tools are available without authentication, and course progress is globally shared rather than scoped to a person.
 
-**Why:** `replit.md` describes this as a "single-user web course." A code reviewer (architect) will flag the practice routes for "broken access control / missing ownership scoping" — that is the app-wide architecture, not a regression. Do NOT bolt `userId` onto only one feature's routes; it would be inconsistent and add no real security while diverging from every other route.
+**Why:** The owner explicitly required all login and login gates to be removed. The app was already globally scoped, so retaining partial authentication would misrepresent its data model.
 
-**How to apply:** If asked to add multi-user/per-user data isolation, treat it as an app-wide change (schema + every route + auth middleware), not a per-feature patch — and confirm scope with the user first.
-
-**Testing diagnostics endpoints:** `routes/diagnostics.ts` (including `expand-lectures`, which supports an optional `?id=` to generate medium/long for ONE lecture) authenticates only via the same-origin Clerk session cookie. `curl` will always get `{"error":"Unauthorized"}` — verify these flows in the browser, not from the shell.
+**How to apply:** Do not add sign-in prompts, auth checks, owner-only controls, or AI login quotas unless the user explicitly reverses this decision. If asked for per-user data isolation, scope it as an app-wide schema and route change rather than patching one feature.

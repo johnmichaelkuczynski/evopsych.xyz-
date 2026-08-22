@@ -1,6 +1,4 @@
 - [GPTZero short-text reliability](gptzero-detection.md) — GPTZero is unreliable < ~250 chars (false pos & neg); don't tune thresholds off one short example.
-- [Clerk server proxy is prod-only](clerk-server-proxy.md) — NODE_ENV gate in api-server Clerk proxy is the canonical template, not a bug; do not "fix" it.
-- [Single-user backend](qr-course-single-user.md) — EvoPsych backend has no userId scoping by design (only diagnostics is auth-gated); don't add per-feature ownership.
+- [Single-user public backend](qr-course-single-user.md) — EvoPsych has no accounts or login; all course and diagnostics routes are intentionally public and globally scoped.
 - [Practice list scaling](practice-list-scaling.md) — practice sets are unbounded by design; list queries must batch/group counts, never N+1 per row.
-- [Anon AI gate](anon-ai-gate.md) — free-preview budget must be reserved atomically and gated by AI-route list, not HTTP verb; cookie reset is accepted.
 - [api-server bundling](api-server-bundling.md) — deps that read sibling data files (e.g. pdfkit) must be externalized in the esbuild config, not bundled.

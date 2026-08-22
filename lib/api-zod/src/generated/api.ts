@@ -136,14 +136,6 @@ export const TrackVisitorResponse = zod.object({
 
 
 /**
- * @summary Unique visitor count (owner-only)
- */
-export const GetVisitorCountResponse = zod.object({
-  "uniqueVisitors": zod.number()
-})
-
-
-/**
  * @summary List all assignments (homeworks, tests, midterm, final)
  */
 export const ListAssignmentsResponseItem = zod.object({

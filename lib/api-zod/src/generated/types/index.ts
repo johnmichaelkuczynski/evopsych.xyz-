@@ -62,6 +62,5 @@ export * from './topicAnalytics';
 export * from './topicAnalyticsStrengthLabel';
 export * from './tutorAskInput';
 export * from './tutorReply';
-export * from './visitorCount';
 export * from './visitorTrackResult';
 export * from './week';
