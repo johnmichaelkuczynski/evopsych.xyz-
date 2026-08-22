@@ -132,6 +132,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/VisitorTrackResult"
 
+  /visitors/count:
+    get:
+      operationId: getVisitorCount
+      tags: [visitors]
+      summary: Public unique visitor count
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorCount"
+
   /assignments:
     get:
       operationId: listAssignments
@@ -567,6 +580,12 @@ components:
       required: [ok]
       properties:
         ok: { type: boolean }
+
+    VisitorCount:
+      type: object
+      required: [uniqueVisitors]
+      properties:
+        uniqueVisitors: { type: integer }
 
     HealthStatus:
       type: object

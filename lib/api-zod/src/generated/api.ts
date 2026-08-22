@@ -136,6 +136,14 @@ export const TrackVisitorResponse = zod.object({
 
 
 /**
+ * @summary Public unique visitor count
+ */
+export const GetVisitorCountResponse = zod.object({
+  "uniqueVisitors": zod.number()
+})
+
+
+/**
  * @summary List all assignments (homeworks, tests, midterm, final)
  */
 export const ListAssignmentsResponseItem = zod.object({

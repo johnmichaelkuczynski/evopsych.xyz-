@@ -55,6 +55,7 @@ import type {
   TopicAnalytics,
   TutorAskInput,
   TutorReply,
+  VisitorCount,
   VisitorTrackResult,
   Week
 } from './api.schemas';
@@ -609,6 +610,83 @@ export const useTrackVisitor = <TError = ErrorType<unknown>,
       > => {
       return useMutation(getTrackVisitorMutationOptions(options));
     }
+
+export const getGetVisitorCountUrl = () => {
+
+
+
+
+  return `/api/visitors/count`
+}
+
+/**
+ * @summary Public unique visitor count
+ */
+export const getVisitorCount = async ( options?: RequestInit): Promise<VisitorCount> => {
+
+  return customFetch<VisitorCount>(getGetVisitorCountUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetVisitorCountQueryKey = () => {
+    return [
+    `/api/visitors/count`
+    ] as const;
+    }
+
+
+export const getGetVisitorCountQueryOptions = <TData = Awaited<ReturnType<typeof getVisitorCount>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getVisitorCount>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetVisitorCountQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getVisitorCount>>> = ({ signal }) => getVisitorCount({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getVisitorCount>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetVisitorCountQueryResult = NonNullable<Awaited<ReturnType<typeof getVisitorCount>>>
+export type GetVisitorCountQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Public unique visitor count
+ */
+
+export function useGetVisitorCount<TData = Awaited<ReturnType<typeof getVisitorCount>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getVisitorCount>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetVisitorCountQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
 
 export const getListAssignmentsUrl = () => {
 
