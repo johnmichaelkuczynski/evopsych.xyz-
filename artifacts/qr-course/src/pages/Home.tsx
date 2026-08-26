@@ -107,8 +107,32 @@ export default function Home() {
       </main>
 
       <footer className="border-t border-border">
-        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-sm text-muted-foreground">
-          Evolutionary Psychology — read the idea, ground the idea, state the idea.
+        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+          <span>
+            Evolutionary Psychology — read the idea, ground the idea, state the idea.
+          </span>
+          <div className="flex items-center gap-4">
+            <a
+              href="mailto:johnmichaelkuczynski@gmail.com"
+              className="font-medium text-foreground hover:underline"
+            >
+              Contact Us
+            </a>
+            <a
+              href="https://zhisystems.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit ZHI Systems"
+              className="inline-flex items-center gap-2 font-medium text-foreground hover:opacity-80 transition-opacity"
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}zhi-logo.png`}
+                alt="ZHI Systems"
+                className="w-7 h-7 rounded object-contain"
+              />
+              <span>ZHI Systems</span>
+            </a>
+          </div>
         </div>
       </footer>
     </div>

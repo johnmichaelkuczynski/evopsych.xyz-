@@ -31,6 +31,28 @@ function UserPanel() {
       <p className="text-[11px] text-muted-foreground leading-snug">
         All course tools are available.
       </p>
+      <div className="flex items-center justify-between gap-2 pt-1">
+        <a
+          href="mailto:johnmichaelkuczynski@gmail.com"
+          className="text-xs font-medium text-foreground hover:underline"
+        >
+          Contact Us
+        </a>
+        <a
+          href="https://zhisystems.ai/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit ZHI Systems"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground hover:opacity-80 transition-opacity"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL}zhi-logo.png`}
+            alt="ZHI Systems"
+            className="w-6 h-6 rounded object-contain"
+          />
+          <span>ZHI</span>
+        </a>
+      </div>
     </div>
   );
 }
