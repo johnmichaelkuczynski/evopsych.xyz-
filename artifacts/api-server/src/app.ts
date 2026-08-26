@@ -49,6 +49,15 @@ if (process.env.NODE_ENV === "production") {
     const indexHtml = path.join(staticDir, "index.html");
     logger.info({ staticDir }, "Serving qr-course static bundle");
     app.use(express.static(staticDir, { index: false }));
+    app.get(/^\/(weeks|lectures)\/\d+\/?$/, (req, res, next) => {
+      const prerenderedHtml = path.join(
+        staticDir,
+        req.path.replace(/^\/+|\/+$/g, ""),
+        "index.html",
+      );
+      if (!fs.existsSync(prerenderedHtml)) return next();
+      res.sendFile(prerenderedHtml);
+    });
     app.get(/^\/(?!api\/).*/, (_req, res, next) => {
       if (!fs.existsSync(indexHtml)) return next();
       res.sendFile(indexHtml);

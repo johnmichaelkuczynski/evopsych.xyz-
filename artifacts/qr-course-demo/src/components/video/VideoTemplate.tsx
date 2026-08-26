@@ -103,7 +103,11 @@ export default function VideoTemplate({
   const SceneComponent = SCENE_COMPONENTS[baseSceneKey];
 
   return (
-    <div className="w-full h-screen flex overflow-hidden bg-background">
+    <div
+      className="w-full h-screen flex overflow-hidden bg-background"
+      role="application"
+      aria-label="Animated Evolutionary Psychology course demonstration"
+    >
       {/* Sidebar - persists across all scenes */}
       <div className="w-64 h-full border-r border-border bg-white flex flex-col pt-8 pb-4 shrink-0 z-20 shadow-sm relative">
         <div className="px-6 mb-8 flex items-center space-x-2">

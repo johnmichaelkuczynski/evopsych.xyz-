@@ -65,20 +65,25 @@ export default function Home() {
           <p className="mt-4 text-sm text-muted-foreground">
             Browse the entire course, practice, tutoring, and grading freely.
           </p>
+          <a
+            href="/qr-course-demo/"
+            className="inline-block mt-3 text-sm font-medium text-primary hover:underline"
+          >
+            Watch the course demo
+          </a>
         </section>
 
         <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-16">
           {weeks.map((w, i) => (
-            <div
-              key={w.title}
-              className="rounded-lg border border-card-border bg-card p-5 text-left"
-            >
-              <div className="text-xs font-semibold text-muted-foreground mb-2">
-                Week {i + 1}
+            <Link key={w.title} href={`/weeks/${i + 1}/`}>
+              <div className="rounded-lg border border-card-border bg-card p-5 text-left h-full hover:border-primary/50 transition-colors">
+                <div className="text-xs font-semibold text-muted-foreground mb-2">
+                  Week {i + 1}
+                </div>
+                <h3 className="font-serif font-semibold text-lg mb-1.5">{w.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{w.body}</p>
               </div>
-              <h3 className="font-serif font-semibold text-lg mb-1.5">{w.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{w.body}</p>
-            </div>
+            </Link>
           ))}
         </section>
 

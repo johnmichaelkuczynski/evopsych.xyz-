@@ -23,6 +23,138 @@ publicDir = "artifacts/qr-course/dist/public"
 serve = "static"
 
 [[services.production.rewrites]]
+from = "/weeks/1/"
+to = "/weeks/1/index.html"
+
+[[services.production.rewrites]]
+from = "/weeks/2/"
+to = "/weeks/2/index.html"
+
+[[services.production.rewrites]]
+from = "/weeks/3/"
+to = "/weeks/3/index.html"
+
+[[services.production.rewrites]]
+from = "/weeks/4/"
+to = "/weeks/4/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/1/"
+to = "/lectures/1/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/2/"
+to = "/lectures/2/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/3/"
+to = "/lectures/3/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/4/"
+to = "/lectures/4/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/5/"
+to = "/lectures/5/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/6/"
+to = "/lectures/6/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/7/"
+to = "/lectures/7/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/8/"
+to = "/lectures/8/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/9/"
+to = "/lectures/9/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/10/"
+to = "/lectures/10/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/11/"
+to = "/lectures/11/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/12/"
+to = "/lectures/12/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/13/"
+to = "/lectures/13/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/14/"
+to = "/lectures/14/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/15/"
+to = "/lectures/15/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/16/"
+to = "/lectures/16/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/17/"
+to = "/lectures/17/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/18/"
+to = "/lectures/18/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/19/"
+to = "/lectures/19/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/20/"
+to = "/lectures/20/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/21/"
+to = "/lectures/21/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/22/"
+to = "/lectures/22/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/23/"
+to = "/lectures/23/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/24/"
+to = "/lectures/24/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/25/"
+to = "/lectures/25/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/26/"
+to = "/lectures/26/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/27/"
+to = "/lectures/27/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/28/"
+to = "/lectures/28/index.html"
+
+[[services.production.rewrites]]
+from = "/lectures/29/"
+to = "/lectures/29/index.html"
+
+[[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
 

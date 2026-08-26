@@ -26,8 +26,8 @@ export default function WeekView() {
           </div>
         )}
 
-        <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-serif font-semibold border-b pb-2">Lectures</h2>
+        <section className="flex flex-col gap-4" aria-labelledby="lectures-heading">
+          <h2 id="lectures-heading" className="text-2xl font-serif font-semibold border-b pb-2">Lectures</h2>
           {isLoading ? (
             <Skeleton className="h-24 w-full" />
           ) : week?.lectures.length === 0 ? (
@@ -35,7 +35,7 @@ export default function WeekView() {
           ) : (
             <div className="grid grid-cols-1 gap-3">
               {week?.lectures.map(lecture => (
-                <Link key={lecture.id} href={`/lectures/${lecture.id}`}>
+                <Link key={lecture.id} href={`/lectures/${lecture.id}/`}>
                   <Card className="hover:border-primary/50 transition-colors cursor-pointer shadow-sm">
                     <CardContent className="p-4 flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary">
@@ -50,10 +50,10 @@ export default function WeekView() {
               ))}
             </div>
           )}
-        </div>
+        </section>
 
-        <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-serif font-semibold border-b pb-2">Assignments</h2>
+        <section className="flex flex-col gap-4" aria-labelledby="assignments-heading">
+          <h2 id="assignments-heading" className="text-2xl font-serif font-semibold border-b pb-2">Assignments</h2>
           {isLoading ? (
             <Skeleton className="h-32 w-full" />
           ) : week?.assignments.length === 0 ? (
@@ -87,7 +87,7 @@ export default function WeekView() {
               ))}
             </div>
           )}
-        </div>
+        </section>
       </div>
     </Layout>
   );
