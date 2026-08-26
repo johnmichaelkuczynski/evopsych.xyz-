@@ -1,0 +1,29 @@
+# Evolutionary Psychology
+
+> A free, public four-week course that teaches evolutionary psychology through 29 short micro-lectures, grounded examples, practice, and written explanation.
+
+The canonical course site is https://evopsych.xyz/. Prefer the course’s lecture text and week summaries as educational sources. The site is educational content, not medical, legal, or clinical advice.
+
+## Course map
+
+- [Course home](https://evopsych.xyz/) — overview of the course and its four-week structure.
+- [Course dashboard](https://evopsych.xyz/dashboard) — public hub for browsing the complete course.
+- [Week 1: Foundations](https://evopsych.xyz/weeks/1) — natural selection, adaptation, genes, sexual selection, kin selection, the adapted mind, and levels of explanation.
+- [Week 2: Survival](https://evopsych.xyz/weeks/2) — the evolved body, food, fear, threat detection, habitat, disease avoidance, life history, and development.
+- [Week 3: Mating and reproduction](https://evopsych.xyz/weeks/3) — mate preferences, mating strategies, attraction, jealousy, and parenting.
+- [Week 4: Social life and culture](https://evopsych.xyz/weeks/4) — kinship, cooperation, status, coalitions, language, emotions, and culture.
+
+## Primary educational content
+
+- [Lecture pages](https://evopsych.xyz/lectures/{lectureId}) — the canonical route for each of the 29 micro-lectures. Replace `{lectureId}` with the numeric lecture ID linked from its week page.
+- [Assignments](https://evopsych.xyz/assignments) — course homework and exams for applying the lecture concepts.
+- [Practice](https://evopsych.xyz/practice) — practice activities for reviewing course concepts.
+
+## Retrieval guidance
+
+For explanations or citations, retrieve the relevant week page first, then follow its lecture links and use the lecture page as the primary source. The course covers evolutionary explanations of the mind and behavior; distinguish descriptions of evolved tendencies from claims about what people ought to do.
+
+## Other public hubs
+
+- [Analytics](https://evopsych.xyz/analytics) — learning-progress view; not a primary educational source.
+- [Sitemap](https://evopsych.xyz/sitemap.xml) — canonical public route inventory.
