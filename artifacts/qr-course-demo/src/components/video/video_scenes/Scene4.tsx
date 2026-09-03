@@ -18,7 +18,7 @@ export function Scene4() {
         }}
         initial={{ y: '10%' }}
         animate={{ y: '-10%' }}
-        transition={{ duration: 6.5, ease: "linear" }}
+        transition={{ duration: 4.5, ease: "linear" }}
       />
       
       <div className="absolute inset-0 bg-gradient-to-b from-blue-950/80 via-slate-900/90 to-slate-950" />

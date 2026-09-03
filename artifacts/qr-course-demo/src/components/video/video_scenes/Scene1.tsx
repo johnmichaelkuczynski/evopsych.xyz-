@@ -18,7 +18,7 @@ export function Scene1() {
         }}
         initial={{ scale: 1.2, y: '5vh' }}
         animate={{ scale: 1.05, y: '-5vh' }}
-        transition={{ duration: 5, ease: "linear" }}
+        transition={{ duration: 8.5, ease: "linear" }}
       />
       
       <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
@@ -35,7 +35,7 @@ export function Scene1() {
           className="w-full h-auto object-cover object-top"
           initial={{ y: 0 }}
           animate={{ y: '-10%' }}
-          transition={{ duration: 4, ease: "linear" }}
+          transition={{ duration: 8.5, ease: "linear" }}
         />
       </motion.div>
 
@@ -45,12 +45,18 @@ export function Scene1() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        <h1 className="text-[10vw] font-bold tracking-tight leading-none mb-[2vh]">
-          Welcome to <span className="text-blue-400">EvoPsych</span>
+        <h1 className="text-[7.5vw] font-bold tracking-tight leading-tight mb-[1vh] drop-shadow-lg">
+          PhD in <br />
+          <span className="text-blue-400">Evolutionary<br />Psychology?</span>
         </h1>
-        <div className="bg-white/10 backdrop-blur-md px-[6vw] py-[1.5vh] rounded-full border border-white/20">
-          <p className="text-[4.5vw] font-medium tracking-wide">evopsych.xyz</p>
-        </div>
+        <motion.div 
+          className="bg-white/10 backdrop-blur-md px-[6vw] py-[1.5vh] rounded-full border border-white/20 mt-[2vh]"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 5.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="text-[4.5vw] font-medium tracking-wide">Start at <span className="font-bold text-white">evopsych.xyz</span></p>
+        </motion.div>
       </motion.div>
     </motion.div>
   );

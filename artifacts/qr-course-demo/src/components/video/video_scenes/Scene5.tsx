@@ -64,7 +64,7 @@ export function Scene5() {
         className="absolute bottom-[8vh] text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 3 }}
+        transition={{ duration: 1, delay: 4 }}
       >
         <p className="text-[4vw] text-slate-400 font-medium">www.zhisystems.com</p>
       </motion.div>

@@ -20,7 +20,7 @@ export function Scene3() {
           className="w-[150%] max-w-none h-auto object-cover object-top origin-top-right"
           initial={{ x: '-30%', y: 0 }}
           animate={{ x: '-20%', y: '-10%' }}
-          transition={{ duration: 5.5, ease: "linear" }}
+          transition={{ duration: 4.5, ease: "linear" }}
         />
       </motion.div>
 

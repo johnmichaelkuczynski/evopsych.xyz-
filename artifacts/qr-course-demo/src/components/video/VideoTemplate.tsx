@@ -9,11 +9,11 @@ import { Scene4 } from './video_scenes/Scene4';
 import { Scene5 } from './video_scenes/Scene5';
 
 export const SCENE_DURATIONS = {
-  s1: 4500,
-  s2: 4500,
-  s3: 5500,
-  s4: 6500,
-  s5: 7000,
+  s1: 8500,
+  s2: 6500,
+  s3: 4000,
+  s4: 3500,
+  s5: 8000,
 };
 
 const SCENE_START_SEC: Record<string, number> = (() => {

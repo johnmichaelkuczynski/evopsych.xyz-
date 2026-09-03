@@ -27,7 +27,7 @@ export function Scene2() {
           className="w-full h-auto object-cover object-top origin-top"
           initial={{ scale: 1 }}
           animate={{ scale: 1.15, y: '-15%' }}
-          transition={{ duration: 4.5, ease: "linear" }}
+          transition={{ duration: 6.5, ease: "linear" }}
         />
       </motion.div>
 
