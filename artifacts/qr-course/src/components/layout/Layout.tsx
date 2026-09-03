@@ -1,28 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, PenTool, Dumbbell, BarChart3, Activity, RotateCcw, Sparkles, Users } from "lucide-react";
+import { LayoutDashboard, PenTool, Dumbbell, BarChart3, Activity, RotateCcw, Sparkles } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useGetVisitorCount } from "@workspace/api-client-react";
-
-function VisitorCounter() {
-  const { data } = useGetVisitorCount({
-    query: {
-      queryKey: ["visitors", "count"],
-      refetchOnWindowFocus: false,
-    },
-  });
-
-  if (data === undefined) return null;
-  return (
-    <div
-      className="flex items-center gap-2 text-xs text-muted-foreground"
-      data-testid="text-visitor-count"
-    >
-      <Users className="w-3.5 h-3.5" />
-      {data.uniqueVisitors.toLocaleString()} unique visitors
-    </div>
-  );
-}
+import { VisitorCounter } from "@/components/VisitorCounter";
 
 function UserPanel() {
   return (

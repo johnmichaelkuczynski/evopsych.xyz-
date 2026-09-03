@@ -124,12 +124,19 @@ export function TutorPane({
               send();
             }
           }}
+          aria-label="Ask the tutor a question"
           placeholder={placeholder}
           rows={4}
           className="flex-1 bg-secondary border-none rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary resize-y min-h-[96px] max-h-[280px]"
           data-testid="input-tutor-question"
         />
-        <Button size="lg" onClick={send} disabled={!input.trim() || ask.isPending}>
+        <Button
+          size="lg"
+          onClick={send}
+          disabled={!input.trim() || ask.isPending}
+          aria-label="Send question"
+          title="Send question"
+        >
           <Send className="w-4 h-4" />
         </Button>
       </div>

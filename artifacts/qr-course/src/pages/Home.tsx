@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { BookOpen, Brain, Dna, GraduationCap } from "lucide-react";
 import { TopicsRail } from "@/components/TopicsRail";
+import { VisitorCounter } from "@/components/VisitorCounter";
 
 const weeks = [
   {
@@ -31,6 +32,7 @@ export default function Home() {
           </div>
           <span className="font-serif font-semibold text-lg tracking-tight">EvoPsych</span>
         </div>
+        <VisitorCounter className="rounded-full border border-border bg-secondary/60 px-3 py-1.5" />
       </header>
 
       <main className="max-w-7xl mx-auto px-6 flex items-start gap-10">

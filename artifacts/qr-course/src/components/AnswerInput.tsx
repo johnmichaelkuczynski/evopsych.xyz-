@@ -272,6 +272,7 @@ export function AnswerInput({ value, onChange, placeholder, disabled, promptSour
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
         onDrop={handleDrop}
+        aria-label="Your answer"
         placeholder={placeholder || "Type your answer here..."}
         disabled={disabled}
         className="w-full min-h-[180px] p-5 bg-card border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary font-mono text-3xl leading-relaxed resize-y"

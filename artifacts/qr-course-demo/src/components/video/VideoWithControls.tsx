@@ -200,7 +200,21 @@ export default function VideoWithControls() {
     return () => document.removeEventListener('pointerdown', onDocPointerDown);
   }, [collapsed, tapPinned]);
 
-  if (!isIframed) return <VideoTemplate />;
+  if (!isIframed) {
+    return (
+      <div className="relative w-full h-screen">
+        <VideoTemplate muted={muted} />
+        <button
+          type="button"
+          onClick={() => setMuted((m) => !m)}
+          className="absolute top-4 right-4 z-50 rounded-lg bg-black/60 px-4 py-3 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+          aria-pressed={!muted}
+        >
+          {muted ? 'Enable sound' : 'Mute sound'}
+        </button>
+      </div>
+    );
+  }
 
   const barVisible = !collapsed || hovering || tapPinned;
 
