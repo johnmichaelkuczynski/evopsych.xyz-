@@ -4,6 +4,7 @@ title = "Evolutionary Psychology Demo Video"
 version = "1.0.0"
 id = "artifacts/qr-course-demo"
 router = "path"
+videoAspectRatio = "9:16"
 
 [[integratedSkills]]
 name = "video-js"

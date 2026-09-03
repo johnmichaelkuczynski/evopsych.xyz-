@@ -1,138 +1,51 @@
-import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { TypewriterText } from '../TypewriterText';
-import { StreamingText } from '../StreamingText';
-import { TypingIndicator } from '../TypingIndicator';
 
-export function Scene3({ setCursorPos, setIsClicking }: { setCursorPos: (pos: {x: string, y: string}) => void, setIsClicking: (val: boolean) => void }) {
-  const [phase, setPhase] = useState(0);
-
-  useEffect(() => {
-    // 0-2.0s Cursor into textarea, types "What's the difference between an adaptation and a by-product?"
-    // 2.0-2.5s Cursor to send button, clicks.
-    // 2.5-3.5s Pulsing dots.
-    // 3.5-10s AI response streams.
-    // 10-12s Cursor types "So is language an adaptation?"
-
-    setCursorPos({ x: '60vw', y: '16vh' }); // Start at Tutor tab
-    
-    const t1 = setTimeout(() => {
-      setCursorPos({ x: '60vw', y: '85vh' }); // Move to textarea
-      setPhase(1); // Start typing question 1
-    }, 500);
-
-    const t2 = setTimeout(() => {
-      setCursorPos({ x: '92vw', y: '88vh' }); // Move to send button
-    }, 2000);
-
-    const t3 = setTimeout(() => {
-      setIsClicking(true);
-      setPhase(2); // Show user bubble, start AI typing
-    }, 2400);
-
-    const t4 = setTimeout(() => {
-      setIsClicking(false);
-      setPhase(3); // AI streaming
-    }, 3400);
-
-    const t5 = setTimeout(() => {
-      setCursorPos({ x: '65vw', y: '90vh' }); // Move back to textarea
-    }, 10000);
-
-    const t6 = setTimeout(() => {
-      setPhase(4); // Start typing question 2
-    }, 10500);
-
-    return () => {
-      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
-      clearTimeout(t4); clearTimeout(t5); clearTimeout(t6);
-    };
-  }, [setCursorPos, setIsClicking]);
-
+export function Scene3() {
   return (
-    <motion.div 
-      className="absolute inset-0 w-full h-full bg-background flex"
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <motion.div
+      className="absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-slate-950"
+      initial={{ opacity: 0, x: '20vw' }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Left Pane (Static from previous) */}
-      <div className="w-1/2 h-full border-r border-border p-12 overflow-hidden flex flex-col relative opacity-50">
-        <div className="text-xs font-bold tracking-widest text-muted-foreground mb-4">WEEK 1 — FOUNDATIONS OF EVOLUTIONARY PSYCHOLOGY</div>
-        <h1 className="text-3xl font-serif text-primary mb-8">1.1 What evolutionary psychology is and why it exists</h1>
-        <div className="prose prose-sm max-w-none text-foreground/80 space-y-6">
-          <h2 className="font-serif text-2xl text-primary">What is the mind?</h2>
-          <p>Evolutionary psychology asks the question psychology classes usually skip: why do we have the minds we do? It studies the mind as a collection of adaptations built by natural selection — from mate choice to kin altruism to fear of predators.</p>
-        </div>
-      </div>
+      <motion.div
+        className="relative z-10 w-[90vw] h-[80vh] rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.3)] border border-blue-500/30 bg-white"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <motion.img 
+          src={`${import.meta.env.BASE_URL}images/evopsych-lecture.jpg`}
+          className="w-[150%] max-w-none h-auto object-cover object-top origin-top-right"
+          initial={{ x: '-30%', y: 0 }}
+          animate={{ x: '-20%', y: '-10%' }}
+          transition={{ duration: 5.5, ease: "linear" }}
+        />
+      </motion.div>
 
-      {/* Right Pane: Tutor Chat */}
-      <div className="w-1/2 h-full bg-white flex flex-col relative">
-        <div className="flex border-b border-border px-4 pt-4 bg-background">
-          <div className="px-6 py-3 font-medium text-sm border-b-2 border-primary text-primary">Ask the tutor</div>
-          <div className="px-6 py-3 font-medium text-sm border-b-2 border-transparent text-muted-foreground">Practice on this</div>
-        </div>
-
-        <div className="flex-1 p-8 relative flex flex-col overflow-hidden">
-          
-          <div className="flex-1 overflow-y-auto space-y-6 flex flex-col">
-            {phase < 2 && (
-              <motion.div exit={{ opacity: 0, y: -20 }} className="mt-auto">
-                <div className="mb-4 text-xs font-semibold text-muted-foreground uppercase tracking-widest">Starter questions for this section</div>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  <div className="px-3 py-1.5 rounded-full border border-border text-sm text-primary bg-muted/30">What's the difference between an adaptation and a by-product?</div>
-                </div>
-              </motion.div>
-            )}
-
-            {phase >= 2 && (
-              <motion.div 
-                initial={{ opacity: 0, y: 20, scale: 0.95 }} 
-                animate={{ opacity: 1, y: 0, scale: 1 }} 
-                className="self-end max-w-[85%] bg-primary text-white p-4 rounded-2xl rounded-tr-sm shadow-sm mt-auto"
-              >
-                What's the difference between an adaptation and a by-product?
-              </motion.div>
-            )}
-
-            {phase === 2 && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                className="self-start max-w-[85%]"
-              >
-                <TypingIndicator />
-              </motion.div>
-            )}
-
-            {phase >= 3 && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                className="self-start w-[85%] bg-muted/30 border border-border p-5 rounded-2xl rounded-tl-sm text-[15px] leading-relaxed shadow-sm"
-              >
-                <StreamingText text="Great question. An adaptation is a trait built by natural selection because it solved a specific survival or reproductive problem — like the fear circuitry that detects predators. A by-product has no function of its own; it exists only because it is tied to an adaptation. The classic example: bones are white because of calcium, not because whiteness was ever selected for. Telling the two apart is the central inferential task of the field." delay={0} />
-              </motion.div>
-            )}
+      <motion.div 
+        className="absolute bottom-[5vh] left-[5vw] right-[5vw] z-20 flex flex-col items-center"
+        initial={{ opacity: 0, y: '5vh' }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="bg-slate-900/95 backdrop-blur-xl px-[6vw] py-[3vh] rounded-2xl shadow-2xl border border-white/10 text-center w-full">
+          <div className="flex items-center justify-center gap-[2vw] mb-[1vh]">
+            <motion.div 
+              className="w-[4vw] h-[4vw] bg-blue-500 rounded-full"
+              animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <h2 className="text-[7.5vw] font-bold tracking-tight text-white">
+              AI Tutor built-in
+            </h2>
           </div>
-
-          <div className="mt-6 w-full min-h-24 border border-border rounded-xl bg-background p-3 flex items-end shadow-inner relative z-10">
-            <div className="w-full flex justify-between items-center pr-2">
-              <div className="text-foreground text-[15px] font-medium pl-2 relative w-full h-full flex items-center">
-                {phase === 1 && <TypewriterText text="What's the difference between an adaptation and a by-product?" speed={25} />}
-                {phase >= 2 && phase < 4 && <span className="text-muted-foreground font-normal">Ask a question about what evolutionary psychology is...</span>}
-                {phase >= 4 && <TypewriterText text="So is language an adaptation?" speed={20} />}
-                {((phase >= 1 && phase < 2) || phase >= 4) && (
-                  <motion.div className="w-0.5 h-5 bg-primary ml-1" animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} />
-                )}
-              </div>
-              <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors shrink-0 ${phase === 1 ? 'bg-primary text-white cursor-pointer shadow-md' : 'bg-muted text-muted-foreground opacity-50'}`}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </div>
-            </div>
-          </div>
-
+          <p className="text-[4.5vw] text-slate-300 font-medium leading-snug">
+            Real-time feedback &<br/>AI-graded tests
+          </p>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
