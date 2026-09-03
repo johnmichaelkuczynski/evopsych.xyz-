@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  useGetCourseOverview,
   useGetLecture,
   useStartPracticeSession,
   useNextPracticeProblem,
@@ -15,12 +16,25 @@ import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { AnswerInput } from "@/components/AnswerInput";
 import { TutorPane } from "@/components/TutorPane";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MessageSquare, Sparkles, X, RefreshCw, CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, MessageSquare, Sparkles, X, RefreshCw, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 
 export default function LectureView() {
   const params = useParams();
   const lectureId = Number(params.lectureId);
   const { data: lecture, isLoading, refetch } = useGetLecture(lectureId);
+  const { data: overview } = useGetCourseOverview();
+  const lectureScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const lectureSequence = useMemo(
+    () => overview?.weeks.flatMap((week) => week.lectures) ?? [],
+    [overview],
+  );
+  const lectureIndex = lectureSequence.findIndex((item) => item.id === lectureId);
+  const previousLecture = lectureIndex > 0 ? lectureSequence[lectureIndex - 1] : null;
+  const nextLecture =
+    lectureIndex >= 0 && lectureIndex < lectureSequence.length - 1
+      ? lectureSequence[lectureIndex + 1]
+      : null;
 
   // shared selected-text state (used by both Tutor and Practice)
   const [selectedText, setSelectedText] = useState("");
@@ -58,6 +72,13 @@ export default function LectureView() {
   // can outlive a navigation. Track the current id in a ref to detect that.
   const lectureIdRef = useRef(lectureId);
   lectureIdRef.current = lectureId;
+
+  useEffect(() => {
+    lectureScrollRef.current?.scrollTo({ top: 0 });
+    setSelectedText("");
+    setLevel("short");
+    setGenError(null);
+  }, [lectureId]);
 
   function hasLevel(lvl: "short" | "medium" | "long"): boolean {
     if (lvl === "short") return true;
@@ -128,7 +149,7 @@ export default function LectureView() {
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-0">
         {/* LEFT: lecture */}
-        <div className="overflow-y-auto px-8 pb-16 border-r border-border">
+        <div ref={lectureScrollRef} className="overflow-y-auto px-8 pb-16 border-r border-border">
           {isLoading ? (
             <div className="flex flex-col gap-6 mt-4">
               <Skeleton className="h-12 w-3/4" />
@@ -200,6 +221,42 @@ export default function LectureView() {
                   Tip: highlight any passage above to ask the tutor about it, or to generate practice problems specifically on what you selected.
                 </div>
               </div>
+              <nav
+                aria-label="Lecture navigation"
+                className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3"
+              >
+                {previousLecture ? (
+                  <Link href={`/lectures/${previousLecture.id}`}>
+                    <Button variant="outline" className="w-full h-auto min-h-12 justify-start text-left">
+                      <ArrowLeft className="w-4 h-4 mr-2 shrink-0" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-xs text-muted-foreground">Previous lecture</span>
+                        <span className="block truncate">{previousLecture.title}</span>
+                      </span>
+                    </Button>
+                  </Link>
+                ) : (
+                  <div />
+                )}
+                {nextLecture ? (
+                  <Link href={`/lectures/${nextLecture.id}`}>
+                    <Button variant="default" className="w-full h-auto min-h-12 justify-end text-right">
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-xs text-primary-foreground/75">Next lecture</span>
+                        <span className="block truncate">{nextLecture.title}</span>
+                      </span>
+                      <ArrowRight className="w-4 h-4 ml-2 shrink-0" />
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href="/dashboard">
+                    <Button variant="default" className="w-full min-h-12">
+                      Course complete
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                )}
+              </nav>
             </article>
           ) : (
             <div className="mt-8">Lecture not found.</div>
